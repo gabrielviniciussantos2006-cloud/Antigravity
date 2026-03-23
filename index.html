@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth bg-black">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aivery | Inteligência Artificial e Automação</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Inter, Bebas Neue, DM Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- CountUp.js via CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.8.0/countUp.umd.js"></script>
+
+    <!-- Calendly Widget -->
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        black: '#000000',
+                        neutral: {
+                            800: '#1c1c1e',
+                            900: '#151516',
+                        }
+                    },
+                    letterSpacing: {
+                        tighter: '-.04em',
+                        tight: '-.02em',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #000000;
+            color: #f5f5f7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        .glass-header {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Hero text mask for premium subtle gradient */
+        .text-gradient {
+            background: linear-gradient(180deg, #FFFFFF 0%, #a1a1a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Ambient Glow behind Hero */
+        .ambient-glow {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60vw;
+            height: 60vh;
+            background: radial-gradient(ellipse at center, rgba(30, 50, 45, 0.15) 0%, rgba(0, 0, 0, 0) 60%);
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(40px);
+        }
+
+        .hero-img-mask {
+            mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 100%);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 100%);
+        }
+
+        .section-img-mask {
+            mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 15%, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0) 100%);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 15%, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0) 100%);
+        }
+
+        /* Custom Slider Styling */
+        input[type=range] {
+            width: 100%;
+            -webkit-appearance: none;
+            appearance: none;
+            outline: none;
+            height: 8px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            height: 32px;
+            width: 32px;
+            border-radius: 50%;
+            background: #ffffff;
+            cursor: pointer;
+            -webkit-appearance: none;
+            transition: transform 0.1s ease;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+
+        input[type=range]::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+        }
+
+        #result-container {
+            display: none;
+        }
+
+        #final-cta-btn {
+            opacity: 0;
+            transform: translateY(10px) scale(0.98);
+            transition: all 0.5s ease-out;
+            pointer-events: none;
+        }
+
+        #final-cta-btn.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
+
+        /* Hide scrollbar for horizontal scrolling containers */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* CTA com Urgência + WhatsApp */
+        .cta-urgency-bar {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 100px;
+            padding: 8px 20px;
+            margin-bottom: 32px;
+        }
+
+        .cta-urgency-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #ffffff;
+            flex-shrink: 0;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.3;
+                transform: scale(0.8);
+            }
+        }
+
+        .cta-urgency-text {
+            font-size: 12px;
+            font-weight: 500;
+            color: #f0ede8;
+            letter-spacing: 0.05em;
+        }
+
+        .cta-microcopy {
+            font-size: 12px;
+            color: #555;
+            letter-spacing: 0.03em;
+            margin-top: 12px;
+        }
+
+        .cta-microcopy span {
+            color: #444;
+        }
+
+        .cta-divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 20px 0 16px;
+        }
+
+        .cta-divider-line {
+            width: 60px;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        .cta-divider-text {
+            font-size: 11px;
+            color: #444;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .cta-btn-whatsapp {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: transparent;
+            color: #f0ede8;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            padding: 13px 28px;
+            border-radius: 100px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            cursor: pointer;
+            text-decoration: none;
+            transition: border-color 0.2s ease, background 0.2s ease;
+        }
+
+        .cta-btn-whatsapp:hover {
+            border-color: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .cta-trust {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-top: 36px;
+            padding-top: 36px;
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .cta-trust-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .cta-check {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* Rodapé Completo */
+        .aivery-footer {
+            background: #000000;
+            color: #f0ede8;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 300;
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .aivery-footer .container {
+            max-width: 1160px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 60px;
+            padding: 48px 0 32px;
+        }
+
+        .footer-brand-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 28px;
+            letter-spacing: 0.04em;
+            color: #f0ede8;
+            margin-bottom: 14px;
+            display: block;
+        }
+
+        .footer-brand-tagline {
+            font-size: 15.6px;
+            color: #555;
+            line-height: 1.6;
+            max-width: 290px;
+            margin-bottom: 20px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 8px;
+        }
+
+        .footer-social-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            text-decoration: none;
+            transition: border-color 0.2s ease, background 0.2s ease;
+        }
+
+        .footer-social-btn:hover {
+            border-color: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-col-title {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #444;
+            margin-bottom: 16px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-links a {
+            font-size: 14px;
+            color: #666;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: #f0ede8;
+        }
+
+        .footer-contact-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-contact-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: #111;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .footer-contact-text {
+            font-size: 13px;
+            color: #666;
+            text-decoration: none;
+            transition: color 0.2s ease;
+            line-height: 1.4;
+        }
+
+        .footer-contact-text:hover {
+            color: #f0ede8;
+        }
+
+        .footer-contact-badge {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 500;
+            color: #4ade80;
+            background: rgba(74, 222, 128, 0.08);
+            border: 1px solid rgba(74, 222, 128, 0.2);
+            padding: 2px 8px;
+            border-radius: 100px;
+            margin-top: 3px;
+            letter-spacing: 0.04em;
+        }
+
+        .footer-bottom {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 0;
+        }
+
+        .footer-copyright {
+            font-size: 12px;
+            color: #86868b;
+        }
+
+        .footer-slogan {
+            font-size: 11px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #86868b;
+            white-space: nowrap;
+        }
+
+        .footer-slogan strong {
+            color: #f0ede8;
+            font-weight: 500;
+        }
+
+        @media (max-width: 960px) {
+            .footer-top {
+                gap: 80px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .aivery-footer .container {
+                padding: 0 24px;
+            }
+
+            .footer-top {
+                flex-direction: column;
+                gap: 40px;
+                padding: 52px 0 40px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .footer-slogan {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body class="selection:bg-white selection:text-black">
+
+    <!-- Header Transparente -->
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent">
+        <div class="w-full px-4 md:px-6 h-14 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#"
+                class="ml-[10%] text-[20px] font-semibold tracking-tight text-white hover:opacity-80 transition-opacity">
+                Aivery
+            </a>
+
+            <!-- Navegação Desktop -->
+            <nav class="hidden md:flex items-center space-x-8 text-[12px] font-medium text-neutral-400">
+                <a href="#calculadora"
+                    class="px-4 py-1.5 bg-white text-black font-semibold rounded-full hover:bg-neutral-200 transition-colors">
+                    Quero automatizar
+                </a>
+            </nav>
+
+            <!-- Mobile Menu -->
+            <button class="md:hidden text-white focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden pt-14">
+            <div class="ambient-glow"></div>
+
+            <img src="assets/hero_bg.png" alt=""
+                class="absolute inset-0 w-full h-full object-cover opacity-30 hero-img-mask pointer-events-none"
+                onerror="this.style.display='none'">
+
+            <div class="relative z-20 text-center px-4 max-w-5xl mx-auto w-full mt-10">
+                <h1
+                    class="text-[3.5rem] md:text-6xl lg:text-[6.5rem] font-extrabold tracking-tighter text-gradient mb-6 leading-[1.05]">
+                    Menos trabalho braçal.<br class="hidden md:block" /> Mais margem de lucro.
+                </h1>
+                <p
+                    class="text-[19px] md:text-[21px] text-neutral-400 max-w-[40rem] mx-auto leading-relaxed mb-10 font-medium">
+                    Eliminamos o trabalho braçal da sua equipe conectando Inteligência Artificial aos sistemas que você
+                    já usa. Menos custos, zero falhas.
+                </p>
+                <div class="flex flex-col items-center justify-center gap-4">
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
+                        <a href="#calculadora"
+                            class="w-full sm:w-auto px-8 py-3.5 bg-white text-black font-bold rounded-full hover:scale-105 hover:bg-neutral-200 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.15)]">
+                            Descobrir quanto perco por ano &rarr;
+                        </a>
+                    </div>
+                    <div class="flex flex-wrap justify-center gap-x-5 gap-y-2 mt-4 text-[13px] text-white/50 font-medium">
+                        <span class="flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5 text-[#FFB800]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                            100% gratuito
+                        </span>
+                        <span class="flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5 text-[#FFB800]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                            Resposta em até 2h
+                        </span>
+                        <span class="flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5 text-[#FFB800]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                            Sem compromisso
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Processo (Como Funciona) -->
+        <section id="processo" class="py-24 md:py-32 relative bg-black overflow-hidden">
+            <img src="assets/processo_bg.png" alt=""
+                class="absolute inset-0 w-full h-full object-cover opacity-10 pointer-events-none section-img-mask"
+                onerror="this.style.display='none'">
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+                <div class="mb-16 md:mb-20">
+                    <h2 class="text-4xl md:text-[3.5rem] font-bold tracking-tight text-white mb-6">O Processo.</h2>
+                    <p class="text-[#a1a1a6] text-[19px] md:text-[21px] max-w-2xl font-medium leading-relaxed">
+                        Metodologia orientada por dados, desde o conceito estratégico até a escala final dos seus
+                        agentes de IA.
+                    </p>
+                </div>
+
+                <!-- Cards Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Etapa 1 -->
+                    <div
+                        class="bg-[#151516] border border-white/5 rounded-3xl p-10 flex flex-col justify-between hover:bg-[#1c1c1e] transition-colors duration-300 group relative overflow-hidden">
+                        <img src="assets/process_1_audit.png" alt=""
+                            class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none transition-transform duration-500 group-hover:scale-110"
+                            onerror="this.style.display='none'">
+                        <div class="relative z-20">
+                            <span
+                                class="text-[5rem] font-bold text-[#2a2a2c] leading-none tracking-tighter group-hover:text-[#333336] transition-colors block mb-4">1</span>
+                            <h3 class="text-[24px] font-semibold text-white mb-3">Auditoria <br />e Descoberta</h3>
+                            <p class="text-[#86868b] leading-relaxed text-[17px]">
+                                Mapeamos as ineficiências operacionais do seu negócio para identificar gargalos com o
+                                maior potencial de automação.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Etapa 2 -->
+                    <div
+                        class="bg-[#151516] border border-white/5 rounded-3xl p-10 flex flex-col justify-between hover:bg-[#1c1c1e] transition-colors duration-300 group relative overflow-hidden">
+                        <img src="assets/process_2_engineering.png" alt=""
+                            class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none transition-transform duration-500 group-hover:scale-110"
+                            onerror="this.style.display='none'">
+                        <div class="relative z-20">
+                            <span
+                                class="text-[5rem] font-bold text-[#2a2a2c] leading-none tracking-tighter group-hover:text-[#333336] transition-colors block mb-4">2</span>
+                            <h3 class="text-[24px] font-semibold text-white mb-3">Engenharia <br />de Inteligência
+                            </h3>
+                            <p class="text-[#86868b] leading-relaxed text-[17px]">
+                                Desenvolvemos os robôs de software e integramos as IAs diretamente ao seu ERP ou
+                                WhatsApp para que a máquina execute as tarefas repetitivas sozinha.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Etapa 3 -->
+                    <div
+                        class="bg-[#151516] border border-white/5 rounded-3xl p-10 flex flex-col justify-between hover:bg-[#1c1c1e] transition-colors duration-300 group relative overflow-hidden">
+                        <img src="assets/process_3_scale.png" alt=""
+                            class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none transition-transform duration-500 group-hover:scale-110"
+                            onerror="this.style.display='none'">
+                        <div class="relative z-20">
+                            <span
+                                class="text-[5rem] font-bold text-[#2a2a2c] leading-none tracking-tighter group-hover:text-[#333336] transition-colors block mb-4">3</span>
+                            <h3 class="text-[24px] font-semibold text-white mb-3">Implantação <br />e Escala</h3>
+                            <p class="text-[#86868b] leading-relaxed text-[17px]">
+                                Lançamento em ambiente de produção com sistemas de monitoramento contínuo. Sua empresa
+                                não dorme mais.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projetos (Bento Grid) -->
+        <section id="projetos" class="py-24 md:py-32 relative bg-black overflow-hidden">
+            <img src="assets/portfolio_bg.png" alt=""
+                class="absolute inset-0 w-full h-full object-cover opacity-10 pointer-events-none section-img-mask"
+                onerror="this.style.display='none'">
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+                <div class="text-center mb-16 md:mb-24">
+                    <h2 class="text-4xl md:text-[3.5rem] font-bold tracking-tight text-white mb-6">Projetos em Destaque.
+                    </h2>
+                    <p class="text-[#a1a1a6] text-[19px] md:text-[21px] max-w-2xl mx-auto font-medium leading-relaxed">
+                        Do varejo a instituições financeiras, reduzimos custos e multiplicamos o faturamento dos nossos
+                        clientes.
+                    </p>
+                </div>
+
+                <!-- Bento Grid -->
+                <div
+                    class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 auto-rows-[350px] md:auto-rows-[400px] gap-6">
+
+                    <!-- Destaque Principal (Large) -->
+                    <!-- Card grande — Automação de Backoffice Logístico -->
+                    <div
+                        class="md:col-span-2 md:row-span-2 rounded-[2rem] bg-[#151516] border border-white/5 overflow-hidden relative group flex flex-col justify-between hover:bg-[#1c1c1e] transition-colors duration-300">
+
+                        <!-- Elemento visual: grid de arquivos animado -->
+                        <div class="flex-1 p-8 md:p-10 pb-0 relative flex flex-col justify-start">
+                            <div class="flex flex-col gap-[10px] w-full">
+                                <div class="flex items-center gap-[10px]">
+                                    <span
+                                        class="text-[10px] font-medium tracking-[0.08em] text-white/50 border border-white/10 px-2 py-[3px] rounded inline-block text-center w-[42px] min-w-[42px] shrink-0 whitespace-nowrap">XML</span>
+                                    <div class="h-1 bg-white/5 rounded-full flex-1 relative overflow-hidden">
+                                        <div class="absolute inset-y-0 left-0 bg-white/20 rounded-full"
+                                            style="width: 85%"></div>
+                                    </div>
+                                    <span
+                                        class="text-white/40 text-[9px] w-[18px] h-[18px] rounded-full flex items-center justify-center border border-white/10 shrink-0">✓</span>
+                                </div>
+                                <div class="flex items-center gap-[10px]">
+                                    <span
+                                        class="text-[10px] font-medium tracking-[0.08em] text-white/50 border border-white/10 px-2 py-[3px] rounded inline-block text-center w-[42px] min-w-[42px] shrink-0 whitespace-nowrap">CT-e</span>
+                                    <div class="h-1 bg-white/5 rounded-full flex-1 relative overflow-hidden">
+                                        <div class="absolute inset-y-0 left-0 bg-white/20 rounded-full"
+                                            style="width: 62%"></div>
+                                    </div>
+                                    <span
+                                        class="text-white/40 text-[9px] w-[18px] h-[18px] rounded-full flex items-center justify-center border border-white/10 shrink-0">✓</span>
+                                </div>
+                                <div class="flex items-center gap-[10px]">
+                                    <span
+                                        class="text-[10px] font-medium tracking-[0.08em] text-white/50 border border-white/10 px-2 py-[3px] rounded inline-block text-center w-[42px] min-w-[42px] shrink-0 whitespace-nowrap">XML</span>
+                                    <div class="h-1 bg-white/5 rounded-full flex-1 relative overflow-hidden">
+                                        <div class="absolute inset-y-0 left-0 bg-white/20 rounded-full"
+                                            style="width: 74%"></div>
+                                    </div>
+                                    <span
+                                        class="text-white/40 text-[9px] w-[18px] h-[18px] rounded-full flex items-center justify-center border border-white/10 shrink-0">✓</span>
+                                </div>
+                            </div>
+
+                            <!-- Métrica na base da área visual -->
+                            <div class="mt-5 pt-4 flex flex-row items-baseline gap-2 border-t border-white/5">
+                                <span
+                                    class="font-['Bebas_Neue'] text-[52px] leading-none text-[#f0ede8] tracking-[0.02em]">500</span>
+                                <span class="text-[11px] text-[#86868b] tracking-[0.1em] uppercase mb-1">arquivos /
+                                    dia</span>
+                            </div>
+
+                            <!-- Status Statistics -->
+                            <div class="flex items-center mt-5 py-4 border-y border-white/5">
+                                <div class="flex flex-1 flex-col gap-1">
+                                    <span
+                                        class="font-['Bebas_Neue'] text-[26px] leading-none text-[#f0ede8] tracking-[0.02em]">−80%</span>
+                                    <span class="text-[11px] text-[#86868b] tracking-[0.06em] leading-[1.3]">tempo
+                                        manual</span>
+                                </div>
+                                <div class="w-[1px] h-8 bg-white/5 mx-3 md:mx-5 shrink-0"></div>
+                                <div class="flex flex-1 flex-col gap-1">
+                                    <span
+                                        class="font-['Bebas_Neue'] text-[26px] leading-none text-[#f0ede8] tracking-[0.02em]">0</span>
+                                    <span class="text-[11px] text-[#86868b] tracking-[0.06em] leading-[1.3]">erros de
+                                        importação</span>
+                                </div>
+                                <div class="w-[1px] h-8 bg-white/5 mx-3 md:mx-5 shrink-0"></div>
+                                <div class="flex flex-1 flex-col gap-1">
+                                    <span
+                                        class="font-['Bebas_Neue'] text-[26px] leading-none text-[#f0ede8] tracking-[0.02em]">24h</span>
+                                    <span class="text-[11px] text-[#86868b] tracking-[0.06em] leading-[1.3]">operação
+                                        contínua</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Conteúdo -->
+                        <div class="px-8 md:px-10 pb-8 md:pb-10 pt-0 relative z-20">
+                            <h3 class="text-2xl md:text-3xl font-bold text-white mb-2">Automação de Backoffice Logístico
+                            </h3>
+                            <p class="text-[#86868b] text-[15px] leading-relaxed">500 arquivos por dia. Zero cliques. O
+                                ERP sempre atualizado.</p>
+                        </div>
+
+                    </div>
+
+                    <!-- Médio Superior Direito -->
+                    <div
+                        class="md:col-span-2 rounded-[2rem] bg-[#151516] border border-white/5 overflow-hidden relative group p-8 md:p-10 flex flex-col justify-end hover:bg-[#1c1c1e] transition-colors duration-300">
+                        <div class="relative z-20">
+                            <h3 class="text-2xl md:text-3xl font-bold text-white mb-3">Agendamento Inteligente em
+                                WhatsApp</h3>
+                            <p class="text-[#f5f5f7] opacity-80 max-w-[280px]">
+                                Assistente virtual integrado à agenda que marca, remarca e tira dúvidas sobre consultas
+                                24h por dia.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Pequeno Canto Inferior 1 -->
+                    <div
+                        class="md:col-span-1 border border-white/5 rounded-[2rem] bg-[#151516] overflow-hidden relative group p-8 flex flex-col justify-end hover:bg-[#1c1c1e] transition-colors duration-300">
+                        <div class="relative z-20">
+                            <h3 class="text-[22px] font-bold text-white mb-2 leading-tight">Conciliação Financeira</h3>
+                            <p class="text-[#a1a1a6] text-sm">Cruzamento autônomo de extratos bancários e notas fiscais.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Pequeno Canto Inferior 2 -->
+                    <div
+                        class="md:col-span-1 border border-white/5 rounded-[2rem] bg-[#151516] overflow-hidden relative group p-8 flex flex-col justify-end hover:bg-[#1c1c1e] transition-colors duration-300">
+                        <div class="relative z-20">
+                            <h3 class="text-[22px] font-bold text-white mb-2 leading-tight">Qualificação de Leads</h3>
+                            <p class="text-[#a1a1a6] text-sm">Filtro automático de contatos recebidos em campanhas de
+                                marketing.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Resultados (Prova) -->
+        <section id="resultado" class="py-24 md:py-32 relative bg-black overflow-hidden">
+            <div
+                class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent">
+            </div>
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+
+                <!-- Cabeçalho -->
+                <div class="flex flex-col md:flex-row justify-between items-end gap-8 mb-16 md:mb-20">
+                    <div>
+                        <p class="text-white text-[11px] font-medium tracking-[0.2em] uppercase mb-5">Resultado</p>
+                        <h2
+                            class="text-5xl md:text-[5rem] lg:text-[6rem] font-bold tracking-tighter text-white leading-[0.9]">
+                            Números<br><span class="text-white/60">reais.</span></h2>
+                    </div>
+                    <p
+                        class="text-[#a1a1a6] text-[15px] md:text-[17px] text-left md:text-right max-w-sm leading-relaxed pb-2 md:pb-4">
+                        Impacto medido 90 dias após a implantação. Menos trabalho manual, mais escala, zero falhas.
+                    </p>
+                </div>
+
+                <!-- Cards de métricas -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[1px] bg-white/5 mb-[1px]">
+                    <div class="bg-[#111] p-9 relative group hover:bg-[#151515] transition-colors">
+                        <div class="text-[4rem] md:text-[5rem] font-bold text-white leading-none mb-2 tracking-tighter">
+                            73%</div>
+                        <div class="text-[13px] text-[#999] leading-relaxed mb-4 min-h-[40px]">Redução de custos
+                            operacionais</div>
+                        <span
+                            class="inline-flex items-center gap-1.5 text-[11px] font-medium tracking-wide text-white bg-white/5 border border-white/10 px-2.5 py-1 rounded-full"><span
+                                class="w-1.5 h-1.5 rounded-full bg-white"></span>vs. processo manual</span>
+                        <div
+                            class="absolute bottom-0 left-0 right-0 h-[2px] bg-white scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100">
+                        </div>
+                    </div>
+                    <div class="bg-[#111] p-9 relative group hover:bg-[#151515] transition-colors">
+                        <div class="text-[4rem] md:text-[5rem] font-bold text-white leading-none mb-2 tracking-tighter">
+                            10×</div>
+                        <div class="text-[13px] text-[#999] leading-relaxed mb-4 min-h-[40px]">Velocidade de execução de
+                            tarefas</div>
+                        <span
+                            class="inline-flex items-center gap-1.5 text-[11px] font-medium tracking-wide text-white bg-white/5 border border-white/10 px-2.5 py-1 rounded-full"><span
+                                class="w-1.5 h-1.5 rounded-full bg-white"></span>rendimento médio</span>
+                        <div
+                            class="absolute bottom-0 left-0 right-0 h-[2px] bg-white scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100">
+                        </div>
+                    </div>
+                    <div class="bg-[#111] p-9 relative group hover:bg-[#151515] transition-colors">
+                        <div class="text-[4rem] md:text-[5rem] font-bold text-white leading-none mb-2 tracking-tighter">
+                            0</div>
+                        <div class="text-[13px] text-[#999] leading-relaxed mb-4 min-h-[40px]">Erros humanos em
+                            processos automatizados</div>
+                        <span
+                            class="inline-flex items-center gap-1.5 text-[11px] font-medium tracking-wide text-white bg-white/5 border border-white/10 px-2.5 py-1 rounded-full"><span
+                                class="w-1.5 h-1.5 rounded-full bg-white"></span>100% de precisão</span>
+                        <div
+                            class="absolute bottom-0 left-0 right-0 h-[2px] bg-white scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100">
+                        </div>
+                    </div>
+                    <div class="bg-[#111] p-9 relative group hover:bg-[#151515] transition-colors">
+                        <div class="text-[4rem] md:text-[5rem] font-bold text-white leading-none mb-2 tracking-tighter">
+                            +40%</div>
+                        <div class="text-[13px] text-[#999] leading-relaxed mb-4 min-h-[40px]">Crescimento de receita
+                            sem novas contratações</div>
+                        <span
+                            class="inline-flex items-center gap-1.5 text-[11px] font-medium tracking-wide text-white bg-white/5 border border-white/10 px-2.5 py-1 rounded-full"><span
+                                class="w-1.5 h-1.5 rounded-full bg-white"></span>receita / headcount</span>
+                        <div
+                            class="absolute bottom-0 left-0 right-0 h-[2px] bg-white scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Linha inferior: comparativo + cases -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-[1px] bg-white/5 mb-16">
+
+                    <!-- Comparativo antes × depois -->
+                    <div class="bg-[#111] p-10">
+                        <p class="text-[11px] font-medium tracking-[0.15em] uppercase text-[#666] mb-7">Antes × Depois
+                        </p>
+
+                        <div class="mb-6">
+                            <div class="flex justify-between items-baseline mb-2">
+                                <span class="text-[13px] text-[#999]">Tempo de resposta ao cliente</span>
+                                <div class="flex gap-4 text-[12px]">
+                                    <span class="text-[#666]">Antes: 4h</span>
+                                    <span class="text-white font-medium">Depois: 3min</span>
+                                </div>
+                            </div>
+                            <div class="h-[5px] bg-white/5 rounded-full overflow-hidden mb-1">
+                                <div class="h-full rounded-full bg-white/15 w-full"></div>
+                            </div>
+                            <div class="h-[5px] bg-white/5 rounded-full overflow-hidden">
+                                <div class="h-full rounded-full bg-white w-[4%]"></div>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <div class="flex justify-between items-baseline mb-2">
+                                <span class="text-[13px] text-[#999]">Arquivos processados por dia</span>
+                                <div class="flex gap-4 text-[12px]">
+                                    <span class="text-[#666]">Antes: 40</span>
+                                    <span class="text-white font-medium">Depois: 500+</span>
+                                </div>
+                            </div>
+                            <div class="h-[5px] bg-white/5 rounded-full overflow-hidden mb-1">
+                                <div class="h-full rounded-full bg-white/15 w-[8%]"></div>
+                            </div>
+                            <div class="h-[5px] bg-white/5 rounded-full overflow-hidden">
+                                <div class="h-full rounded-full bg-white w-full"></div>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <div class="flex justify-between items-baseline mb-2">
+                                <span class="text-[13px] text-[#999]">Horas de trabalho manual / semana</span>
+                                <div class="flex gap-4 text-[12px]">
+                                    <span class="text-[#666]">Antes: 120h</span>
+                                    <span class="text-white font-medium">Depois: 8h</span>
+                                </div>
+                            </div>
+                            <div class="h-[5px] bg-white/5 rounded-full overflow-hidden mb-1">
+                                <div class="h-full rounded-full bg-white/15 w-full"></div>
+                            </div>
+                            <div class="h-[5px] bg-white/5 rounded-full overflow-hidden">
+                                <div class="h-full rounded-full bg-white w-[7%]"></div>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4 mt-8 pt-4 border-t border-white/10">
+                            <span class="flex items-center gap-2 text-[11px] text-[#666]">
+                                <span class="w-2 h-2 rounded-full bg-white/15"></span> Antes da automação
+                            </span>
+                            <span class="flex items-center gap-2 text-[11px] text-[#666]">
+                                <span class="w-2 h-2 rounded-full bg-white"></span> Depois da automação
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Cases por setor -->
+                    <div class="bg-[#111] p-10">
+                        <p class="text-[11px] font-medium tracking-[0.15em] uppercase text-[#666] mb-7">Cases por setor
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div
+                                class="bg-[#181818] border border-white/5 rounded-[10px] p-5 hover:border-white/10 transition-colors">
+                                <div class="text-[13px] font-medium text-[#f0ede8] mb-1.5 leading-[1.3]">Backoffice
+                                    Logístico</div>
+                                <div class="text-[12px] text-[#666] leading-relaxed mb-3">Processamento XML/CT-e
+                                    automatizado no TMS</div>
+                                <span
+                                    class="inline-block text-[11px] font-medium text-white bg-white/5 border border-white/10 px-2.5 py-1 rounded-full tracking-wide">-80%
+                                    tempo manual</span>
+                            </div>
+                            <div
+                                class="bg-[#181818] border border-white/5 rounded-[10px] p-5 hover:border-white/10 transition-colors">
+                                <div class="text-[13px] font-medium text-[#f0ede8] mb-1.5 leading-[1.3]">Agendamento
+                                    WhatsApp</div>
+                                <div class="text-[12px] text-[#666] leading-relaxed mb-3">Assistente virtual 24h
+                                    integrado à agenda</div>
+                                <span
+                                    class="inline-block text-[11px] font-medium text-white bg-white/5 border border-white/10 px-2.5 py-1 rounded-full tracking-wide">+3×
+                                    leads convertidos</span>
+                            </div>
+                            <div
+                                class="bg-[#181818] border border-white/5 rounded-[10px] p-5 hover:border-white/10 transition-colors">
+                                <div class="text-[13px] font-medium text-[#f0ede8] mb-1.5 leading-[1.3]">Conciliação
+                                    Financeira</div>
+                                <div class="text-[12px] text-[#666] leading-relaxed mb-3">Cruzamento automático de
+                                    extratos e notas</div>
+                                <span
+                                    class="inline-block text-[11px] font-medium text-white bg-white/5 border border-white/10 px-2.5 py-1 rounded-full tracking-wide">0
+                                    erros de conciliação</span>
+                            </div>
+                            <div
+                                class="bg-[#181818] border border-white/5 rounded-[10px] p-5 hover:border-white/10 transition-colors">
+                                <div class="text-[13px] font-medium text-[#f0ede8] mb-1.5 leading-[1.3]">Qualificação de
+                                    Leads</div>
+                                <div class="text-[12px] text-[#666] leading-relaxed mb-3">Filtro automático pós-campanha
+                                    de marketing</div>
+                                <span
+                                    class="inline-block text-[11px] font-medium text-white bg-white/5 border border-white/10 px-2.5 py-1 rounded-full tracking-wide">5×
+                                    ROI em campanhas</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Fechamento -->
+                <div class="text-center py-6">
+                    <p class="text-[34px] md:text-5xl font-bold tracking-tighter text-white mb-3">
+                        Menos pessoas em tarefas manuais.<br><span class="text-white/60">Mais pessoas focadas no
+                            crescimento.</span>
+                    </p>
+                    <p class="text-[14px] md:text-[17px] text-[#999] mb-8 font-medium">A sua empresa não precisa crescer
+                        contratando mais — precisa trabalhar de forma mais inteligente.</p>
+
+                    <div class="mt-10 flex justify-center w-full">
+                        <a href="#calculadora"
+                            class="inline-flex items-center justify-center px-6 py-2.5 bg-transparent border border-white/20 text-white font-medium rounded-full hover:bg-white/10 transition-colors text-[14px]">
+                            Descobrir a minha fuga de capital &rarr;
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+        <!-- 🧮 Secção 1: A Calculadora de Custo Invisível -->
+        <section id="calculadora" class="relative min-h-[80vh] flex flex-col items-center justify-start overflow-hidden py-24 px-4 bg-black">
+            <img src="assets/calculator_bg.png" alt="" class="absolute inset-0 w-full h-full object-cover opacity-[0.03] pointer-events-none" onerror="this.style.display='none'">
+            <div class="ambient-glow" style="top: 20%; height: 80vh;"></div>
+
+            <div class="relative z-20 w-full max-w-4xl mx-auto pt-10">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-white mb-6">
+                        Calcule o Custo Invisível da sua Operação
+                    </h2>
+                    <p
+                        class="text-[17px] md:text-[19px] text-neutral-400 font-medium leading-relaxed max-w-3xl mx-auto">
+                        Descubra em 30 segundos quanto a sua operação perde por ano com trabalho manual.
+                    </p>
+                </div>
+
+                <!-- Painel da Calculadora -->
+                <div class="bg-[#111] border border-white/10 rounded-3xl p-8 md:p-12 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+
+                    <!-- Sliders -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-10">
+                        <!-- Número de Colaboradores -->
+                        <div class="flex flex-col gap-4">
+                            <div class="flex justify-between items-end">
+                                <label for="slider-n" class="text-[15px] font-medium text-white">Número de colaboradores:</label>
+                                <span id="val-n"
+                                    class="text-2xl font-bold text-white bg-white/10 px-3 py-1 rounded-lg">3</span>
+                            </div>
+                            <input type="range" id="slider-n" min="1" max="50" value="3" step="1"
+                                oninput="updateValues()">
+                        </div>
+
+                        <!-- Horas Perdidas -->
+                        <div class="flex flex-col gap-4">
+                            <div class="flex justify-between items-end">
+                                <label for="slider-h"
+                                    class="text-[15px] font-medium text-white max-w-[200px] leading-tight">Horas
+                                    perdidas por dia por colaborador:</label>
+                                <span id="val-h"
+                                    class="text-2xl font-bold text-white bg-white/10 px-3 py-1 rounded-lg">2</span>
+                            </div>
+                            <input type="range" id="slider-h" min="1" max="10" value="2" step="1"
+                                oninput="updateValues()">
+                        </div>
+                    </div>
+
+                    <!-- Resultado -->
+                    <div id="result-container" class="mt-8 pt-8 flex flex-col items-center">
+
+                        <div class="text-center mb-8">
+                            <p class="text-[18px] md:text-[22px] font-semibold text-white/90 mb-3">
+                                O trabalho manual está roubando
+                            </p>
+                            <div
+                                class="flex items-center justify-center text-red-500 font-['Bebas_Neue'] text-[4rem] md:text-[5.5rem] leading-none tracking-tight mb-2">
+                                <span>R$&nbsp;</span><span id="resultado-valor">0</span>
+                            </div>
+                            <p class="text-[18px] md:text-[22px] font-semibold text-white/90">
+                                da sua margem de lucro todos os anos.
+                            </p>
+                        </div>
+
+                        <div class="text-center max-w-2xl mx-auto mb-10 space-y-6">
+                            <p class="text-neutral-400 text-[16px] md:text-[17px] leading-relaxed">
+                                Esse valor <strong class="text-white font-semibold">sai da sua margem todos os anos</strong> — sem aparecer em nenhum relatório, sem que ninguém perceba. É o <strong class="text-white font-semibold">custo invisível</strong> que nenhum gestor consegue ver sem parar para calcular.
+                            </p>
+                            <p class="text-neutral-400 text-[16px] md:text-[17px] leading-relaxed">
+                                <strong class="text-white font-semibold">A boa notícia:</strong> O setup da Aivery <strong class="text-white font-semibold">custa menos que 3 meses dessa perda</strong>. Construímos "Agentes Digitais" capazes de assumir esta tarefa em background por uma fração desse valor.
+                            </p>
+                            <p class="text-[12px] text-neutral-600 !mb-0">
+                                *Fórmula utilizada: Colaboradores × Horas/dia × R$ 15/hora × 240 dias úteis.
+                            </p>
+                        </div>
+
+                        <!-- Botão Principal condicionado -->
+                        <p class="text-[15px] text-white/80 font-medium mb-4 text-center">O diagnóstico é gratuito e leva 30 minutos.</p>
+                        <!-- Lembre-se de configurar no seu Calendly/Cal.com os campos: Nome, E-mail corporativo, e "Qual o principal processo manual que gera custo ou atrasa a sua operação hoje?" -->
+                        <button onclick="abrirCalendly(event)" id="final-cta-btn"
+                            class="inline-block w-full max-w-md px-8 py-4 bg-white text-black text-center font-bold rounded-full hover:scale-105 transition-all duration-300">
+                            Agendar o meu Diagnóstico Gratuito
+                        </button>
+                        <p class="text-[12px] text-neutral-500 mt-4 text-center font-medium">
+                            *Sem cartão de crédito. Sem compromisso de compra.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- FAQ Section -->
+        <section class="py-24 max-w-4xl mx-auto px-6 border-t border-white/5">
+            <h2 class="text-3xl md:text-[2.5rem] font-bold tracking-tight text-white mb-12 text-center">Perguntas Frequentes</h2>
+            <div class="space-y-4">
+                <details class="group bg-[#111] border border-white/10 rounded-2xl overflow-hidden [&_summary::-webkit-details-marker]:hidden">
+                    <summary class="flex items-center justify-between cursor-pointer p-6 bg-transparent">
+                        <span class="text-lg font-semibold text-white">O que acontece depois do diagnóstico — vou receber uma proposta gigante?</span>
+                        <span class="transition group-open:rotate-180">
+                            <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" class="text-white"><path d="M6 9l6 6 6-6"></path></svg>
+                        </span>
+                    </summary>
+                    <div class="px-6 pb-6 text-[#a1a1a6] text-[15px] leading-relaxed">
+                        Nada obrigatório. Você recebe o mapa de automações e decide o que fazer. Não existe proposta automática nem follow-up agressivo.
+                    </div>
+                </details>
+                
+                <details class="group bg-[#111] border border-white/10 rounded-2xl overflow-hidden [&_summary::-webkit-details-marker]:hidden">
+                    <summary class="flex items-center justify-between cursor-pointer p-6 bg-transparent">
+                        <span class="text-lg font-semibold text-white">Minha equipe precisa parar o que está fazendo para participar?</span>
+                        <span class="transition group-open:rotate-180">
+                            <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" class="text-white"><path d="M6 9l6 6 6-6"></path></svg>
+                        </span>
+                    </summary>
+                    <div class="px-6 pb-6 text-[#a1a1a6] text-[15px] leading-relaxed">
+                        Não. O diagnóstico é uma conversa de 30 minutos com quem conhece o processo — geralmente um gestor ou o próprio dono.
+                    </div>
+                </details>
+                
+                <details class="group bg-[#111] border border-white/10 rounded-2xl overflow-hidden [&_summary::-webkit-details-marker]:hidden">
+                    <summary class="flex items-center justify-between cursor-pointer p-6 bg-transparent">
+                        <span class="text-lg font-semibold text-white">Quanto tempo leva para implementar?</span>
+                        <span class="transition group-open:rotate-180">
+                            <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" class="text-white"><path d="M6 9l6 6 6-6"></path></svg>
+                        </span>
+                    </summary>
+                    <div class="px-6 pb-6 text-[#a1a1a6] text-[15px] leading-relaxed">
+                        Sistemas complexos e implantações de 6 meses são coisas do passado. O primeiro piloto laboratório (micro-automação) é normalmente entregue em no máximo 1 mês. Operações maiores são lançadas por módulos rápidos e validadas em semanas operacionais, garantindo retorno do dinheiro investido rapidamente.
+                    </div>
+                </details>
+                
+                <details class="group bg-[#111] border border-white/10 rounded-2xl overflow-hidden [&_summary::-webkit-details-marker]:hidden">
+                    <summary class="flex items-center justify-between cursor-pointer p-6 bg-transparent">
+                        <span class="text-lg font-semibold text-white">A Inteligência Artificial conecta-se aos sistemas que nós já usamos (ERPs, CRM)?</span>
+                        <span class="transition group-open:rotate-180">
+                            <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" class="text-white"><path d="M6 9l6 6 6-6"></path></svg>
+                        </span>
+                    </summary>
+                    <div class="px-6 pb-6 text-[#a1a1a6] text-[15px] leading-relaxed">
+                        100%. Trabalhamos com os sistemas que você já usa — ERP, planilhas, WhatsApp, portais de governo — sem precisar trocar nada. A integração é feita nos bastidores, invisível para a sua equipe.
+                    </div>
+                </details>
+            </div>
+        </section>
+
+    <!-- Contato / CTA Reestilizado -->
+    <section class="cta-section py-32 md:py-40 bg-black relative flex flex-col items-center" id="contato">
+        <img src="assets/contato_bg.png" alt=""
+            class="absolute inset-0 w-full h-full object-cover opacity-15 pointer-events-none section-img-mask"
+            onerror="this.style.display='none'">
+
+        <div class="container flex flex-col items-center mx-auto text-center px-6 max-w-4xl relative z-10">
+
+            <h2
+                class="cta-heading text-4xl md:text-5xl lg:text-[4.5rem] font-bold tracking-tighter text-white mb-6 leading-[1.05]">
+                Você viu o prejuízo.<br><span class="text-white/60">Agora elimine esse custo da sua operação.</span></h2>
+
+            <p
+                class="cta-sub text-[#a1a1a6] text-[17px] md:text-[19px] mb-12 font-medium max-w-2xl mx-auto leading-relaxed">
+                Agende um diagnóstico gratuito de 30 minutos e saia com um mapa
+                das automações que sua empresa pode implementar agora.
+            </p>
+
+            <!-- Botão principal -->
+            <!-- Lembre-se de configurar no seu Calendly/Cal.com os campos: Nome, E-mail corporativo, e "Qual o principal processo manual que gera custo ou atrasa a sua operação hoje?" -->
+            <button onclick="abrirCalendly(event)"
+                class="cta-btn-primary w-full max-w-md flex items-center justify-center gap-2 px-8 py-4 md:py-5 bg-white text-black font-bold rounded-full text-[17px] md:text-[18px] hover:scale-105 transition-transform duration-300 shadow-[0_4px_30px_rgba(255,255,255,0.1)] mb-2">
+                Agendar Diagnóstico Gratuito &rarr;
+            </button>
+
+            <!-- Micro-copy -->
+            <div class="flex flex-wrap justify-center gap-x-6 gap-y-3 mt-4 text-[13.5px] text-white/60 font-medium">
+                <span class="flex items-center gap-1.5">
+                    <svg class="w-4 h-4 text-[#FFB800]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                    Sem compromisso
+                </span>
+                <span class="flex items-center gap-1.5">
+                    <svg class="w-4 h-4 text-[#FFB800]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                    100% gratuito
+                </span>
+                <span class="flex items-center gap-1.5">
+                    <svg class="w-4 h-4 text-[#FFB800]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                    Resposta em até 2h
+                </span>
+            </div>
+            <p class="text-[13px] text-[#FFB800] mt-4 font-medium tracking-wide">
+                Agenda de diagnóstico: 3 vagas disponíveis esta semana.
+            </p>
+
+            <!-- Separador -->
+            <div class="cta-divider">
+                <span class="cta-divider-line"></span>
+                <span class="cta-divider-text">ou</span>
+                <span class="cta-divider-line"></span>
+            </div>
+
+            <!-- WhatsApp — troque 55XXXXXXXXXXX pelo seu número -->
+            <a href="https://wa.me/55XXXXXXXXXXX?text=Ol%C3%A1%2C%20estava%20no%20site%20da%20Aivery%20e%20vi%20o%20c%C3%A1lculo%20de%20fuga%20de%20caixa.%20Gostaria%20de%20entender%20como%20a%20micro-automa%C3%A7%C3%A3o%20funciona." class="cta-btn-whatsapp" target="_blank" rel="noopener">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <path
+                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
+                        fill="#4ade80" />
+                    <path
+                        d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.96 9.96 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"
+                        stroke="#4ade80" stroke-width="1.5" stroke-linecap="round" />
+                </svg>
+                Falar via WhatsApp
+            </a>
+
+            <!-- Itens de confiança -->
+            <div class="cta-trust">
+
+                <div class="cta-trust-item">
+                    <span class="cta-check">
+                        <svg width="9" height="9" viewBox="0 0 10 10" fill="none">
+                            <path d="M2 5l2.5 2.5L8 3" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </span>
+                    Diagnóstico em 30 minutos
+                </div>
+
+                <div class="cta-trust-item">
+                    <span class="cta-check">
+                        <svg width="9" height="9" viewBox="0 0 10 10" fill="none">
+                            <path d="M2 5l2.5 2.5L8 3" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </span>
+                    Resultado prático na conversa
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Rodapé Completo Aivery -->
+    <footer class="aivery-footer">
+        <div class="container">
+
+            <div class="footer-top">
+
+                <!-- Marca -->
+                <div>
+                    <span class="footer-brand-name">Aivery</span>
+                    <p class="footer-brand-tagline">
+                        Automatizamos os processos que travam o crescimento da sua empresa.
+                    </p>
+
+                </div>
+
+                <!-- Navegação -->
+                <div>
+                    <p class="footer-col-title">Navegação</p>
+                    <ul class="footer-links">
+                        <li><a href="#processo">O Processo</a></li>
+                        <li><a href="#projetos">Projetos</a></li>
+                        <li><a href="#resultado">Resultados</a></li>
+                        <li><a href="calculadora.html">Quero automatizar</a></li>
+                    </ul>
+                </div>
+
+
+            </div>
+
+            <div class="footer-bottom">
+                <span class="footer-copyright">São José dos Campos - © 2026 Aivery. Todos os direitos reservados.</span>
+                <span class="footer-slogan"><strong>Provamos o valor</strong> antes de falar em contrato.</span>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- Lógica da Calculadora -->
+    <script>
+        let countUpAnim;
+
+        // Formater for currency
+        const formatBRL = (value) => {
+            return value.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        };
+
+        function initCountUp(initialValue) {
+            const options = {
+                decimalPlaces: 2,
+                duration: 2.5,
+                useEasing: true,
+                useGrouping: true,
+                separator: '.',
+                decimal: ',',
+            };
+            if (typeof countUp !== 'undefined' && countUp.CountUp) {
+                countUpAnim = new countUp.CountUp('resultado-valor', initialValue, options);
+                if (!countUpAnim.error) {
+                    countUpAnim.start();
+                } else {
+                    console.error(countUpAnim.error);
+                }
+            }
+        }
+
+        function updateValues() {
+            const sliderN = document.getElementById('slider-n');
+            const sliderH = document.getElementById('slider-h');
+
+            const n = parseInt(sliderN.value) || 3;
+            const h = parseInt(sliderH.value) || 2;
+
+            // Progresso Visual dos Sliders
+            const percentN = ((n - sliderN.min) / (sliderN.max - sliderN.min)) * 100;
+            sliderN.style.background = `linear-gradient(to right, #ffffff ${percentN}%, rgba(255, 255, 255, 0.1) ${percentN}%)`;
+
+            const percentH = ((h - sliderH.min) / (sliderH.max - sliderH.min)) * 100;
+            sliderH.style.background = `linear-gradient(to right, #ffffff ${percentH}%, rgba(255, 255, 255, 0.1) ${percentH}%)`;
+
+            document.getElementById('val-n').innerText = n;
+            document.getElementById('val-h').innerText = h;
+
+            const annualCost = n * h * 15 * 240;
+
+            if (countUpAnim && !countUpAnim.error) {
+                countUpAnim.update(annualCost);
+            } else {
+                document.getElementById('resultado-valor').innerText = formatBRL(annualCost);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Start calculation based on DOM elements setup
+            const sliderN = document.getElementById('slider-n');
+            const sliderH = document.getElementById('slider-h');
+            
+            if (!sliderN || !sliderH) return; // safety check
+            
+            const n = parseInt(sliderN.value) || 3;
+            const h = parseInt(sliderH.value) || 2;
+            const initialCost = n * h * 15 * 240;
+
+            // Initialize background fills right away
+            updateValues();
+
+            // Wait brief moment for CountUp library to inject via CDN if not fully loaded
+            setTimeout(() => {
+                const resultContainer = document.getElementById('result-container');
+                if (resultContainer) {
+                    resultContainer.style.display = 'flex';
+                    // Trigger reflow to apply transition classes safely if needed
+                    void resultContainer.offsetWidth;
+                    resultContainer.classList.add('visible');
+                }
+
+                initCountUp(initialCost);
+
+                const btn = document.getElementById('final-cta-btn');
+                if (btn) {
+                    // Small delay to let user see numbers before button appears
+                    setTimeout(() => {
+                        btn.classList.add('visible');
+                    }, 1000);
+                }
+            }, 100);
+        });
+    </script>
+
+    <script>
+        function abrirCalendly(event) {
+            // Previne que a página recarregue ao clicar no botão
+            event.preventDefault(); 
+            
+            // Substitua a URL abaixo pelo link do evento que você gerou no Calendly
+            Calendly.initPopupWidget({ 
+                url: 'https://calendly.com/gabriel-aiverycompany/diagnostico-gratuito-de-automacao' 
+            });
+            return false;
+        }
+    </script>
+</body>
+
+</html>
