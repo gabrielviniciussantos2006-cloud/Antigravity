@@ -115,7 +115,7 @@
         <p class="text-sm text-gray-400">Descubra quanto dinheiro sua empresa perde por ano.</p>
       </div>
 
-      <form id="form-lead" action="obrigado.html" class="space-y-4">
+      <form id="form-lead" class="space-y-4">
         
         <div class="space-y-1.5 text-left">
           <label for="nome" class="block text-[13px] font-medium text-gray-300 ml-1">Seu Nome</label>
@@ -168,6 +168,49 @@
     document.getElementById('whatsapp').addEventListener('input', function (e) {
       var x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
       e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+    });
+
+    /* Integração com Webhook (n8n, Make, Zapier) -> Trello */
+    document.getElementById('form-lead').addEventListener('submit', async function (e) {
+      e.preventDefault(); // Impede o redirecionamento HTML padrão
+
+      const btn = this.querySelector('button[type="submit"]');
+      const originalContent = btn.innerHTML;
+
+      // Pegando os dados digitados
+      const data = {
+        nome: document.getElementById('nome').value,
+        empresa: document.getElementById('empresa').value,
+        whatsapp: document.getElementById('whatsapp').value
+      };
+
+      // Alterando botão para dar feedback visual e evitar cliques duplos
+      btn.innerHTML = '<span class="text-sm font-semibold">Enviando dados...</span>';
+      btn.disabled = true;
+      btn.classList.add('opacity-70', 'cursor-not-allowed');
+
+      try {
+        // Webhook do n8n (Integração Direta com o Trello via Test/Prod)
+        await fetch('https://gabrielviniciusst.app.n8n.cloud/webhook-test/lead-aivery', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data) // Empacota os dados em JSON para o Trello entender
+        });
+
+        // 🟢 Se funcionou e foi pro webhook (n8n), agora sim manda pro Obrigado!
+        window.location.href = 'obrigado.html';
+
+      } catch (error) {
+        console.error('Erro ao integrar com o webhook:', error);
+        alert('Não conseguimos processar neste momento. Verifique sua conexão ou tente novamente!');
+        
+        // Restaura o botão caso dê erro (internet caiu, webhook off, etc)
+        btn.innerHTML = originalContent;
+        btn.disabled = false;
+        btn.classList.remove('opacity-70', 'cursor-not-allowed');
+      }
     });
   </script>
 </body>
