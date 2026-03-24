@@ -1,194 +1,174 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Diagnóstico de Automação com IA — Aivery</title>
   
   <link rel="icon" type="image/png" href="assets/favicon.png">
 
+  <!-- Fonte Inter (Idêntica à página principal aivery.html) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'], // Removida a Syne, focando 100% na Inter
+                },
+                colors: {
+                    brand: '#4ade80',
+                    check: '#d4af37'
+                },
+                letterSpacing: {
+                    tighter: '-.04em',
+                    tight: '-.02em',
+                }
+            }
+        }
+    }
+  </script>
 
   <style>
-    :root {
-      --black: #000000;
-      --white: #ffffff;
-      --grey-1: #111111;
-      --grey-2: #1a1a1a;
-      --grey-3: #333333;
-      --green-text: #4ade80;
-    }
-
     body {
-      background: var(--black);
-      color: var(--white);
-      font-family: 'DM Sans', sans-serif;
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
+      background-color: #000000;
+      -webkit-font-smoothing: antialiased;
     }
-
-    /* Cabeçalho Cego (Sem Menu) */
-    header {
-      padding: 30px 40px;
-      text-align: center; /* Logo centralizada foca a atenção */
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+    
+    /* Gradiente sutil do texto (Idêntico ao text-gradient principal) */
+    .text-gradient {
+      background: linear-gradient(180deg, #FFFFFF 0%, #a1a1a6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-    .logo {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 24px;
-      color: var(--white);
-      text-decoration: none;
-      letter-spacing: 0.05em;
+    
+    .hero-bg {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 100vh;
+      background-image: url('assets/hero_bg.png');
+      background-size: contain;
+      background-position: center 10%;
+      background-repeat: no-repeat;
+      opacity: 0.35;
+      mix-blend-screen: screen;
+      pointer-events: none;
+      z-index: 0;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%);
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%);
     }
-
-    /* Seção Principal (Hero) */
-    .hero {
-      max-width: 800px;
-      margin: 80px auto 40px;
-      text-align: center;
-      padding: 0 20px;
-    }
-    .badge {
-      display: inline-block;
-      background: rgba(74, 222, 128, 0.1);
-      color: var(--green-text);
-      padding: 6px 16px;
-      border-radius: 50px;
-      font-size: 14px;
-      font-weight: 500;
-      margin-bottom: 20px;
-      border: 1px solid rgba(74, 222, 128, 0.2);
-    }
-    h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: 48px;
-      line-height: 1.1;
-      margin-bottom: 20px;
-    }
-    h1 span { color: rgba(255,255,255,0.4); }
-    .subtitle {
-      font-size: 18px;
-      color: rgba(255,255,255,0.7);
-      margin-bottom: 40px;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    /* Formulário de Captura */
-    .form-container {
-      background: var(--grey-1);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 16px;
-      padding: 40px;
-      max-width: 500px;
-      margin: 0 auto 80px;
-    }
-    .form-container h3 {
-      font-family: 'Syne', sans-serif;
-      font-size: 24px;
-      margin-top: 0;
-      margin-bottom: 10px;
-      text-align: center;
-    }
-    .form-container p {
-      text-align: center;
-      color: rgba(255,255,255,0.5);
-      font-size: 14px;
-      margin-bottom: 30px;
-    }
-    .input-group { margin-bottom: 20px; }
-    .input-group label {
-      display: block;
-      font-size: 14px;
-      margin-bottom: 8px;
-      color: rgba(255,255,255,0.8);
-    }
-    .input-group input {
-      width: 100%;
-      padding: 16px;
-      background: var(--grey-2);
-      border: 1px solid var(--grey-3);
-      border-radius: 8px;
-      color: var(--white);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 16px;
-      box-sizing: border-box;
-    }
-    .input-group input:focus {
-      outline: none;
-      border-color: var(--green-text);
-    }
-    .btn-submit {
-      width: 100%;
-      padding: 18px;
-      background: var(--white);
-      color: var(--black);
-      border: none;
-      border-radius: 8px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .btn-submit:hover { background: rgba(255,255,255,0.8); }
-
-    /* Rodapé Limpo */
-    footer {
-      text-align: center;
-      padding: 40px 20px;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      font-size: 14px;
-      color: rgba(255,255,255,0.3);
-    }
-
-    @media (max-width: 600px) {
-      h1 { font-size: 36px; }
-      .form-container { padding: 30px 20px; border-radius: 0; border-left: none; border-right: none;}
+    
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus, 
+    input:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 30px #111111 inset !important;
+      -webkit-text-fill-color: white !important;
+      transition: background-color 5000s ease-in-out 0s;
     }
   </style>
 </head>
-<body>
+<body class="text-[#f5f5f7] min-h-screen flex flex-col items-center relative overflow-x-hidden pt-6">
 
-  <header>
-    <div class="logo">AIVERY</div>
+  <!-- Background do Cérebro Artificial -->
+  <div class="hero-bg"></div>
+
+  <!-- Header -->
+  <header class="w-full text-left relative z-10 px-8 py-2 mb-4 md:mb-8 max-w-6xl mx-auto flex justify-between items-center">
+    <!-- Logo -->
+    <a href="index.html" class="font-sans font-extrabold text-2xl tracking-tight text-white hover:opacity-80 transition-opacity">
+      Aivery
+    </a>
   </header>
 
-  <section class="hero">
-    <div class="badge">Exclusivo para Pequenas e Médias Empresas</div>
-    <h1>Sua equipe perde horas por dia em <span>tarefas manuais?</span></h1>
-    <p class="subtitle">Descubra o seu custo invisível. Implementamos agentes de inteligência artificial para automatizar seus processos internos sem precisar trocar os sistemas que você já usa.</p>
-  </section>
-
-  <div class="form-container">
-    <h3>Agende seu Diagnóstico</h3>
-    <p>Mapeamento de 30 min gratuito e sem compromisso.</p>
-
-    <form id="form-lead">
-      <div class="input-group">
-        <label for="nome">Seu Nome</label>
-        <input type="text" id="nome" placeholder="Ex: João Silva" required>
+  <!-- Main Content Area -->
+  <main class="w-full max-w-5xl mx-auto px-6 flex flex-col items-center relative z-10 flex-1 pt-4 pb-16">
+    
+    <!-- Hero Text (Escrita Original Restaurada) -->
+    <div class="text-center w-full max-w-3xl mb-10">
+      
+      <!-- Badge Premium -->
+      <div class="inline-flex items-center px-4 py-1.5 rounded-full border border-brand/20 bg-brand/10 text-brand text-sm font-medium mb-6 uppercase tracking-wider">
+        Exclusivo para PMEs
       </div>
-      <div class="input-group">
-        <label for="empresa">Nome da Empresa</label>
-        <input type="text" id="empresa" placeholder="Ex: Minha Empresa LTDA" required>
-      </div>
-      <div class="input-group">
-        <label for="whatsapp">WhatsApp (com DDD)</label>
-        <input type="tel" id="whatsapp" placeholder="(00) 00000-0000" required>
-      </div>
-      <button type="submit" class="btn-submit">Descobrir meu Potencial de Automação</button>
-    </form>
-  </div>
 
-  <footer>
-    <p>São José dos Campos — © 2026 Aivery. Provamos o valor antes do contrato.</p>
-  </footer>
+      <h1 class="font-sans text-4xl md:text-6xl font-extrabold leading-[1.05] mb-6 tracking-tighter">
+        Sua equipe perde horas por dia em <span class="text-gradient">tarefas manuais?</span>
+      </h1>
+      
+      <p class="text-[16px] md:text-lg text-gray-400 leading-relaxed max-w-2xl mx-auto font-sans px-4">
+        Descubra o seu custo invisível. Implementamos agentes de inteligência artificial para automatizar seus processos sem precisar trocar os sistemas que você já usa.
+      </p>
+    </div>
 
+    <!-- Formulário Captura Glassmorphism -->
+    <div class="w-full max-w-[460px] bg-[#0a0a0a]/80 backdrop-blur-3xl border border-white/10 rounded-3xl p-8 shadow-2xl relative mb-8">
+      
+      <div class="text-center mb-7">
+        <h3 class="font-sans text-xl font-bold mb-1 tracking-tight">Diagnóstico Automático</h3>
+        <p class="text-sm text-gray-400">Descubra quanto dinheiro sua empresa perde por ano.</p>
+      </div>
+
+      <form id="form-lead" action="obrigado.html" class="space-y-4">
+        
+        <div class="space-y-1.5 text-left">
+          <label for="nome" class="block text-[13px] font-medium text-gray-300 ml-1">Seu Nome</label>
+          <input type="text" id="nome" placeholder="Ex: João Silva" required
+            class="w-full bg-[#111] border border-white/10 rounded-2xl px-5 py-4 text-white text-[15px] placeholder-gray-600 focus:outline-none focus:border-white/40 focus:bg-[#1a1a1a] transition-all">
+        </div>
+        
+        <div class="space-y-1.5 text-left">
+          <label for="empresa" class="block text-[13px] font-medium text-gray-300 ml-1">Nome da Empresa</label>
+          <input type="text" id="empresa" placeholder="Ex: Aivery Corporation" required
+            class="w-full bg-[#111] border border-white/10 rounded-2xl px-5 py-4 text-white text-[15px] placeholder-gray-600 focus:outline-none focus:border-white/40 focus:bg-[#1a1a1a] transition-all">
+        </div>
+        
+        <div class="space-y-1.5 text-left">
+          <label for="whatsapp" class="block text-[13px] font-medium text-gray-300 ml-1">WhatsApp corporativo</label>
+          <input type="tel" id="whatsapp" placeholder="(00) 00000-0000" required
+            class="w-full bg-[#111] border border-white/10 rounded-2xl px-5 py-4 text-white text-[15px] placeholder-gray-600 focus:outline-none focus:border-white/40 focus:bg-[#1a1a1a] transition-all">
+        </div>
+        
+        <!-- CTA Principal Arredondado Branco -->
+        <button type="submit" class="w-full mt-6 bg-white text-black font-sans font-semibold text-[16px] tracking-tight rounded-full px-4 py-4 hover:bg-gray-200 transform hover:scale-[1.02] transition-all flex items-center justify-center gap-2">
+          Descobrir meu Potencial de Automação
+          <!-- Flecha do botão -->
+          <svg class="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </button>
+
+      </form>
+    </div>
+
+    <!-- Indicadores de Confiança -->
+    <div class="flex flex-wrap items-center justify-center gap-6 mt-2 text-[13px] font-medium text-gray-400">
+      <div class="flex items-center gap-2">
+        <svg class="w-4 h-4 text-check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+        <span>100% gratuito</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <svg class="w-4 h-4 text-check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+        <span>Resposta em até 2h</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <svg class="w-4 h-4 text-check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+        <span>Sem compromisso</span>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    /* Máscara automática de Celular/WhatsApp */
+    document.getElementById('whatsapp').addEventListener('input', function (e) {
+      var x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
+      e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+    });
+  </script>
 </body>
 </html>
