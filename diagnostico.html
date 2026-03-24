@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diagnóstico de Automação com IA — Aivery</title>
+  
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --black: #000000;
+      --white: #ffffff;
+      --grey-1: #111111;
+      --grey-2: #1a1a1a;
+      --grey-3: #333333;
+      --green-text: #4ade80;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    /* Cabeçalho Cego (Sem Menu) */
+    header {
+      padding: 30px 40px;
+      text-align: center; /* Logo centralizada foca a atenção */
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 24px;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+    }
+
+    /* Seção Principal (Hero) */
+    .hero {
+      max-width: 800px;
+      margin: 80px auto 40px;
+      text-align: center;
+      padding: 0 20px;
+    }
+    .badge {
+      display: inline-block;
+      background: rgba(74, 222, 128, 0.1);
+      color: var(--green-text);
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 20px;
+      border: 1px solid rgba(74, 222, 128, 0.2);
+    }
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: 48px;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    h1 span { color: rgba(255,255,255,0.4); }
+    .subtitle {
+      font-size: 18px;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Formulário de Captura */
+    .form-container {
+      background: var(--grey-1);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 40px;
+      max-width: 500px;
+      margin: 0 auto 80px;
+    }
+    .form-container h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 24px;
+      margin-top: 0;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .form-container p {
+      text-align: center;
+      color: rgba(255,255,255,0.5);
+      font-size: 14px;
+      margin-bottom: 30px;
+    }
+    .input-group { margin-bottom: 20px; }
+    .input-group label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 8px;
+      color: rgba(255,255,255,0.8);
+    }
+    .input-group input {
+      width: 100%;
+      padding: 16px;
+      background: var(--grey-2);
+      border: 1px solid var(--grey-3);
+      border-radius: 8px;
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+    .input-group input:focus {
+      outline: none;
+      border-color: var(--green-text);
+    }
+    .btn-submit {
+      width: 100%;
+      padding: 18px;
+      background: var(--white);
+      color: var(--black);
+      border: none;
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-submit:hover { background: rgba(255,255,255,0.8); }
+
+    /* Rodapé Limpo */
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      font-size: 14px;
+      color: rgba(255,255,255,0.3);
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 36px; }
+      .form-container { padding: 30px 20px; border-radius: 0; border-left: none; border-right: none;}
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">AIVERY</div>
+  </header>
+
+  <section class="hero">
+    <div class="badge">Exclusivo para Pequenas e Médias Empresas</div>
+    <h1>Sua equipe perde horas por dia em <span>tarefas manuais?</span></h1>
+    <p class="subtitle">Descubra o seu custo invisível. Implementamos agentes de inteligência artificial para automatizar seus processos internos sem precisar trocar os sistemas que você já usa.</p>
+  </section>
+
+  <div class="form-container">
+    <h3>Agende seu Diagnóstico</h3>
+    <p>Mapeamento de 30 min gratuito e sem compromisso.</p>
+
+    <form id="form-lead">
+      <div class="input-group">
+        <label for="nome">Seu Nome</label>
+        <input type="text" id="nome" placeholder="Ex: João Silva" required>
+      </div>
+      <div class="input-group">
+        <label for="empresa">Nome da Empresa</label>
+        <input type="text" id="empresa" placeholder="Ex: Minha Empresa LTDA" required>
+      </div>
+      <div class="input-group">
+        <label for="whatsapp">WhatsApp (com DDD)</label>
+        <input type="tel" id="whatsapp" placeholder="(00) 00000-0000" required>
+      </div>
+      <button type="submit" class="btn-submit">Descobrir meu Potencial de Automação</button>
+    </form>
+  </div>
+
+  <footer>
+    <p>São José dos Campos — © 2026 Aivery. Provamos o valor antes do contrato.</p>
+  </footer>
+
+</body>
+</html>
