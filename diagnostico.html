@@ -177,12 +177,12 @@
       const btn = this.querySelector('button[type="submit"]');
       const originalContent = btn.innerHTML;
 
-      // Pegando os dados digitados
-      const data = {
+      // Empacota os dados sem esbarrar no bloqueio de segurança "CORS"
+      const data = new URLSearchParams({
         nome: document.getElementById('nome').value,
         empresa: document.getElementById('empresa').value,
         whatsapp: document.getElementById('whatsapp').value
-      };
+      });
 
       // Alterando botão para dar feedback visual e evitar cliques duplos
       btn.innerHTML = '<span class="text-sm font-semibold">Enviando dados...</span>';
@@ -190,13 +190,14 @@
       btn.classList.add('opacity-70', 'cursor-not-allowed');
 
       try {
-        // Webhook do n8n (Integração Direta com o Trello via Test/Prod)
+        // Envio no formato Form (X-WWW) que ignora o bloqueio do navegador (CORS)
         await fetch('https://gabrielviniciusst.app.n8n.cloud/webhook-test/lead-aivery', {
           method: 'POST',
+          mode: 'no-cors', // Fundamental para não dar erro se o n8n demorar a responder
           headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded',
           },
-          body: JSON.stringify(data) // Empacota os dados em JSON para o Trello entender
+          body: data.toString() 
         });
 
         // 🟢 Se funcionou e foi pro webhook (n8n), agora sim manda pro Obrigado!
