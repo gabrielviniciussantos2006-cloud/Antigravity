@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aivery | Inteligência Artificial e Automação</title>
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/favicon.png">
 
@@ -530,17 +530,30 @@
                             Descobrir quanto perco por ano &rarr;
                         </a>
                     </div>
-                    <div class="flex flex-wrap justify-center gap-x-5 gap-y-2 mt-4 text-[13px] text-white/50 font-medium">
+                    <div
+                        class="flex flex-wrap justify-center gap-x-5 gap-y-2 mt-4 text-[13px] text-white/50 font-medium">
                         <span class="flex items-center gap-1.5">
-                            <svg class="w-3.5 h-3.5 text-[#FFB800]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                            <svg class="w-3.5 h-3.5 text-[#FFB800]" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg>
                             100% gratuito
                         </span>
                         <span class="flex items-center gap-1.5">
-                            <svg class="w-3.5 h-3.5 text-[#FFB800]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                            <svg class="w-3.5 h-3.5 text-[#FFB800]" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg>
                             Resposta em até 2h
                         </span>
                         <span class="flex items-center gap-1.5">
-                            <svg class="w-3.5 h-3.5 text-[#FFB800]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                            <svg class="w-3.5 h-3.5 text-[#FFB800]" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg>
                             Sem compromisso
                         </span>
                     </div>
@@ -969,150 +982,188 @@
 
     </main>
 
-        <!-- 🧮 Secção 1: A Calculadora de Custo Invisível -->
-        <section id="calculadora" class="relative min-h-[80vh] flex flex-col items-center justify-start overflow-hidden py-24 px-4 bg-black">
-            <img src="assets/calculator_bg.png" alt="" class="absolute inset-0 w-full h-full object-cover opacity-[0.03] pointer-events-none" onerror="this.style.display='none'">
-            <div class="ambient-glow" style="top: 20%; height: 80vh;"></div>
+    <!-- 🧮 Secção 1: A Calculadora de Custo Invisível -->
+    <section id="calculadora"
+        class="relative min-h-[80vh] flex flex-col items-center justify-start overflow-hidden py-24 px-4 bg-black">
+        <img src="assets/calculator_bg.png" alt=""
+            class="absolute inset-0 w-full h-full object-cover opacity-[0.03] pointer-events-none"
+            onerror="this.style.display='none'">
+        <div class="ambient-glow" style="top: 20%; height: 80vh;"></div>
 
-            <div class="relative z-20 w-full max-w-4xl mx-auto pt-10">
-                <div class="text-center mb-12">
-                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-white mb-6">
-                        Calcule o Custo Invisível da sua Operação
-                    </h2>
-                    <p
-                        class="text-[17px] md:text-[19px] text-neutral-400 font-medium leading-relaxed max-w-3xl mx-auto">
-                        Descubra em 30 segundos quanto a sua operação perde por ano com trabalho manual.
-                    </p>
-                </div>
+        <div class="relative z-20 w-full max-w-4xl mx-auto pt-10">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-white mb-6">
+                    Calcule o Custo Invisível da sua Operação
+                </h2>
+                <p class="text-[17px] md:text-[19px] text-neutral-400 font-medium leading-relaxed max-w-3xl mx-auto">
+                    Descubra em 30 segundos quanto a sua operação perde por ano com trabalho manual.
+                </p>
+            </div>
 
-                <!-- Painel da Calculadora -->
-                <div class="bg-[#111] border border-white/10 rounded-3xl p-8 md:p-12 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+            <!-- Painel da Calculadora -->
+            <div class="bg-[#111] border border-white/10 rounded-3xl p-8 md:p-12 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
 
-                    <!-- Sliders -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-10">
-                        <!-- Número de Colaboradores -->
-                        <div class="flex flex-col gap-4">
-                            <div class="flex justify-between items-end">
-                                <label for="slider-n" class="text-[15px] font-medium text-white">Número de colaboradores:</label>
-                                <span id="val-n"
-                                    class="text-2xl font-bold text-white bg-white/10 px-3 py-1 rounded-lg">3</span>
-                            </div>
-                            <input type="range" id="slider-n" min="1" max="50" value="3" step="1"
-                                oninput="updateValues()">
+                <!-- Sliders -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-10">
+                    <!-- Número de Colaboradores -->
+                    <div class="flex flex-col gap-4">
+                        <div class="flex justify-between items-end">
+                            <label for="slider-n" class="text-[15px] font-medium text-white">Número de
+                                colaboradores:</label>
+                            <span id="val-n"
+                                class="text-2xl font-bold text-white bg-white/10 px-3 py-1 rounded-lg">3</span>
                         </div>
-
-                        <!-- Horas Perdidas -->
-                        <div class="flex flex-col gap-4">
-                            <div class="flex justify-between items-end">
-                                <label for="slider-h"
-                                    class="text-[15px] font-medium text-white max-w-[200px] leading-tight">Horas
-                                    perdidas por dia por colaborador:</label>
-                                <span id="val-h"
-                                    class="text-2xl font-bold text-white bg-white/10 px-3 py-1 rounded-lg">2</span>
-                            </div>
-                            <input type="range" id="slider-h" min="1" max="10" value="2" step="1"
-                                oninput="updateValues()">
-                        </div>
+                        <input type="range" id="slider-n" min="1" max="50" value="3" step="1" oninput="updateValues()">
                     </div>
 
-                    <!-- Resultado -->
-                    <div id="result-container" class="mt-8 pt-8 flex flex-col items-center">
-
-                        <div class="text-center mb-8">
-                            <p class="text-[18px] md:text-[22px] font-semibold text-white/90 mb-3">
-                                O trabalho manual está roubando
-                            </p>
-                            <div
-                                class="flex items-center justify-center text-red-500 font-['Bebas_Neue'] text-[4rem] md:text-[5.5rem] leading-none tracking-tight mb-2">
-                                <span>R$&nbsp;</span><span id="resultado-valor">0</span>
-                            </div>
-                            <p class="text-[18px] md:text-[22px] font-semibold text-white/90">
-                                da sua margem de lucro todos os anos.
-                            </p>
+                    <!-- Horas Perdidas -->
+                    <div class="flex flex-col gap-4">
+                        <div class="flex justify-between items-end">
+                            <label for="slider-h"
+                                class="text-[15px] font-medium text-white max-w-[200px] leading-tight">Horas
+                                perdidas por dia por colaborador:</label>
+                            <span id="val-h"
+                                class="text-2xl font-bold text-white bg-white/10 px-3 py-1 rounded-lg">2</span>
                         </div>
+                        <input type="range" id="slider-h" min="1" max="10" value="2" step="1" oninput="updateValues()">
+                    </div>
+                </div>
 
-                        <div class="text-center max-w-2xl mx-auto mb-10 space-y-6">
-                            <p class="text-neutral-400 text-[16px] md:text-[17px] leading-relaxed">
-                                Esse valor <strong class="text-white font-semibold">sai da sua margem todos os anos</strong> — sem aparecer em nenhum relatório, sem que ninguém perceba. É o <strong class="text-white font-semibold">custo invisível</strong> que nenhum gestor consegue ver sem parar para calcular.
-                            </p>
-                            <p class="text-neutral-400 text-[16px] md:text-[17px] leading-relaxed">
-                                <strong class="text-white font-semibold">A boa notícia:</strong> O setup da Aivery <strong class="text-white font-semibold">custa menos que 3 meses dessa perda</strong>. Construímos "Agentes Digitais" capazes de assumir esta tarefa em background por uma fração desse valor.
-                            </p>
-                            <p class="text-[12px] text-neutral-600 !mb-0">
-                                *Fórmula utilizada: Colaboradores × Horas/dia × R$ 15/hora × 240 dias úteis.
-                            </p>
+                <!-- Resultado -->
+                <div id="result-container" class="mt-8 pt-8 flex flex-col items-center">
+
+                    <div class="text-center mb-8">
+                        <p class="text-[18px] md:text-[22px] font-semibold text-white/90 mb-3">
+                            O trabalho manual está roubando
+                        </p>
+                        <div
+                            class="flex items-center justify-center text-red-500 font-['Bebas_Neue'] text-[4rem] md:text-[5.5rem] leading-none tracking-tight mb-2">
+                            <span>R$&nbsp;</span><span id="resultado-valor">0</span>
                         </div>
-
-                        <!-- Botão Principal condicionado -->
-                        <p class="text-[15px] text-white/80 font-medium mb-4 text-center">O diagnóstico é gratuito e leva 30 minutos.</p>
-                        <!-- Lembre-se de configurar no seu Calendly/Cal.com os campos: Nome, E-mail corporativo, e "Qual o principal processo manual que gera custo ou atrasa a sua operação hoje?" -->
-                        <button onclick="abrirCalendly(event)" id="final-cta-btn"
-                            class="inline-block w-full max-w-md px-8 py-4 bg-white text-black text-center font-bold rounded-full hover:scale-105 transition-all duration-300">
-                            Agendar o meu Diagnóstico Gratuito
-                        </button>
-                        <p class="text-[12px] text-neutral-500 mt-4 text-center font-medium">
-                            *Sem cartão de crédito. Sem compromisso de compra.
+                        <p class="text-[18px] md:text-[22px] font-semibold text-white/90">
+                            da sua margem de lucro todos os anos.
                         </p>
                     </div>
+
+                    <div class="text-center max-w-2xl mx-auto mb-10 space-y-6">
+                        <p class="text-neutral-400 text-[16px] md:text-[17px] leading-relaxed">
+                            Esse valor <strong class="text-white font-semibold">sai da sua margem todos os anos</strong>
+                            — sem aparecer em nenhum relatório, sem que ninguém perceba. É o <strong
+                                class="text-white font-semibold">custo invisível</strong> que nenhum gestor consegue ver
+                            sem parar para calcular.
+                        </p>
+                        <p class="text-neutral-400 text-[16px] md:text-[17px] leading-relaxed">
+                            <strong class="text-white font-semibold">A boa notícia:</strong> O setup da Aivery <strong
+                                class="text-white font-semibold">custa menos que 3 meses dessa perda</strong>.
+                            Construímos "Agentes Digitais" capazes de assumir esta tarefa em background por uma fração
+                            desse valor.
+                        </p>
+                        <p class="text-[12px] text-neutral-600 !mb-0">
+                            *Fórmula utilizada: Colaboradores × Horas/dia × R$ 15/hora × 240 dias úteis.
+                        </p>
+                    </div>
+
+                    <!-- Botão Principal condicionado -->
+                    <p class="text-[15px] text-white/80 font-medium mb-4 text-center">O diagnóstico é gratuito e leva 30
+                        minutos.</p>
+                    <!-- Lembre-se de configurar no seu Calendly/Cal.com os campos: Nome, E-mail corporativo, e "Qual o principal processo manual que gera custo ou atrasa a sua operação hoje?" -->
+                    <button onclick="abrirCalendly(event)" id="final-cta-btn"
+                        class="inline-block w-full max-w-md px-8 py-4 bg-white text-black text-center font-bold rounded-full hover:scale-105 transition-all duration-300">
+                        Agendar o meu Diagnóstico Gratuito
+                    </button>
+                    <p class="text-[12px] text-neutral-500 mt-4 text-center font-medium">
+                        *Sem cartão de crédito. Sem compromisso de compra.
+                    </p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
 
 
-        <!-- FAQ Section -->
-        <section class="py-24 max-w-4xl mx-auto px-6 border-t border-white/5">
-            <h2 class="text-3xl md:text-[2.5rem] font-bold tracking-tight text-white mb-12 text-center">Perguntas Frequentes</h2>
-            <div class="space-y-4">
-                <details class="group bg-[#111] border border-white/10 rounded-2xl overflow-hidden [&_summary::-webkit-details-marker]:hidden">
-                    <summary class="flex items-center justify-between cursor-pointer p-6 bg-transparent">
-                        <span class="text-lg font-semibold text-white">O que acontece depois do diagnóstico — vou receber uma proposta gigante?</span>
-                        <span class="transition group-open:rotate-180">
-                            <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" class="text-white"><path d="M6 9l6 6 6-6"></path></svg>
-                        </span>
-                    </summary>
-                    <div class="px-6 pb-6 text-[#a1a1a6] text-[15px] leading-relaxed">
-                        Nada obrigatório. Você recebe o mapa de automações e decide o que fazer. Não existe proposta automática nem follow-up agressivo.
-                    </div>
-                </details>
-                
-                <details class="group bg-[#111] border border-white/10 rounded-2xl overflow-hidden [&_summary::-webkit-details-marker]:hidden">
-                    <summary class="flex items-center justify-between cursor-pointer p-6 bg-transparent">
-                        <span class="text-lg font-semibold text-white">Minha equipe precisa parar o que está fazendo para participar?</span>
-                        <span class="transition group-open:rotate-180">
-                            <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" class="text-white"><path d="M6 9l6 6 6-6"></path></svg>
-                        </span>
-                    </summary>
-                    <div class="px-6 pb-6 text-[#a1a1a6] text-[15px] leading-relaxed">
-                        Não. O diagnóstico é uma conversa de 30 minutos com quem conhece o processo — geralmente um gestor ou o próprio dono.
-                    </div>
-                </details>
-                
-                <details class="group bg-[#111] border border-white/10 rounded-2xl overflow-hidden [&_summary::-webkit-details-marker]:hidden">
-                    <summary class="flex items-center justify-between cursor-pointer p-6 bg-transparent">
-                        <span class="text-lg font-semibold text-white">Quanto tempo leva para implementar?</span>
-                        <span class="transition group-open:rotate-180">
-                            <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" class="text-white"><path d="M6 9l6 6 6-6"></path></svg>
-                        </span>
-                    </summary>
-                    <div class="px-6 pb-6 text-[#a1a1a6] text-[15px] leading-relaxed">
-                        Sistemas complexos e implantações de 6 meses são coisas do passado. O primeiro piloto laboratório (micro-automação) é normalmente entregue em no máximo 1 mês. Operações maiores são lançadas por módulos rápidos e validadas em semanas operacionais, garantindo retorno do dinheiro investido rapidamente.
-                    </div>
-                </details>
-                
-                <details class="group bg-[#111] border border-white/10 rounded-2xl overflow-hidden [&_summary::-webkit-details-marker]:hidden">
-                    <summary class="flex items-center justify-between cursor-pointer p-6 bg-transparent">
-                        <span class="text-lg font-semibold text-white">A Inteligência Artificial conecta-se aos sistemas que nós já usamos (ERPs, CRM)?</span>
-                        <span class="transition group-open:rotate-180">
-                            <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" class="text-white"><path d="M6 9l6 6 6-6"></path></svg>
-                        </span>
-                    </summary>
-                    <div class="px-6 pb-6 text-[#a1a1a6] text-[15px] leading-relaxed">
-                        100%. Trabalhamos com os sistemas que você já usa — ERP, planilhas, WhatsApp, portais de governo — sem precisar trocar nada. A integração é feita nos bastidores, invisível para a sua equipe.
-                    </div>
-                </details>
-            </div>
-        </section>
+    <!-- FAQ Section -->
+    <section class="py-24 max-w-4xl mx-auto px-6 border-t border-white/5">
+        <h2 class="text-3xl md:text-[2.5rem] font-bold tracking-tight text-white mb-12 text-center">Perguntas Frequentes
+        </h2>
+        <div class="space-y-4">
+            <details
+                class="group bg-[#111] border border-white/10 rounded-2xl overflow-hidden [&_summary::-webkit-details-marker]:hidden">
+                <summary class="flex items-center justify-between cursor-pointer p-6 bg-transparent">
+                    <span class="text-lg font-semibold text-white">O que acontece depois do diagnóstico — vou receber
+                        uma proposta gigante?</span>
+                    <span class="transition group-open:rotate-180">
+                        <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor"
+                            stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24"
+                            width="24" class="text-white">
+                            <path d="M6 9l6 6 6-6"></path>
+                        </svg>
+                    </span>
+                </summary>
+                <div class="px-6 pb-6 text-[#a1a1a6] text-[15px] leading-relaxed">
+                    Nada obrigatório. Você recebe o mapa de automações e decide o que fazer. Não existe proposta
+                    automática nem follow-up agressivo.
+                </div>
+            </details>
+
+            <details
+                class="group bg-[#111] border border-white/10 rounded-2xl overflow-hidden [&_summary::-webkit-details-marker]:hidden">
+                <summary class="flex items-center justify-between cursor-pointer p-6 bg-transparent">
+                    <span class="text-lg font-semibold text-white">Minha equipe precisa parar o que está fazendo para
+                        participar?</span>
+                    <span class="transition group-open:rotate-180">
+                        <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor"
+                            stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24"
+                            width="24" class="text-white">
+                            <path d="M6 9l6 6 6-6"></path>
+                        </svg>
+                    </span>
+                </summary>
+                <div class="px-6 pb-6 text-[#a1a1a6] text-[15px] leading-relaxed">
+                    Não. O diagnóstico é uma conversa de 30 minutos com quem conhece o processo — geralmente um gestor
+                    ou o próprio dono.
+                </div>
+            </details>
+
+            <details
+                class="group bg-[#111] border border-white/10 rounded-2xl overflow-hidden [&_summary::-webkit-details-marker]:hidden">
+                <summary class="flex items-center justify-between cursor-pointer p-6 bg-transparent">
+                    <span class="text-lg font-semibold text-white">Quanto tempo leva para implementar?</span>
+                    <span class="transition group-open:rotate-180">
+                        <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor"
+                            stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24"
+                            width="24" class="text-white">
+                            <path d="M6 9l6 6 6-6"></path>
+                        </svg>
+                    </span>
+                </summary>
+                <div class="px-6 pb-6 text-[#a1a1a6] text-[15px] leading-relaxed">
+                    Sistemas complexos e implantações de 6 meses são coisas do passado. O primeiro piloto laboratório
+                    (micro-automação) é normalmente entregue em no máximo 1 mês. Operações maiores são lançadas por
+                    módulos rápidos e validadas em semanas operacionais, garantindo retorno do dinheiro investido
+                    rapidamente.
+                </div>
+            </details>
+
+            <details
+                class="group bg-[#111] border border-white/10 rounded-2xl overflow-hidden [&_summary::-webkit-details-marker]:hidden">
+                <summary class="flex items-center justify-between cursor-pointer p-6 bg-transparent">
+                    <span class="text-lg font-semibold text-white">A Inteligência Artificial conecta-se aos sistemas que
+                        nós já usamos (ERPs, CRM)?</span>
+                    <span class="transition group-open:rotate-180">
+                        <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor"
+                            stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24"
+                            width="24" class="text-white">
+                            <path d="M6 9l6 6 6-6"></path>
+                        </svg>
+                    </span>
+                </summary>
+                <div class="px-6 pb-6 text-[#a1a1a6] text-[15px] leading-relaxed">
+                    100%. Trabalhamos com os sistemas que você já usa — ERP, planilhas, WhatsApp, portais de governo —
+                    sem precisar trocar nada. A integração é feita nos bastidores, invisível para a sua equipe.
+                </div>
+            </details>
+        </div>
+    </section>
 
     <!-- Contato / CTA Reestilizado -->
     <section class="cta-section py-32 md:py-40 bg-black relative flex flex-col items-center" id="contato">
@@ -1124,7 +1175,8 @@
 
             <h2
                 class="cta-heading text-4xl md:text-5xl lg:text-[4.5rem] font-bold tracking-tighter text-white mb-6 leading-[1.05]">
-                Você viu o prejuízo.<br><span class="text-white/60">Agora elimine esse custo da sua operação.</span></h2>
+                Você viu o prejuízo.<br><span class="text-white/60">Agora elimine esse custo da sua operação.</span>
+            </h2>
 
             <p
                 class="cta-sub text-[#a1a1a6] text-[17px] md:text-[19px] mb-12 font-medium max-w-2xl mx-auto leading-relaxed">
@@ -1142,15 +1194,24 @@
             <!-- Micro-copy -->
             <div class="flex flex-wrap justify-center gap-x-6 gap-y-3 mt-4 text-[13.5px] text-white/60 font-medium">
                 <span class="flex items-center gap-1.5">
-                    <svg class="w-4 h-4 text-[#FFB800]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                    <svg class="w-4 h-4 text-[#FFB800]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7">
+                        </path>
+                    </svg>
                     Sem compromisso
                 </span>
                 <span class="flex items-center gap-1.5">
-                    <svg class="w-4 h-4 text-[#FFB800]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                    <svg class="w-4 h-4 text-[#FFB800]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7">
+                        </path>
+                    </svg>
                     100% gratuito
                 </span>
                 <span class="flex items-center gap-1.5">
-                    <svg class="w-4 h-4 text-[#FFB800]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                    <svg class="w-4 h-4 text-[#FFB800]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7">
+                        </path>
+                    </svg>
                     Resposta em até 2h
                 </span>
             </div>
@@ -1165,8 +1226,9 @@
                 <span class="cta-divider-line"></span>
             </div>
 
-            <!-- WhatsApp — troque 55XXXXXXXXXXX pelo seu número -->
-            <a href="https://wa.me/55XXXXXXXXXXX?text=Ol%C3%A1%2C%20estava%20no%20site%20da%20Aivery%20e%20vi%20o%20c%C3%A1lculo%20de%20fuga%20de%20caixa.%20Gostaria%20de%20entender%20como%20a%20micro-automa%C3%A7%C3%A3o%20funciona." class="cta-btn-whatsapp" target="_blank" rel="noopener">
+            <!-- WhatsApp — (12) 99678-1030 -->
+            <a href="https://wa.me/5512996781030?text=Ol%C3%A1%2C%20estava%20no%20site%20da%20Aivery%20e%20vi%20o%20c%C3%A1lculo%20de%20fuga%20de%20caixa.%20Gostaria%20de%20entender%20como%20a%20micro-automa%C3%A7%C3%A3o%20funciona."
+                class="cta-btn-whatsapp" target="_blank" rel="noopener">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
                     <path
                         d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
@@ -1300,9 +1362,9 @@
             // Start calculation based on DOM elements setup
             const sliderN = document.getElementById('slider-n');
             const sliderH = document.getElementById('slider-h');
-            
+
             if (!sliderN || !sliderH) return; // safety check
-            
+
             const n = parseInt(sliderN.value) || 3;
             const h = parseInt(sliderH.value) || 2;
             const initialCost = n * h * 15 * 240;
@@ -1336,11 +1398,11 @@
     <script>
         function abrirCalendly(event) {
             // Previne que a página recarregue ao clicar no botão
-            event.preventDefault(); 
-            
+            event.preventDefault();
+
             // Substitua a URL abaixo pelo link do evento que você gerou no Calendly
-            Calendly.initPopupWidget({ 
-                url: 'https://calendly.com/gabriel-aiverycompany/diagnostico-gratuito-de-automacao' 
+            Calendly.initPopupWidget({
+                url: 'https://calendly.com/gabriel-aiverycompany/diagnostico-gratuito-de-automacao'
             });
             return false;
         }
