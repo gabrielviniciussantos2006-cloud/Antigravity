@@ -106,7 +106,7 @@
 
         @media (max-width: 768px) {
             .hero-scroll-container {
-                height: 250vh; /* Faster scroll on mobile (2.5x viewport instead of 5x) */
+                height: 180vh; /* Aggressive scroll speed on mobile */
             }
         }
 
@@ -1569,7 +1569,7 @@
             const animateNumbers = (el) => {
                 const target = parseInt(el.getAttribute('data-target'));
                 const suffix = el.getAttribute('data-suffix') || '';
-                const duration = 1000; // ms (Faster count-up)
+                const duration = 800; // ms (Ultra-fast count-up)
                 const startTimestamp = performance.now();
 
                 const step = (now) => {
