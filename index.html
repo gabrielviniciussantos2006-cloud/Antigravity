@@ -97,6 +97,41 @@
             -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 15%, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0) 100%);
         }
 
+        /* Video Scroll Hero Styles */
+        .hero-scroll-container {
+            height: 500vh; /* Adjust for scroll duration */
+            position: relative;
+        }
+
+        .hero-sticky-wrapper {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .hero-video-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.8) 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
         /* Custom Slider Styling */
         input[type=range] {
             width: 100%;
@@ -138,6 +173,20 @@
             opacity: 1;
             transform: translateY(0) scale(1);
             pointer-events: auto;
+        }
+
+        /* Bento & Result Animations */
+        .bar-container {
+            overflow: hidden;
+        }
+        
+        .animate-bar {
+            width: 0 !important;
+            transition: width 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .animate-bar.active {
+            width: var(--target-width) !important;
         }
 
         /* Hide scrollbar for horizontal scrolling containers */
@@ -505,61 +554,64 @@
     </header>
 
     <main>
-        <!-- Hero Section -->
-        <section class="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden pt-14">
-            <div class="ambient-glow"></div>
+        <!-- Hero Section Controlled by Scroll -->
+        <div class="hero-scroll-container">
+            <div class="hero-sticky-wrapper">
+                <video id="hero-video" class="hero-video-bg" muted playsinline preload="auto">
+                    <source src="assets/hero_video.mp4" type="video/mp4">
+                </video>
+                <div class="hero-video-overlay"></div>
+                <div class="ambient-glow"></div>
 
-            <img src="assets/hero_bg.png" alt=""
-                class="absolute inset-0 w-full h-full object-cover opacity-30 hero-img-mask pointer-events-none"
-                onerror="this.style.display='none'">
-
-            <div class="relative z-20 text-center px-4 max-w-5xl mx-auto w-full mt-10">
-                <h1
-                    class="text-[3.5rem] md:text-6xl lg:text-[6.5rem] font-extrabold tracking-tighter text-gradient mb-6 leading-[1.05]">
-                    Menos trabalho braçal.<br class="hidden md:block" /> Mais margem de lucro.
-                </h1>
-                <p
-                    class="text-[19px] md:text-[21px] text-neutral-400 max-w-[40rem] mx-auto leading-relaxed mb-10 font-medium">
-                    Eliminamos o trabalho braçal da sua equipe conectando Inteligência Artificial aos sistemas que você
-                    já usa. Menos custos, zero falhas.
-                </p>
-                <div class="flex flex-col items-center justify-center gap-4">
-                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
-                        <a href="#calculadora"
-                            class="w-full sm:w-auto px-8 py-3.5 bg-white text-black font-bold rounded-full hover:scale-105 hover:bg-neutral-200 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.15)]">
-                            Descobrir quanto perco por ano &rarr;
-                        </a>
-                    </div>
-                    <div
-                        class="flex flex-wrap justify-center gap-x-5 gap-y-2 mt-4 text-[13px] text-white/50 font-medium">
-                        <span class="flex items-center gap-1.5">
-                            <svg class="w-3.5 h-3.5 text-[#FFB800]" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
-                            100% gratuito
-                        </span>
-                        <span class="flex items-center gap-1.5">
-                            <svg class="w-3.5 h-3.5 text-[#FFB800]" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
-                            Resposta em até 2h
-                        </span>
-                        <span class="flex items-center gap-1.5">
-                            <svg class="w-3.5 h-3.5 text-[#FFB800]" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
-                            Sem compromisso
-                        </span>
+                <div class="relative z-20 text-center px-4 max-w-5xl mx-auto w-full">
+                    <h1
+                        class="text-[3.5rem] md:text-6xl lg:text-[6.5rem] font-extrabold tracking-tighter text-gradient mb-6 leading-[1.05]">
+                        Menos trabalho braçal.<br class="hidden md:block" /> Mais margem de lucro.
+                    </h1>
+                    <p
+                        class="text-[19px] md:text-[21px] text-neutral-400 max-w-[40rem] mx-auto leading-relaxed mb-10 font-medium">
+                        Eliminamos o trabalho braçal da sua equipe conectando Inteligência Artificial aos sistemas que
+                        você
+                        já usa. Menos custos, zero falhas.
+                    </p>
+                    <div class="flex flex-col items-center justify-center gap-4">
+                        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
+                            <a href="#calculadora"
+                                class="w-full sm:w-auto px-8 py-3.5 bg-white text-black font-bold rounded-full hover:scale-105 hover:bg-neutral-200 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.15)]">
+                                Descobrir quanto perco por ano &rarr;
+                            </a>
+                        </div>
+                        <div
+                            class="flex flex-wrap justify-center gap-x-5 gap-y-2 mt-4 text-[13px] text-white/50 font-medium">
+                            <span class="flex items-center gap-1.5">
+                                <svg class="w-3.5 h-3.5 text-[#FFB800]" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                        d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                100% gratuito
+                            </span>
+                            <span class="flex items-center gap-1.5">
+                                <svg class="w-3.5 h-3.5 text-[#FFB800]" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                        d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Resposta em até 2h
+                            </span>
+                            <span class="flex items-center gap-1.5">
+                                <svg class="w-3.5 h-3.5 text-[#FFB800]" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                        d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Sem compromisso
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
         <!-- Processo (Como Funciona) -->
         <section id="processo" class="py-24 md:py-32 relative bg-black overflow-hidden">
@@ -662,9 +714,9 @@
                                 <div class="flex items-center gap-[10px]">
                                     <span
                                         class="text-[10px] font-medium tracking-[0.08em] text-white/50 border border-white/10 px-2 py-[3px] rounded inline-block text-center w-[42px] min-w-[42px] shrink-0 whitespace-nowrap">XML</span>
-                                    <div class="h-1 bg-white/5 rounded-full flex-1 relative overflow-hidden">
-                                        <div class="absolute inset-y-0 left-0 bg-white/20 rounded-full"
-                                            style="width: 85%"></div>
+                                    <div class="h-1 bg-white/5 rounded-full flex-1 relative overflow-hidden bar-container">
+                                        <div class="absolute inset-y-0 left-0 bg-white/20 rounded-full animate-bar"
+                                            style="--target-width: 85%"></div>
                                     </div>
                                     <span
                                         class="text-white/40 text-[9px] w-[18px] h-[18px] rounded-full flex items-center justify-center border border-white/10 shrink-0">✓</span>
@@ -672,9 +724,9 @@
                                 <div class="flex items-center gap-[10px]">
                                     <span
                                         class="text-[10px] font-medium tracking-[0.08em] text-white/50 border border-white/10 px-2 py-[3px] rounded inline-block text-center w-[42px] min-w-[42px] shrink-0 whitespace-nowrap">CT-e</span>
-                                    <div class="h-1 bg-white/5 rounded-full flex-1 relative overflow-hidden">
-                                        <div class="absolute inset-y-0 left-0 bg-white/20 rounded-full"
-                                            style="width: 62%"></div>
+                                    <div class="h-1 bg-white/5 rounded-full flex-1 relative overflow-hidden bar-container">
+                                        <div class="absolute inset-y-0 left-0 bg-white/20 rounded-full animate-bar"
+                                            style="--target-width: 62%"></div>
                                     </div>
                                     <span
                                         class="text-white/40 text-[9px] w-[18px] h-[18px] rounded-full flex items-center justify-center border border-white/10 shrink-0">✓</span>
@@ -682,9 +734,9 @@
                                 <div class="flex items-center gap-[10px]">
                                     <span
                                         class="text-[10px] font-medium tracking-[0.08em] text-white/50 border border-white/10 px-2 py-[3px] rounded inline-block text-center w-[42px] min-w-[42px] shrink-0 whitespace-nowrap">XML</span>
-                                    <div class="h-1 bg-white/5 rounded-full flex-1 relative overflow-hidden">
-                                        <div class="absolute inset-y-0 left-0 bg-white/20 rounded-full"
-                                            style="width: 74%"></div>
+                                    <div class="h-1 bg-white/5 rounded-full flex-1 relative overflow-hidden bar-container">
+                                        <div class="absolute inset-y-0 left-0 bg-white/20 rounded-full animate-bar"
+                                            style="--target-width: 74%"></div>
                                     </div>
                                     <span
                                         class="text-white/40 text-[9px] w-[18px] h-[18px] rounded-full flex items-center justify-center border border-white/10 shrink-0">✓</span>
@@ -694,7 +746,7 @@
                             <!-- Métrica na base da área visual -->
                             <div class="mt-5 pt-4 flex flex-row items-baseline gap-2 border-t border-white/5">
                                 <span
-                                    class="font-['Bebas_Neue'] text-[52px] leading-none text-[#f0ede8] tracking-[0.02em]">500</span>
+                                    class="font-['Bebas_Neue'] text-[52px] leading-none text-[#f0ede8] tracking-[0.02em] animate-number" data-target="500">0</span>
                                 <span class="text-[11px] text-[#86868b] tracking-[0.1em] uppercase mb-1">arquivos /
                                     dia</span>
                             </div>
@@ -703,21 +755,21 @@
                             <div class="flex items-center mt-5 py-4 border-y border-white/5">
                                 <div class="flex flex-1 flex-col gap-1">
                                     <span
-                                        class="font-['Bebas_Neue'] text-[26px] leading-none text-[#f0ede8] tracking-[0.02em]">−80%</span>
+                                        class="font-['Bebas_Neue'] text-[26px] leading-none text-[#f0ede8] tracking-[0.02em] animate-number" data-target="-80" data-suffix="%">0%</span>
                                     <span class="text-[11px] text-[#86868b] tracking-[0.06em] leading-[1.3]">tempo
                                         manual</span>
                                 </div>
                                 <div class="w-[1px] h-8 bg-white/5 mx-3 md:mx-5 shrink-0"></div>
                                 <div class="flex flex-1 flex-col gap-1">
                                     <span
-                                        class="font-['Bebas_Neue'] text-[26px] leading-none text-[#f0ede8] tracking-[0.02em]">0</span>
+                                        class="font-['Bebas_Neue'] text-[26px] leading-none text-[#f0ede8] tracking-[0.02em] animate-number" data-target="0">0</span>
                                     <span class="text-[11px] text-[#86868b] tracking-[0.06em] leading-[1.3]">erros de
                                         importação</span>
                                 </div>
                                 <div class="w-[1px] h-8 bg-white/5 mx-3 md:mx-5 shrink-0"></div>
                                 <div class="flex flex-1 flex-col gap-1">
                                     <span
-                                        class="font-['Bebas_Neue'] text-[26px] leading-none text-[#f0ede8] tracking-[0.02em]">24h</span>
+                                        class="font-['Bebas_Neue'] text-[26px] leading-none text-[#f0ede8] tracking-[0.02em] animate-number" data-target="24" data-suffix="h">0h</span>
                                     <span class="text-[11px] text-[#86868b] tracking-[0.06em] leading-[1.3]">operação
                                         contínua</span>
                                 </div>
@@ -863,11 +915,11 @@
                                     <span class="text-white font-medium">Depois: 3min</span>
                                 </div>
                             </div>
-                            <div class="h-[5px] bg-white/5 rounded-full overflow-hidden mb-1">
-                                <div class="h-full rounded-full bg-white/15 w-full"></div>
+                            <div class="h-[5px] bg-white/5 rounded-full overflow-hidden mb-1 bar-container">
+                                <div class="h-full rounded-full bg-white/15 animate-bar" style="--target-width: 100%"></div>
                             </div>
-                            <div class="h-[5px] bg-white/5 rounded-full overflow-hidden">
-                                <div class="h-full rounded-full bg-white w-[4%]"></div>
+                            <div class="h-[5px] bg-white/5 rounded-full overflow-hidden bar-container">
+                                <div class="h-full rounded-full bg-white animate-bar" style="--target-width: 4%"></div>
                             </div>
                         </div>
 
@@ -879,11 +931,11 @@
                                     <span class="text-white font-medium">Depois: 500+</span>
                                 </div>
                             </div>
-                            <div class="h-[5px] bg-white/5 rounded-full overflow-hidden mb-1">
-                                <div class="h-full rounded-full bg-white/15 w-[8%]"></div>
+                            <div class="h-[5px] bg-white/5 rounded-full overflow-hidden mb-1 bar-container">
+                                <div class="h-full rounded-full bg-white/15 animate-bar" style="--target-width: 8%"></div>
                             </div>
-                            <div class="h-[5px] bg-white/5 rounded-full overflow-hidden">
-                                <div class="h-full rounded-full bg-white w-full"></div>
+                            <div class="h-[5px] bg-white/5 rounded-full overflow-hidden bar-container">
+                                <div class="h-full rounded-full bg-white animate-bar" style="--target-width: 100%"></div>
                             </div>
                         </div>
 
@@ -895,11 +947,11 @@
                                     <span class="text-white font-medium">Depois: 8h</span>
                                 </div>
                             </div>
-                            <div class="h-[5px] bg-white/5 rounded-full overflow-hidden mb-1">
-                                <div class="h-full rounded-full bg-white/15 w-full"></div>
+                            <div class="h-[5px] bg-white/5 rounded-full overflow-hidden mb-1 bar-container">
+                                <div class="h-full rounded-full bg-white/15 animate-bar" style="--target-width: 100%"></div>
                             </div>
-                            <div class="h-[5px] bg-white/5 rounded-full overflow-hidden">
-                                <div class="h-full rounded-full bg-white w-[7%]"></div>
+                            <div class="h-[5px] bg-white/5 rounded-full overflow-hidden bar-container">
+                                <div class="h-full rounded-full bg-white animate-bar" style="--target-width: 7%"></div>
                             </div>
                         </div>
 
@@ -1409,6 +1461,123 @@
             });
             return false;
         }
+    </script>
+
+    <!-- Scroll-Video Sync Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const video = document.getElementById('hero-video');
+            const container = document.querySelector('.hero-scroll-container');
+            
+            if (!video || !container) return;
+
+            let videoDuration = 0;
+            let lastScrollY = -1;
+            let ticking = false;
+
+            const updateVideoPosition = () => {
+                const scrollY = window.scrollY;
+                if (scrollY === lastScrollY) {
+                    ticking = false;
+                    return;
+                }
+                lastScrollY = scrollY;
+
+                const containerTop = container.offsetTop;
+                const containerHeight = container.offsetHeight;
+                const windowHeight = window.innerHeight;
+                
+                let progress = (scrollY - containerTop) / (containerHeight - windowHeight);
+                progress = Math.max(0, Math.min(progress, 1));
+                
+                if (videoDuration > 0) {
+                    // Smoothly set the current time
+                    video.currentTime = videoDuration * progress;
+                }
+                
+                requestAnimationFrame(updateVideoPosition);
+            };
+
+            video.addEventListener('loadedmetadata', () => {
+                videoDuration = video.duration;
+                // Initial update
+                updateVideoPosition();
+            });
+
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    requestAnimationFrame(updateVideoPosition);
+                    ticking = true;
+                }
+            }, { passive: true });
+
+            // Ensure video starts paused and is muted
+            video.pause();
+            video.muted = true;
+        });
+
+        // Intersection Observer for Bento Cards & Result Animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                threshold: 0.1
+            };
+
+            const animateNumbers = (el) => {
+                const target = parseInt(el.getAttribute('data-target'));
+                const suffix = el.getAttribute('data-suffix') || '';
+                const duration = 2000; // ms
+                const startTimestamp = performance.now();
+                
+                const step = (now) => {
+                    const elapsed = now - startTimestamp;
+                    const progress = Math.min(elapsed / duration, 1);
+                    // Easing: easeOutExpo
+                    const current = Math.floor(target * (progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress)));
+                    
+                    if (target < 0) {
+                        el.innerText = current + suffix;
+                    } else {
+                        el.innerText = current + suffix;
+                    }
+
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    } else {
+                        el.innerText = target + suffix;
+                    }
+                };
+                window.requestAnimationFrame(step);
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Activate bars
+                        const bars = entry.target.querySelectorAll('.animate-bar');
+                        bars.forEach(bar => bar.classList.add('active'));
+
+                        // Activate numbers
+                        const numbers = entry.target.querySelectorAll('.animate-number');
+                        numbers.forEach(num => {
+                            if (!num.classList.contains('animated')) {
+                                num.classList.add('animated');
+                                animateNumbers(num);
+                            }
+                        });
+
+                        // Stop observing once animated if you want (comment out if you want it to replay)
+                        // observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // Observe containers
+            document.querySelectorAll('.md\\:col-span-2, .bg-\\[\\#111\\]').forEach(container => {
+                if (container.querySelector('.animate-bar') || container.querySelector('.animate-number')) {
+                    observer.observe(container);
+                }
+            });
+        });
     </script>
 </body>
 
