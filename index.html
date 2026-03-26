@@ -557,8 +557,9 @@
         <!-- Hero Section Controlled by Scroll -->
         <div class="hero-scroll-container">
             <div class="hero-sticky-wrapper">
-                <video id="hero-video" class="hero-video-bg" muted playsinline preload="auto">
+                <video id="hero-video" class="hero-video-bg" muted playsinline preload="auto" poster="assets/hero_video_poster.jpg">
                     <source src="assets/hero_video.mp4" type="video/mp4">
+                    <source src="assets/hero_video_mobile.mp4" type="video/mp4">
                 </video>
                 <div class="hero-video-overlay"></div>
                 <div class="ambient-glow"></div>
@@ -1475,6 +1476,19 @@
             let lastScrollY = -1;
             let ticking = false;
 
+            // Kickstart video for iOS/Mobile (unlocks seeking)
+            const kickstartVideo = () => {
+                if (video.paused && video.readyState >= 1) {
+                    video.play().then(() => {
+                        video.pause();
+                    }).catch(err => {
+                        console.log("Mobile video kickstart inhibited:", err);
+                    });
+                    document.removeEventListener('touchstart', kickstartVideo);
+                }
+            };
+            document.addEventListener('touchstart', kickstartVideo);
+
             const updateVideoPosition = () => {
                 const scrollY = window.scrollY;
                 if (scrollY === lastScrollY) {
@@ -1490,19 +1504,23 @@
                 let progress = (scrollY - containerTop) / (containerHeight - windowHeight);
                 progress = Math.max(0, Math.min(progress, 1));
                 
-                if (videoDuration > 0) {
-                    // Smoothly set the current time
+                // Ensure video is ready and has duration
+                if (videoDuration > 0 && video.readyState >= 2) {
                     video.currentTime = videoDuration * progress;
                 }
                 
-                requestAnimationFrame(updateVideoPosition);
+                ticking = false;
             };
 
             video.addEventListener('loadedmetadata', () => {
                 videoDuration = video.duration;
-                // Initial update
                 updateVideoPosition();
             });
+
+            // If metadata is already loaded
+            if (video.readyState >= 1) {
+                videoDuration = video.duration;
+            }
 
             window.addEventListener('scroll', () => {
                 if (!ticking) {
@@ -1511,7 +1529,6 @@
                 }
             }, { passive: true });
 
-            // Ensure video starts paused and is muted
             video.pause();
             video.muted = true;
         });
