@@ -72,6 +72,25 @@
       -webkit-text-fill-color: white !important;
       transition: background-color 5000s ease-in-out 0s;
     }
+
+    /* Typeform transparente e integrado ao design */
+    [data-tf-live] {
+      width: 100%;
+      min-height: 480px;
+    }
+    .tf-v1-widget iframe {
+      border: none !important;
+      border-radius: 0 !important;
+    }
+    /* Remove borda, linha e fundo do wrapper do Typeform */
+    [data-tf-live] > div,
+    [data-tf-live] > div > div {
+      background: transparent !important;
+      box-shadow: none !important;
+      border: none !important;
+      border-top: none !important;
+      outline: none !important;
+    }
   </style>
 </head>
 <body class="text-[#f5f5f7] min-h-screen flex flex-col items-center relative overflow-x-hidden pt-6">
@@ -107,42 +126,12 @@
       </p>
     </div>
 
-    <!-- Formulário Captura Glassmorphism -->
-    <div class="w-full max-w-[460px] bg-[#0a0a0a]/80 backdrop-blur-3xl border border-white/10 rounded-3xl p-8 shadow-2xl relative mb-8">
-      
-      <div class="text-center mb-7">
-        <h3 class="font-sans text-xl font-bold mb-1 tracking-tight">Diagnóstico Automático</h3>
-        <p class="text-sm text-gray-400">Descubra quanto dinheiro sua empresa perde por ano.</p>
-      </div>
-
-      <form id="form-lead" class="space-y-4">
-        
-        <div class="space-y-1.5 text-left">
-          <label for="nome" class="block text-[13px] font-medium text-gray-300 ml-1">Seu Nome</label>
-          <input type="text" id="nome" placeholder="Ex: João Silva" required
-            class="w-full bg-[#111] border border-white/10 rounded-2xl px-5 py-4 text-white text-[15px] placeholder-gray-600 focus:outline-none focus:border-white/40 focus:bg-[#1a1a1a] transition-all">
-        </div>
-        
-        <div class="space-y-1.5 text-left">
-          <label for="empresa" class="block text-[13px] font-medium text-gray-300 ml-1">Nome da Empresa</label>
-          <input type="text" id="empresa" placeholder="Ex: Aivery Corporation" required
-            class="w-full bg-[#111] border border-white/10 rounded-2xl px-5 py-4 text-white text-[15px] placeholder-gray-600 focus:outline-none focus:border-white/40 focus:bg-[#1a1a1a] transition-all">
-        </div>
-        
-        <div class="space-y-1.5 text-left">
-          <label for="whatsapp" class="block text-[13px] font-medium text-gray-300 ml-1">WhatsApp corporativo</label>
-          <input type="tel" id="whatsapp" placeholder="(00) 00000-0000" required
-            class="w-full bg-[#111] border border-white/10 rounded-2xl px-5 py-4 text-white text-[15px] placeholder-gray-600 focus:outline-none focus:border-white/40 focus:bg-[#1a1a1a] transition-all">
-        </div>
-        
-        <!-- CTA Principal Arredondado Branco -->
-        <button type="submit" class="w-full mt-6 bg-white text-black font-sans font-semibold text-[16px] tracking-tight rounded-full px-4 py-4 hover:bg-gray-200 transform hover:scale-[1.02] transition-all flex items-center justify-center gap-2">
-          Descobrir meu Potencial de Automação
-          <!-- Flecha do botão -->
-          <svg class="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-        </button>
-
-      </form>
+    <!-- Typeform Embed -->
+    <div class="w-full max-w-3xl mb-8" style="position:relative;">
+      <!-- Overlay para esconder a linha do topo do iframe -->
+      <div style="position:absolute; top:0; left:0; right:0; height:4px; background:#000000; z-index:10;"></div>
+      <div data-tf-live="01KMQZYXYKRM08B3RVMT12SW6T" data-tf-opacity="0" style="min-height:480px"></div>
+      <script src="https://embed.typeform.com/next/embed.js"></script>
     </div>
 
     <!-- Indicadores de Confiança -->
@@ -175,59 +164,6 @@
     </div>
 
   </main>
-
-  <script>
-    /* Máscara automática de Celular/WhatsApp */
-    document.getElementById('whatsapp').addEventListener('input', function (e) {
-      var x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
-      e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
-    });
-
-    /* Integração com Webhook (n8n, Make, Zapier) -> Trello */
-    document.getElementById('form-lead').addEventListener('submit', async function (e) {
-      e.preventDefault(); // Impede o redirecionamento HTML padrão
-
-      const btn = this.querySelector('button[type="submit"]');
-      const originalContent = btn.innerHTML;
-
-      // Empacota os dados sem esbarrar no bloqueio de segurança "CORS"
-      const data = new URLSearchParams({
-        nome: document.getElementById('nome').value,
-        empresa: document.getElementById('empresa').value,
-        whatsapp: document.getElementById('whatsapp').value
-      });
-
-      // Alterando botão para dar feedback visual e evitar cliques duplos
-      btn.innerHTML = '<span class="text-sm font-semibold">Enviando dados...</span>';
-      btn.disabled = true;
-      btn.classList.add('opacity-70', 'cursor-not-allowed');
-
-      try {
-        // Envio no formato Form (X-WWW) que ignora o bloqueio de segurança "CORS"
-        // Webhook do n8n (Versão de Produção)
-        await fetch('https://gabrielviniciusst.app.n8n.cloud/webhook/lead-aivery', {
-          method: 'POST',
-          mode: 'no-cors', // Fundamental para não dar erro se o n8n demorar a responder
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          body: data.toString() 
-        });
-
-        // 🟢 Se funcionou e foi pro webhook (n8n), agora sim manda pro Obrigado!
-        window.location.href = 'obrigado.html';
-
-      } catch (error) {
-        console.error('Erro ao integrar com o webhook:', error);
-        alert('Não conseguimos processar neste momento. Verifique sua conexão ou tente novamente!');
-        
-        // Restaura o botão caso dê erro (internet caiu, webhook off, etc)
-        btn.innerHTML = originalContent;
-        btn.disabled = false;
-        btn.classList.remove('opacity-70', 'cursor-not-allowed');
-      }
-    });
-  </script>
 </body>
 </html>
 
