@@ -1,3 +1,9 @@
+<!--
+  Teste LP Normal (n8n webhook):
+  curl -X POST https://gabrielviniciusst.app.n8n.cloud/webhook/cc4b796a-b3ec-4192-9076-60c32a9dca87 \
+    -H "Content-Type: application/json" \
+    -d '{"nome":"Teste","email":"teste@email.com","whatsapp":"12999999999","mensagem":"Quero saber mais","origem":"lp-normal"}'
+-->
 <!DOCTYPE html>
 <html lang="pt-BR" class="scroll-smooth bg-black">
 
@@ -99,14 +105,15 @@
 
         /* Video Scroll Hero Styles */
         .hero-scroll-container {
-            height: 500vh;
+            height: 250vh;
             /* Adjust for scroll duration */
             position: relative;
         }
 
         @media (max-width: 768px) {
             .hero-scroll-container {
-                height: 180vh; /* Aggressive scroll speed on mobile */
+                height: 140vh;
+                /* Aggressive scroll speed on mobile */
             }
         }
 
@@ -1478,17 +1485,102 @@
         });
     </script>
 
+    <!-- Modal Nativo Agendamento -->
+    <div id="scheduling-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
+        <!-- Overlay escuro -->
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-md transition-opacity duration-300 opacity-0"
+            id="modal-overlay" onclick="fecharModal()"></div>
+
+        <!-- Conteúdo do Modal -->
+        <div class="relative w-full max-w-4xl bg-[#111] border border-white/10 rounded-3xl shadow-[0_0_60px_rgba(0,0,0,0.8)] overflow-hidden flex flex-col scale-95 opacity-0 transition-all duration-300"
+            id="modal-content" style="height: 85vh; max-height: 750px;">
+
+            <!-- Modal Header -->
+            <div
+                class="flex justify-between items-center px-8 py-5 border-b border-white/10 bg-[#151516] relative z-20">
+                <div>
+                    <h3 class="text-xl font-bold text-white tracking-tight">Agendar Diagnóstico Gratuito</h3>
+                    <p class="text-[13px] text-white/50 mt-1">Escolha o melhor horário para conversarmos.</p>
+                </div>
+                <button onclick="fecharModal()"
+                    class="text-white/50 hover:text-white transition-colors p-2 rounded-full hover:bg-white/10">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Modal Body (Calendly Inline Embed) -->
+            <div class="flex-1 w-full bg-[#111] relative overflow-hidden">
+                <div id="calendly-container" class="w-full h-full" style="min-width:320px;height:100%;"></div>
+            </div>
+        </div>
+    </div>
+
     <script>
+        let calendlyInitialized = false;
+
         function abrirCalendly(event) {
-            // Previne que a página recarregue ao clicar no botão
             event.preventDefault();
 
-            // Substitua a URL abaixo pelo link do evento que você gerou no Calendly
-            Calendly.initPopupWidget({
-                url: 'https://calendly.com/gabriel-aiverycompany/diagnostico-gratuito-de-automacao'
-            });
+            const modal = document.getElementById('scheduling-modal');
+            const overlay = document.getElementById('modal-overlay');
+            const content = document.getElementById('modal-content');
+
+            // Remove display hidden e aplica flex
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+
+            // Força um reflow para a transição funcionar
+            void modal.offsetWidth;
+
+            // Adiciona as classes para transição de entrada
+            overlay.classList.remove('opacity-0');
+            content.classList.remove('scale-95', 'opacity-0');
+
+            // Se houver overflow escondido no body para não rolar a página por trás
+            document.body.style.overflow = 'hidden';
+
+            // Inicializa o widget do Calendly apenas ao abrir o modal
+            if (!calendlyInitialized) {
+                Calendly.initInlineWidget({
+                    url: 'https://calendly.com/gabriel-aiverycompany/diagnostico-gratuito-de-automacao?hide_event_type_details=1&hide_gdpr_banner=1&background_color=111111&text_color=ffffff&primary_color=ffffff',
+                    parentElement: document.getElementById('calendly-container'),
+                    prefill: {},
+                    utm: {}
+                });
+                calendlyInitialized = true;
+            }
+
             return false;
         }
+
+        function fecharModal() {
+            const modal = document.getElementById('scheduling-modal');
+            const overlay = document.getElementById('modal-overlay');
+            const content = document.getElementById('modal-content');
+
+            // Transição de saída
+            overlay.classList.add('opacity-0');
+            content.classList.add('scale-95', 'opacity-0');
+
+            // Restaura o scroll da página
+            document.body.style.overflow = '';
+
+            // Espera a animação acabar para esconder
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 300);
+        }
+
+        // Listeners para fechar com a tecla ESC
+        document.addEventListener('keydown', function (event) {
+            if (event.key === "Escape") {
+                fecharModal();
+            }
+        });
     </script>
 
     <!-- Scroll-Video Sync Script -->
