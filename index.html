@@ -2441,22 +2441,42 @@
 
             if (!video || !container) return;
 
+            const isMobile = window.innerWidth <= 768;
+
+            // --- MOBILE: show last frame only, no scroll animation ---
+            if (isMobile) {
+                video.pause();
+                video.muted = true;
+
+                const seekToEnd = () => {
+                    if (video.duration && video.duration > 0) {
+                        video.currentTime = video.duration - 0.05;
+                    }
+                };
+
+                if (video.readyState >= 1) {
+                    seekToEnd();
+                } else {
+                    video.addEventListener('loadedmetadata', seekToEnd, { once: true });
+                }
+
+                // iOS needs a touch to unlock seeking
+                const unlockAndSeek = () => {
+                    video.play().then(() => {
+                        video.pause();
+                        seekToEnd();
+                    }).catch(() => {});
+                    document.removeEventListener('touchstart', unlockAndSeek);
+                };
+                document.addEventListener('touchstart', unlockAndSeek, { once: true });
+
+                return; // skip all scroll-sync logic on mobile
+            }
+
+            // --- DESKTOP: scroll-synced video ---
             let videoDuration = 0;
             let lastScrollY = -1;
             let ticking = false;
-
-            // Kickstart video for iOS/Mobile (unlocks seeking)
-            const kickstartVideo = () => {
-                if (video.paused && video.readyState >= 1) {
-                    video.play().then(() => {
-                        video.pause();
-                    }).catch(err => {
-                        console.log("Mobile video kickstart inhibited:", err);
-                    });
-                    document.removeEventListener('touchstart', kickstartVideo);
-                }
-            };
-            document.addEventListener('touchstart', kickstartVideo);
 
             const updateVideoPosition = () => {
                 const scrollY = window.scrollY;
