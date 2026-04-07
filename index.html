@@ -132,12 +132,12 @@
 
             .hero-sticky-wrapper {
                 position: relative;
-                background-image: url('assets/hero_video_poster.jpg');
+                background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('assets/hero_video_poster.jpg');
                 background-size: cover;
                 background-position: center;
             }
 
-            .hero-video-bg {
+            .hero-video-bg, .ambient-glow {
                 display: none;
             }
         }
@@ -166,13 +166,13 @@
         .hero-video-overlay {
             position: absolute;
             inset: 0;
-            background: rgba(0, 0, 0, 0.45);
+            background: rgba(0, 0, 0, 0.7);
             z-index: 5;
             pointer-events: none;
         }
 
         .hero-text-shadow {
-            text-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
+            text-shadow: 0 4px 60px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.5);
         }
 
         /* Custom Slider Styling */
@@ -713,24 +713,19 @@
                 <div class="ambient-glow"></div>
 
                 <div class="relative z-20 text-center px-4 max-w-5xl mx-auto w-full flex flex-col items-center">
-                    <!-- Eyebrow Tag -->
-                    <div class="reveal-fast mb-5 inline-flex flex-row items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md" style="transition-delay:0.3s">
-                        <div class="w-1.5 h-1.5 rounded-full bg-[#FFB800]"></div>
-                        <span class="text-[11px] md:text-xs font-semibold text-white/80 tracking-widest uppercase">Backoffice & operações internas</span>
-                    </div>
                     <h1
                         class="reveal-fast text-[2.5rem] md:text-6xl lg:text-[7.5rem] font-extrabold tracking-tighter text-white mb-4 md:mb-6 leading-[1.05] hero-text-shadow" style="transition-delay:0.6s">
-                        Menos trabalho repetitivo.<br class="hidden md:block" /> Mais margem de lucro.
+                        Pare de pagar gente<br class="hidden md:block" /> pra fazer trabalho de robô.
                     </h1>
                     <p
                         class="reveal-fast text-[16px] md:text-[21px] text-white/90 max-w-[42rem] mx-auto leading-relaxed mb-8 md:mb-10 font-medium hero-text-shadow" style="transition-delay:0.9s">
-                        Eliminamos o trabalho repetitivo da sua equipe. Conectamos Inteligência Artificial ao seu ERP, financeiro e processos internos. Menos custos, zero falhas.
+                        A Aivery conecta IA ao seu ERP, financeiro e processos internos — e libera sua equipe pra trabalhar no que faz a empresa crescer.
                     </p>
                     <div class="reveal-fast flex flex-col items-center justify-center gap-4" style="transition-delay:1.2s">
                         <div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
                             <a href="#calculadora"
                                 class="w-full sm:w-auto px-8 py-3.5 bg-white text-black font-bold rounded-full hover:scale-105 hover:bg-neutral-200 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.15)]">
-                                Descobrir quanto perco por ano &rarr;
+                                Descobrir quanto isso me custa por ano &rarr;
                             </a>
                         </div>
                         <div
@@ -749,7 +744,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
                                         d="M5 13l4 4L19 7"></path>
                                 </svg>
-                                Resposta em até 2h
+                                Resposta em 2h no horário comercial
                             </span>
                             <span class="flex items-center gap-1.5">
                                 <svg class="w-3.5 h-3.5 text-[#FFB800]" fill="none" viewBox="0 0 24 24"
@@ -1014,217 +1009,90 @@
             </div>
         </section>
 
-        <!-- Resultados (Prova) -->
-        <section id="resultado" class="py-24 md:py-32 relative bg-black overflow-hidden">
+        <!-- Resultados -->
+        <section id="resultado" class="py-24 md:py-40 relative bg-black overflow-hidden">
             <div
                 class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent">
             </div>
-            <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="max-w-5xl mx-auto px-6 relative z-10">
 
                 <!-- Cabeçalho -->
-                <div class="reveal flex flex-col md:flex-row justify-between items-start gap-8 mb-16 md:mb-20">
-                    <div>
-                        <p class="text-white text-[11px] font-medium tracking-[0.2em] uppercase mb-5">O que muda</p>
-                        <h2
-                            class="text-4xl md:text-[5rem] lg:text-[6rem] font-bold tracking-tighter text-white leading-[0.9]">
-                            Quando o robô<br><span class="text-white/60">faz o trabalho de<br>robô.</span></h2>
-                    </div>
+                <div class="reveal mb-20 md:mb-28">
+                    <p class="text-[#FFB800] text-[11px] font-bold tracking-[0.2em] uppercase mb-6">O que muda quando o robô faz o trabalho de robô</p>
+                    <h2
+                        class="text-4xl md:text-[4.5rem] lg:text-[5.5rem] font-bold tracking-tighter text-white leading-[0.95] mb-8">
+                        O dia em que ninguém<br>mais digita nota fiscal.
+                    </h2>
                     <p
-                        class="text-[#a1a1a6] text-[15px] md:text-[17px] text-left max-w-sm leading-relaxed pb-2 md:pb-4">
-                        Potencial de impacto quando tarefas manuais repetitivas são substituídas por IA.
+                        class="text-[#a1a1a6] text-[17px] md:text-[21px] max-w-2xl font-medium leading-relaxed">
+                        Não é promessa de marketing. É o que acontece quando você devolve cada tarefa pra quem deveria estar fazendo ela.
                     </p>
                 </div>
 
-                <!-- Cards de métricas -->
-                <div class="reveal grid grid-cols-2 lg:grid-cols-4 gap-[1px] bg-white/5 mb-[1px]" style="transition-delay:0.1s">
-                    <div class="bg-[#111] p-6 md:p-9 relative group hover:bg-[#151515] transition-colors">
-                        <div class="text-5xl md:text-[5rem] font-bold text-white leading-none mb-2 tracking-tighter">
-                            até 70%</div>
-                        <div class="text-[12px] md:text-[13px] text-[#999] leading-relaxed mb-4 min-h-[40px]">Redução de
-                            custos
-                            operacionais</div>
-                        <span
-                            class="inline-flex items-center gap-1.5 text-[11px] font-medium tracking-wide text-white bg-white/5 border border-white/10 px-2.5 py-1 rounded-full"><span
-                                class="w-1.5 h-1.5 rounded-full bg-white"></span>meta de automação</span>
-                        <div
-                            class="absolute bottom-0 left-0 right-0 h-[2px] bg-white scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100">
-                        </div>
-                    </div>
-                    <div class="bg-[#111] p-6 md:p-9 relative group hover:bg-[#151515] transition-colors">
-                        <div class="text-5xl md:text-[5rem] font-bold text-white leading-none mb-2 tracking-tighter">
-                            até 10×</div>
-                        <div class="text-[13px] text-[#999] leading-relaxed mb-4 min-h-[40px]">Velocidade de execução de
-                            tarefas</div>
-                        <span
-                            class="inline-flex items-center gap-1.5 text-[11px] font-medium tracking-wide text-white bg-white/5 border border-white/10 px-2.5 py-1 rounded-full"><span
-                                class="w-1.5 h-1.5 rounded-full bg-white"></span>meta de automação</span>
-                        <div
-                            class="absolute bottom-0 left-0 right-0 h-[2px] bg-white scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100">
-                        </div>
-                    </div>
-                    <div class="bg-[#111] p-6 md:p-9 relative group hover:bg-[#151515] transition-colors">
-                        <div class="text-5xl md:text-[5rem] font-bold text-white leading-none mb-2 tracking-tighter">
-                            0</div>
-                        <div class="text-[13px] text-[#999] leading-relaxed mb-4 min-h-[40px]">Erros humanos em
-                            processos automatizados</div>
-                        <span
-                            class="inline-flex items-center gap-1.5 text-[11px] font-medium tracking-wide text-white bg-white/5 border border-white/10 px-2.5 py-1 rounded-full"><span
-                                class="w-1.5 h-1.5 rounded-full bg-white"></span>meta de automação</span>
-                        <div
-                            class="absolute bottom-0 left-0 right-0 h-[2px] bg-white scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100">
-                        </div>
-                    </div>
-                    <div class="bg-[#111] p-6 md:p-9 relative group hover:bg-[#151515] transition-colors">
-                        <div class="text-5xl md:text-[5rem] font-bold text-white leading-none mb-2 tracking-tighter">
-                            até 40%</div>
-                        <div class="text-[12px] md:text-[13px] text-[#999] leading-relaxed mb-4 min-h-[40px]">
-                            Crescimento de receita
-                            sem novas contratações</div>
-                        <span
-                            class="inline-flex items-center gap-1.5 text-[11px] font-medium tracking-wide text-white bg-white/5 border border-white/10 px-2.5 py-1 rounded-full"><span
-                                class="w-1.5 h-1.5 rounded-full bg-white"></span>meta de automação</span>
-                        <div
-                            class="absolute bottom-0 left-0 right-0 h-[2px] bg-white scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100">
-                        </div>
+                <!-- Onde a gente já tira horas -->
+                <div class="reveal mb-16 md:mb-20" style="transition-delay:0.1s">
+                    <p class="text-[11px] font-bold tracking-[0.2em] uppercase text-white/50 mb-6">Onde a gente já tira horas</p>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2.5 bg-[#151516] border border-white/5 rounded-full text-white/80 text-[14px] font-medium hover:bg-[#1c1c1e] hover:border-white/15 transition-all cursor-default">Importação de XML/CT-e</span>
+                        <span class="px-4 py-2.5 bg-[#151516] border border-white/5 rounded-full text-white/80 text-[14px] font-medium hover:bg-[#1c1c1e] hover:border-white/15 transition-all cursor-default">Conciliação bancária</span>
+                        <span class="px-4 py-2.5 bg-[#151516] border border-white/5 rounded-full text-white/80 text-[14px] font-medium hover:bg-[#1c1c1e] hover:border-white/15 transition-all cursor-default">Emissão de NF-e</span>
+                        <span class="px-4 py-2.5 bg-[#151516] border border-white/5 rounded-full text-white/80 text-[14px] font-medium hover:bg-[#1c1c1e] hover:border-white/15 transition-all cursor-default">Leitura de contratos</span>
+                        <span class="px-4 py-2.5 bg-[#151516] border border-white/5 rounded-full text-white/80 text-[14px] font-medium hover:bg-[#1c1c1e] hover:border-white/15 transition-all cursor-default">Cobrança recorrente</span>
+                        <span class="px-4 py-2.5 bg-[#151516] border border-white/5 rounded-full text-white/80 text-[14px] font-medium hover:bg-[#1c1c1e] hover:border-white/15 transition-all cursor-default">Processos internos no ERP</span>
                     </div>
                 </div>
 
-                <!-- Linha inferior: comparativo + cases -->
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-[1px] bg-white/5 mb-16">
-
-                    <!-- Comparativo antes × depois -->
-                    <div class="bg-[#111] p-10">
-                        <p class="text-[11px] font-medium tracking-[0.15em] uppercase text-[#666] mb-7">Antes × Depois
+                <!-- O que clientes recuperam -->
+                <div class="reveal grid grid-cols-1 md:grid-cols-2 gap-6 mb-16 md:mb-20" style="transition-delay:0.2s">
+                    <div class="bg-[#111] border border-white/5 rounded-3xl p-8 md:p-10 relative overflow-hidden group hover:bg-[#151515] transition-colors">
+                        <p class="text-[11px] font-bold tracking-[0.2em] uppercase text-white/50 mb-6">O que clientes recuperam <span class="text-[#FFB800]">· faixa real</span></p>
+                        <div class="text-4xl md:text-[3.5rem] font-bold text-white leading-none mb-4 tracking-tighter">
+                            15–40h<span class="text-white/40 text-3xl md:text-4xl">/semana</span>
+                        </div>
+                        <p class="text-[#a1a1a6] text-[15px] leading-relaxed mb-5">
+                            da equipe operacional, dependendo do tamanho da operação.
                         </p>
-
-                        <div class="mb-8">
-                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-3 gap-1">
-                                <span class="text-[13px] text-[#999]">Tempo de resposta ao cliente</span>
-                                <div class="flex gap-3 text-[11px] md:text-[12px]">
-                                    <span class="text-[#666]">Antes: 4h</span>
-                                    <span class="text-white font-semibold">Depois: 3min</span>
-                                </div>
-                            </div>
-                            <div class="h-[8px] bg-white/5 rounded-full overflow-hidden mb-1.5 bar-container">
-                                <div class="h-full rounded-full bg-white/15 animate-bar" style="--target-width: 100%">
-                                </div>
-                            </div>
-                            <div class="h-[8px] bg-white/5 rounded-full overflow-hidden bar-container">
-                                <div class="h-full rounded-full bg-white animate-bar" style="--target-width: 4%"></div>
-                            </div>
-                        </div>
-
-                        <div class="mb-8">
-                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-3 gap-1">
-                                <span class="text-[13px] text-[#999]">Arquivos processados por dia</span>
-                                <div class="flex gap-3 text-[11px] md:text-[12px]">
-                                    <span class="text-[#666]">Antes: 40</span>
-                                    <span class="text-white font-semibold">Depois: 500+</span>
-                                </div>
-                            </div>
-                            <div class="h-[8px] bg-white/5 rounded-full overflow-hidden mb-1.5 bar-container">
-                                <div class="h-full rounded-full bg-white/15 animate-bar" style="--target-width: 8%">
-                                </div>
-                            </div>
-                            <div class="h-[8px] bg-white/5 rounded-full overflow-hidden bar-container">
-                                <div class="h-full rounded-full bg-white animate-bar" style="--target-width: 100%">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mb-8">
-                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-3 gap-1">
-                                <span class="text-[13px] text-[#999]">Horas de trabalho manual / semana</span>
-                                <div class="flex gap-3 text-[11px] md:text-[12px]">
-                                    <span class="text-[#666]">Antes: 120h</span>
-                                    <span class="text-white font-semibold">Depois: 8h</span>
-                                </div>
-                            </div>
-                            <div class="h-[8px] bg-white/5 rounded-full overflow-hidden mb-1.5 bar-container">
-                                <div class="h-full rounded-full bg-white/15 animate-bar" style="--target-width: 100%">
-                                </div>
-                            </div>
-                            <div class="h-[8px] bg-white/5 rounded-full overflow-hidden bar-container">
-                                <div class="h-full rounded-full bg-white animate-bar" style="--target-width: 7%"></div>
-                            </div>
-                        </div>
-
-                        <div class="flex gap-4 mt-8 pt-4 border-t border-white/10">
-                            <span class="flex items-center gap-2 text-[11px] text-[#666]">
-                                <span class="w-2 h-2 rounded-full bg-white/15"></span> Antes da automação
-                            </span>
-                            <span class="flex items-center gap-2 text-[11px] text-[#666]">
-                                <span class="w-2 h-2 rounded-full bg-white"></span> Depois da automação
-                            </span>
-                        </div>
+                        <p class="text-[#666] text-[13px] leading-relaxed border-t border-white/5 pt-5">
+                            O piloto de 1 mês costuma pagar o investimento antes do segundo mês fechar.
+                        </p>
+                        <div class="absolute bottom-0 left-0 right-0 h-[2px] bg-white scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100"></div>
                     </div>
 
-                    <!-- Cases por setor -->
-                    <div class="bg-[#111] p-6 md:p-10">
-                        <p class="text-[11px] font-medium tracking-[0.15em] uppercase text-[#666] mb-6 md:mb-7">Cases
-                            por setor
-                        </p>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                            <div
-                                class="bg-[#181818] border border-white/5 rounded-[10px] p-4 md:p-5 hover:border-white/10 transition-colors">
-                                <div class="text-[13px] font-medium text-[#f0ede8] mb-1.5 leading-[1.3]">Backoffice
-                                    Logístico</div>
-                                <div class="text-[12px] text-[#666] leading-relaxed mb-3">Processamento XML/CT-e
-                                    automatizado no TMS</div>
-                                <span
-                                    class="inline-block text-[11px] font-medium text-white bg-white/5 border border-white/10 px-2.5 py-1 rounded-full tracking-wide">-80%
-                                    tempo manual</span>
-                            </div>
-                            <div
-                                class="bg-[#181818] border border-white/5 rounded-[10px] p-4 md:p-5 hover:border-white/10 transition-colors">
-                                <div class="text-[13px] font-medium text-[#f0ede8] mb-1.5 leading-[1.3]">Agendamento
-                                    WhatsApp</div>
-                                <div class="text-[12px] text-[#666] leading-relaxed mb-3">Assistente virtual 24h
-                                    integrado à agenda</div>
-                                <span
-                                    class="inline-block text-[11px] font-medium text-white bg-white/5 border border-white/10 px-2.5 py-1 rounded-full tracking-wide">+3×
-                                    leads convertidos</span>
-                            </div>
-                            <div
-                                class="bg-[#181818] border border-white/5 rounded-[10px] p-4 md:p-5 hover:border-white/10 transition-colors">
-                                <div class="text-[13px] font-medium text-[#f0ede8] mb-1.5 leading-[1.3]">Conciliação
-                                    Financeira</div>
-                                <div class="text-[12px] text-[#666] leading-relaxed mb-3">Cruzamento automático de
-                                    extratos e notas</div>
-                                <span
-                                    class="inline-block text-[11px] font-medium text-white bg-white/5 border border-white/10 px-2.5 py-1 rounded-full tracking-wide">0
-                                    erros de conciliação</span>
-                            </div>
-                            <div
-                                class="bg-[#181818] border border-white/5 rounded-[10px] p-4 md:p-5 hover:border-white/10 transition-colors">
-                                <div class="text-[13px] font-medium text-[#f0ede8] mb-1.5 leading-[1.3]">Qualificação de
-                                    Leads</div>
-                                <div class="text-[12px] text-[#666] leading-relaxed mb-3">Filtro automático pós-campanha
-                                    de marketing</div>
-                                <span
-                                    class="inline-block text-[11px] font-medium text-white bg-white/5 border border-white/10 px-2.5 py-1 rounded-full tracking-wide">5×
-                                    ROI em campanhas</span>
+                    <div class="bg-[#111] border border-white/5 rounded-3xl p-8 md:p-10 flex flex-col justify-between relative overflow-hidden group hover:bg-[#151515] transition-colors">
+                        <div>
+                            <p class="text-[11px] font-bold tracking-[0.2em] uppercase text-white/50 mb-6">O que você faz com essas horas</p>
+                            <div class="space-y-5">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-8 h-8 mt-0.5 rounded-full bg-[#1c1c1e] border border-white/10 flex items-center justify-center shrink-0">
+                                        <div class="w-1.5 h-1.5 rounded-full bg-white/40"></div>
+                                    </div>
+                                    <p class="text-white font-medium text-[17px] md:text-[19px]">Vende mais.</p>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div class="w-8 h-8 mt-0.5 rounded-full bg-[#1c1c1e] border border-white/10 flex items-center justify-center shrink-0">
+                                        <div class="w-1.5 h-1.5 rounded-full bg-white/40"></div>
+                                    </div>
+                                    <p class="text-white font-medium text-[17px] md:text-[19px]">Atende melhor.</p>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div class="w-8 h-8 mt-0.5 rounded-full bg-[#1c1c1e] border border-white/10 flex items-center justify-center shrink-0">
+                                        <div class="w-1.5 h-1.5 rounded-full bg-white/40"></div>
+                                    </div>
+                                    <p class="text-white font-medium text-[17px] md:text-[19px]">Vai embora mais cedo.</p>
+                                </div>
                             </div>
                         </div>
+                        <p class="text-white/80 text-[19px] md:text-[22px] font-bold tracking-tight mt-8 pt-6 border-t border-white/5">Escolhe.</p>
+                        <div class="absolute bottom-0 left-0 right-0 h-[2px] bg-white scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100"></div>
                     </div>
-
                 </div>
 
-                <!-- Fechamento -->
-                <div class="text-center py-6">
-                    <p class="text-[34px] md:text-5xl font-bold tracking-tighter text-white mb-3">
-                        Menos pessoas em tarefas manuais.<br><span class="text-white/60">Mais pessoas focadas no
-                            crescimento.</span>
-                    </p>
-                    <p class="text-[14px] md:text-[17px] text-[#999] mb-8 font-medium">A sua empresa não precisa crescer
-                        contratando mais — precisa trabalhar de forma mais inteligente.</p>
-
-                    <div class="mt-10 flex justify-center w-full">
-                        <a href="#calculadora"
-                            class="inline-flex items-center justify-center px-6 py-2.5 bg-transparent border border-white/20 text-white font-medium rounded-full hover:bg-white/10 transition-colors text-[14px]">
-                            Descobrir a minha fuga de capital &rarr;
-                        </a>
-                    </div>
+                <!-- CTA -->
+                <div class="reveal text-center" style="transition-delay:0.3s">
+                    <a href="#calculadora"
+                        class="inline-flex items-center justify-center px-7 py-3 border border-white/20 text-white font-semibold rounded-full hover:bg-white/10 transition-colors text-[14px]">
+                        Descobrir o que dá pra automatizar na minha operação &rarr;
+                    </a>
                 </div>
 
             </div>
