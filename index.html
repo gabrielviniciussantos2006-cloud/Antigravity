@@ -215,11 +215,61 @@
 
         .animate-bar {
             width: 0 !important;
-            transition: width 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: width 0.7s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .animate-bar.active {
             width: var(--target-width) !important;
+        }
+
+        /* Apple-style Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1),
+                        transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered children */
+        .reveal-stagger > .reveal:nth-child(1) { transition-delay: 0s; }
+        .reveal-stagger > .reveal:nth-child(2) { transition-delay: 0.08s; }
+        .reveal-stagger > .reveal:nth-child(3) { transition-delay: 0.16s; }
+        .reveal-stagger > .reveal:nth-child(4) { transition-delay: 0.24s; }
+        .reveal-stagger > .reveal:nth-child(5) { transition-delay: 0.32s; }
+        .reveal-stagger > .reveal:nth-child(6) { transition-delay: 0.40s; }
+
+        /* Faster variant for hero text */
+        .reveal-fast {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.45s cubic-bezier(0.25, 1, 0.5, 1),
+                        transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal-fast.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Scale-in variant for cards */
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.95) translateY(20px);
+            transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+                        transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal-scale.visible {
+            opacity: 1;
+            transform: scale(1) translateY(0);
         }
 
         /* Hide scrollbar for horizontal scrolling containers */
@@ -625,19 +675,19 @@
 
                 <div class="relative z-20 text-center px-4 max-w-5xl mx-auto w-full flex flex-col items-center">
                     <!-- Eyebrow Tag -->
-                    <div class="mb-5 inline-flex flex-row items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md">
+                    <div class="reveal-fast mb-5 inline-flex flex-row items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md">
                         <div class="w-1.5 h-1.5 rounded-full bg-[#FFB800]"></div>
                         <span class="text-[11px] md:text-xs font-semibold text-white/80 tracking-widest uppercase">Backoffice & operações internas</span>
                     </div>
                     <h1
-                        class="text-[3.5rem] md:text-6xl lg:text-[7.5rem] font-extrabold tracking-tighter text-white mb-6 leading-[1.05] hero-text-shadow">
+                        class="reveal-fast text-[3.5rem] md:text-6xl lg:text-[7.5rem] font-extrabold tracking-tighter text-white mb-6 leading-[1.05] hero-text-shadow" style="transition-delay:0.1s">
                         Menos trabalho repetitivo.<br class="hidden md:block" /> Mais margem de lucro.
                     </h1>
                     <p
-                        class="text-[19px] md:text-[21px] text-white/90 max-w-[42rem] mx-auto leading-relaxed mb-10 font-medium hero-text-shadow">
+                        class="reveal-fast text-[19px] md:text-[21px] text-white/90 max-w-[42rem] mx-auto leading-relaxed mb-10 font-medium hero-text-shadow" style="transition-delay:0.2s">
                         Eliminamos o trabalho repetitivo da sua equipe. Conectamos Inteligência Artificial ao seu ERP, financeiro e processos internos. Menos custos, zero falhas.
                     </p>
-                    <div class="flex flex-col items-center justify-center gap-4">
+                    <div class="reveal-fast flex flex-col items-center justify-center gap-4" style="transition-delay:0.3s">
                         <div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
                             <a href="#calculadora"
                                 class="w-full sm:w-auto px-8 py-3.5 bg-white text-black font-bold rounded-full hover:scale-105 hover:bg-neutral-200 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.15)]">
@@ -682,7 +732,7 @@
                 class="absolute inset-0 w-full h-full object-cover opacity-10 pointer-events-none section-img-mask"
                 onerror="this.style.display='none'">
             <div class="max-w-7xl mx-auto px-6 relative z-10">
-                <div class="mb-16 md:mb-20">
+                <div class="reveal mb-16 md:mb-20">
                     <h2 class="text-4xl md:text-[3.5rem] font-bold tracking-tight text-white mb-6">O Processo.</h2>
                     <p class="text-[#a1a1a6] text-[19px] md:text-[21px] max-w-2xl font-medium leading-relaxed">
                         Metodologia orientada por dados, desde o conceito estratégico até a escala final dos seus
@@ -691,10 +741,10 @@
                 </div>
 
                 <!-- Cards Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 reveal-stagger">
                     <!-- Etapa 1 -->
                     <div
-                        class="bg-[#151516] border border-white/5 rounded-3xl p-10 flex flex-col justify-between hover:bg-[#1c1c1e] transition-colors duration-300 group relative overflow-hidden">
+                        class="reveal-scale bg-[#151516] border border-white/5 rounded-3xl p-10 flex flex-col justify-between hover:bg-[#1c1c1e] transition-colors duration-300 group relative overflow-hidden">
                         <img src="assets/process_1_audit.png" alt=""
                             class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none transition-transform duration-500 group-hover:scale-110"
                             onerror="this.style.display='none'">
@@ -711,7 +761,7 @@
 
                     <!-- Etapa 2 -->
                     <div
-                        class="bg-[#151516] border border-white/5 rounded-3xl p-10 flex flex-col justify-between hover:bg-[#1c1c1e] transition-colors duration-300 group relative overflow-hidden">
+                        class="reveal-scale bg-[#151516] border border-white/5 rounded-3xl p-10 flex flex-col justify-between hover:bg-[#1c1c1e] transition-colors duration-300 group relative overflow-hidden" style="transition-delay:0.1s">
                         <img src="assets/process_2_engineering.png" alt=""
                             class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none transition-transform duration-500 group-hover:scale-110"
                             onerror="this.style.display='none'">
@@ -729,7 +779,7 @@
 
                     <!-- Etapa 3 -->
                     <div
-                        class="bg-[#151516] border border-white/5 rounded-3xl p-10 flex flex-col justify-between hover:bg-[#1c1c1e] transition-colors duration-300 group relative overflow-hidden">
+                        class="reveal-scale bg-[#151516] border border-white/5 rounded-3xl p-10 flex flex-col justify-between hover:bg-[#1c1c1e] transition-colors duration-300 group relative overflow-hidden" style="transition-delay:0.2s">
                         <img src="assets/process_3_scale.png" alt=""
                             class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none transition-transform duration-500 group-hover:scale-110"
                             onerror="this.style.display='none'">
@@ -753,7 +803,7 @@
                 class="absolute inset-0 w-full h-full object-cover opacity-10 pointer-events-none section-img-mask"
                 onerror="this.style.display='none'">
             <div class="max-w-7xl mx-auto px-6 relative z-10">
-                <div class="text-center mb-16 md:mb-24 flex flex-col items-center">
+                <div class="reveal text-center mb-16 md:mb-24 flex flex-col items-center">
                     <span class="text-[11px] font-bold tracking-[0.2em] text-[#FFB800] uppercase mb-4 block">O que a Aivery automatiza</span>
                     <h2 class="text-4xl md:text-[3.5rem] font-bold tracking-tight text-white mb-6">Operações que rodam sozinhas.
                     </h2>
@@ -933,7 +983,7 @@
             <div class="max-w-7xl mx-auto px-6 relative z-10">
 
                 <!-- Cabeçalho -->
-                <div class="flex flex-col md:flex-row justify-between items-start gap-8 mb-16 md:mb-20">
+                <div class="reveal flex flex-col md:flex-row justify-between items-start gap-8 mb-16 md:mb-20">
                     <div>
                         <p class="text-white text-[11px] font-medium tracking-[0.2em] uppercase mb-5">O que muda</p>
                         <h2
@@ -947,7 +997,7 @@
                 </div>
 
                 <!-- Cards de métricas -->
-                <div class="grid grid-cols-2 lg:grid-cols-4 gap-[1px] bg-white/5 mb-[1px]">
+                <div class="reveal grid grid-cols-2 lg:grid-cols-4 gap-[1px] bg-white/5 mb-[1px]" style="transition-delay:0.1s">
                     <div class="bg-[#111] p-6 md:p-9 relative group hover:bg-[#151515] transition-colors">
                         <div class="text-5xl md:text-[5rem] font-bold text-white leading-none mb-2 tracking-tighter">
                             até 70%</div>
@@ -1152,7 +1202,7 @@
         <div class="ambient-glow" style="top: 20%; height: 80vh;"></div>
 
         <div class="relative z-20 w-full max-w-4xl mx-auto pt-10">
-            <div class="text-center mb-12">
+            <div class="reveal text-center mb-12">
                 <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-white mb-6">
                     Descubra o potencial da sua operação
                 </h2>
@@ -1244,7 +1294,7 @@
 
     <!-- Integrações / Ferramentas -->
     <section class="py-16 md:py-20 border-t border-white/5 bg-black" id="integracoes">
-        <div class="max-w-6xl mx-auto px-6 text-center">
+        <div class="reveal max-w-6xl mx-auto px-6 text-center">
             <h3 class="text-neutral-500 font-semibold tracking-[0.2em] uppercase text-[11px] mb-8">Nossos robôs operam pelos sistemas que você já usa</h3>
             <div class="flex flex-wrap justify-center items-center gap-6 md:gap-14 opacity-50 grayscale hover:grayscale-0 transition-opacity transition-all duration-500">
                 <div class="flex items-center gap-2 font-bold text-lg text-white"><img src="https://cdn.simpleicons.org/whatsapp/white" class="w-7 h-7" alt="WhatsApp"> WhatsApp</div>
@@ -1261,9 +1311,9 @@
 
     <!-- FAQ Section -->
     <section id="faq" class="py-24 max-w-4xl mx-auto px-6 border-t border-white/5">
-        <h2 class="text-3xl md:text-[2.5rem] font-bold tracking-tight text-white mb-12 text-center">Perguntas Frequentes
+        <h2 class="reveal text-3xl md:text-[2.5rem] font-bold tracking-tight text-white mb-12 text-center">Perguntas Frequentes
         </h2>
-        <div class="space-y-4">
+        <div class="reveal space-y-4" style="transition-delay:0.1s">
             <details
                 class="group bg-[#111] border border-white/10 rounded-2xl overflow-hidden [&_summary::-webkit-details-marker]:hidden">
                 <summary class="flex items-center justify-between cursor-pointer p-6 bg-transparent">
@@ -1492,8 +1542,8 @@
             </div>
 
             <div class="footer-bottom">
-                <span class="footer-copyright">São José dos Campos - © 2026 Aivery. Todos os direitos reservados.</span>
-                <span class="footer-slogan"><strong>Provamos o valor</strong> antes de falar em contrato.</span>
+                <span class="footer-copyright">São José dos Campos · CNPJ 65.744.729/0001-18 · © 2026 Aivery. Todos os direitos reservados.</span>
+                <span class="footer-slogan"><strong>Otimizando o presente,</strong> Automatizando o futuro.</span>
             </div>
 
         </div>
@@ -2433,7 +2483,7 @@
             const animateNumbers = (el) => {
                 const target = parseInt(el.getAttribute('data-target'));
                 const suffix = el.getAttribute('data-suffix') || '';
-                const duration = 800; // ms (Ultra-fast count-up)
+                const duration = 600; // ms (Apple-fast count-up)
                 const startTimestamp = performance.now();
 
                 const step = (now) => {
@@ -2442,11 +2492,7 @@
                     // Easing: easeOutExpo
                     const current = Math.floor(target * (progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress)));
 
-                    if (target < 0) {
-                        el.innerText = current + suffix;
-                    } else {
-                        el.innerText = current + suffix;
-                    }
+                    el.innerText = current + suffix;
 
                     if (progress < 1) {
                         window.requestAnimationFrame(step);
@@ -2472,9 +2518,6 @@
                                 animateNumbers(num);
                             }
                         });
-
-                        // Stop observing once animated if you want (comment out if you want it to replay)
-                        // observer.unobserve(entry.target);
                     }
                 });
             }, observerOptions);
@@ -2484,6 +2527,19 @@
                 if (container.querySelector('.animate-bar') || container.querySelector('.animate-number')) {
                     observer.observe(container);
                 }
+            });
+
+            // Apple-style Scroll Reveal Observer
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+            document.querySelectorAll('.reveal, .reveal-fast, .reveal-scale').forEach(el => {
+                revealObserver.observe(el);
             });
         });
     </script>
