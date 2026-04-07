@@ -1,9 +1,4 @@
-<!--
-  Teste LP Normal (n8n webhook):
-  curl -X POST https://gabrielviniciusst.app.n8n.cloud/webhook/cc4b796a-b3ec-4192-9076-60c32a9dca87 \
-    -H "Content-Type: application/json" \
-    -d '{"nome":"Teste","email":"teste@email.com","whatsapp":"12999999999","mensagem":"Quero saber mais","origem":"lp-normal"}'
--->
+
 <!DOCTYPE html>
 <html lang="pt-BR" class="scroll-smooth bg-black">
 
@@ -11,6 +6,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aivery | Inteligência Artificial e Automação</title>
+
+    <!-- Meta Tags & Open Graph -->
+    <meta name="description" content="A Aivery automatiza os processos que travam o crescimento da sua empresa. Descubra quanto dinheiro você está perdendo mensalmente com trabalho braçal.">
+    <meta property="og:title" content="Aivery | Inteligência Artificial e Automação">
+    <meta property="og:description" content="A Aivery automatiza os processos que travam o crescimento da sua empresa. Descubra quanto você está perdendo.">
+    <meta property="og:image" content="https://aivery.com.br/assets/og-image.jpg">
+    <meta property="og:url" content="https://aivery.com.br">
+    <meta property="og:type" content="website">
+
+    <!-- Analytics Placeholder (Google Analytics / Pixel) -->
+    <!-- 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    -->
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/favicon.png">
@@ -39,6 +53,7 @@
                 extend: {
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
+                        bebas: ['"Bebas Neue"', 'sans-serif'],
                     },
                     colors: {
                         black: '#000000',
@@ -105,14 +120,14 @@
 
         /* Video Scroll Hero Styles */
         .hero-scroll-container {
-            height: 250vh;
+            height: 150vh;
             /* Adjust for scroll duration */
             position: relative;
         }
 
         @media (max-width: 768px) {
             .hero-scroll-container {
-                height: 140vh;
+                height: 100vh;
                 /* Aggressive scroll speed on mobile */
             }
         }
@@ -553,16 +568,21 @@
             </a>
 
             <!-- Navegação Desktop -->
-            <nav class="hidden md:flex items-center space-x-8 text-[12px] font-medium text-neutral-400">
+            <nav class="hidden md:flex items-center space-x-8 text-[13px] font-medium text-neutral-400">
+                <a href="#processo" class="hover:text-white transition-colors">O Processo</a>
+                <a href="#projetos" class="hover:text-white transition-colors">Projetos</a>
+                <a href="#resultado" class="hover:text-white transition-colors">Resultados</a>
+                <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
+                <a href="#contato" class="hover:text-white transition-colors">Contato</a>
                 <a href="#calculadora"
-                    class="px-4 py-1.5 bg-white text-black font-semibold rounded-full hover:bg-neutral-200 transition-colors">
+                    class="px-5 py-2 bg-white text-black font-semibold rounded-full hover:bg-neutral-200 transition-colors">
                     Descobrir Prejuízo
                 </a>
             </nav>
 
             <!-- Mobile Menu -->
-            <button class="md:hidden text-white focus:outline-none">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+            <button class="md:hidden text-white focus:outline-none" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                         d="M4 6h16M4 12h16M4 18h16" />
@@ -570,6 +590,26 @@
             </button>
         </div>
     </header>
+
+    <!-- Mobile Menu Flyout -->
+    <div id="mobile-menu" class="hidden fixed inset-0 z-[60] bg-black/95 backdrop-blur-xl pt-20 px-6 flex flex-col transition-all">
+        <button class="absolute top-4 right-4 text-white p-2" onclick="document.getElementById('mobile-menu').classList.add('hidden')">
+            <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+        <nav class="flex flex-col space-y-6 text-[22px] font-medium text-neutral-400 mt-8">
+            <a href="#processo" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white transition-colors">O Processo</a>
+            <a href="#projetos" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white transition-colors">Projetos</a>
+            <a href="#resultado" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white transition-colors">Resultados</a>
+            <a href="#faq" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white transition-colors">FAQ</a>
+            <a href="#contato" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="hover:text-white transition-colors">Contato</a>
+            <div class="pt-6 border-t border-white/10 mt-8">
+                <a href="#calculadora" onclick="document.getElementById('mobile-menu').classList.add('hidden')"
+                    class="block w-full text-center px-6 py-4 bg-white text-black font-semibold rounded-full hover:bg-neutral-200 transition-colors">
+                    Descobrir Prejuízo
+                </a>
+            </div>
+        </nav>
+    </div>
 
     <main>
         <!-- Hero Section Controlled by Scroll -->
@@ -584,15 +624,18 @@
                 <div class="ambient-glow"></div>
 
                 <div class="relative z-20 text-center px-4 max-w-5xl mx-auto w-full flex flex-col items-center">
+                    <!-- Eyebrow Tag -->
+                    <div class="mb-5 inline-flex flex-row items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md">
+                        <div class="w-1.5 h-1.5 rounded-full bg-[#FFB800]"></div>
+                        <span class="text-[11px] md:text-xs font-semibold text-white/80 tracking-widest uppercase">Backoffice & operações internas</span>
+                    </div>
                     <h1
                         class="text-[3.5rem] md:text-6xl lg:text-[7.5rem] font-extrabold tracking-tighter text-white mb-6 leading-[1.05] hero-text-shadow">
                         Menos trabalho repetitivo.<br class="hidden md:block" /> Mais margem de lucro.
                     </h1>
                     <p
                         class="text-[19px] md:text-[21px] text-white/90 max-w-[42rem] mx-auto leading-relaxed mb-10 font-medium hero-text-shadow">
-                        Eliminamos o trabalho repetitivo da sua equipe conectando Inteligência Artificial aos sistemas
-                        que
-                        você já usa. Menos custos, zero falhas.
+                        Eliminamos o trabalho repetitivo da sua equipe. Conectamos Inteligência Artificial ao seu ERP, financeiro e processos internos. Menos custos, zero falhas.
                     </p>
                     <div class="flex flex-col items-center justify-center gap-4">
                         <div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
@@ -710,25 +753,23 @@
                 class="absolute inset-0 w-full h-full object-cover opacity-10 pointer-events-none section-img-mask"
                 onerror="this.style.display='none'">
             <div class="max-w-7xl mx-auto px-6 relative z-10">
-                <div class="text-center mb-16 md:mb-24">
-                    <h2 class="text-4xl md:text-[3.5rem] font-bold tracking-tight text-white mb-6">Projetos em Destaque.
+                <div class="text-center mb-16 md:mb-24 flex flex-col items-center">
+                    <span class="text-[11px] font-bold tracking-[0.2em] text-[#FFB800] uppercase mb-4 block">O que a Aivery automatiza</span>
+                    <h2 class="text-4xl md:text-[3.5rem] font-bold tracking-tight text-white mb-6">Operações que rodam sozinhas.
                     </h2>
                     <p class="text-[#a1a1a6] text-[19px] md:text-[21px] max-w-2xl mx-auto font-medium leading-relaxed">
-                        Do varejo a instituições financeiras, reduzimos custos e multiplicamos o faturamento dos nossos
-                        clientes.
+                        Quatro frentes de trabalho repetitivo que substituímos por robôs com IA — direto no ERP, financeiro e processos internos da sua empresa.
                     </p>
                 </div>
 
                 <!-- Bento Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 auto-rows-auto md:auto-rows-[400px] gap-6">
-
-                    <!-- Destaque Principal (Large) -->
-                    <!-- Card grande — Automação de Backoffice Logístico -->
                     <div
-                        class="md:col-span-2 md:row-span-2 rounded-[2rem] bg-[#151516] border border-white/5 overflow-hidden relative group flex flex-col justify-between hover:bg-[#1c1c1e] transition-colors duration-300 min-h-[500px] md:min-h-0">
+                        class="md:col-span-2 md:row-span-2 rounded-[2rem] bg-[#151516] border border-white/5 overflow-hidden relative group flex flex-col hover:bg-[#1c1c1e] transition-colors duration-300 min-h-[500px] md:min-h-0">
 
                         <!-- Elemento visual: grid de arquivos animado -->
                         <div class="flex-1 p-6 md:p-10 pb-0 relative flex flex-col justify-start">
+                            <span class="text-[10px] font-bold tracking-[0.15em] text-white/50 border border-white/10 px-2.5 py-1 rounded-sm uppercase self-start mb-6 block w-max bg-white/5">Operação Logística</span>
                             <div class="flex flex-col gap-[10px] w-full">
                                 <div class="flex items-center gap-[10px]">
                                     <span
@@ -754,7 +795,7 @@
                                 </div>
                                 <div class="flex items-center gap-[10px]">
                                     <span
-                                        class="text-[10px] font-medium tracking-[0.08em] text-white/50 border border-white/10 px-2 py-[3px] rounded inline-block text-center w-[42px] min-w-[42px] shrink-0 whitespace-nowrap">XML</span>
+                                        class="text-[10px] font-medium tracking-[0.08em] text-white/50 border border-white/10 px-2 py-[3px] rounded inline-block text-center w-[42px] min-w-[42px] shrink-0 whitespace-nowrap">NF-e</span>
                                     <div
                                         class="h-1 bg-white/5 rounded-full flex-1 relative overflow-hidden bar-container">
                                         <div class="absolute inset-y-0 left-0 bg-white/20 rounded-full animate-bar"
@@ -763,94 +804,124 @@
                                     <span
                                         class="text-white/40 text-[9px] w-[18px] h-[18px] rounded-full flex items-center justify-center border border-white/10 shrink-0">✓</span>
                                 </div>
+                                <div class="flex items-center gap-[10px]">
+                                    <span
+                                        class="text-[10px] font-medium tracking-[0.08em] text-white/50 border border-white/10 px-2 py-[3px] rounded inline-block text-center w-[42px] min-w-[42px] shrink-0 whitespace-nowrap">XML</span>
+                                    <div
+                                        class="h-1 bg-white/5 rounded-full flex-1 relative overflow-hidden bar-container">
+                                        <div class="absolute inset-y-0 left-0 bg-white/20 rounded-full animate-bar"
+                                            style="--target-width: 48%"></div>
+                                    </div>
+                                    <span
+                                        class="text-white/40 text-[9px] w-[18px] h-[18px] rounded-full flex items-center justify-center border border-white/10 shrink-0">✓</span>
+                                </div>
+                                <div class="flex items-center gap-[10px]">
+                                    <span
+                                        class="text-[10px] font-medium tracking-[0.08em] text-white/50 border border-white/10 px-2 py-[3px] rounded inline-block text-center w-[42px] min-w-[42px] shrink-0 whitespace-nowrap">DANFE</span>
+                                    <div
+                                        class="h-1 bg-white/5 rounded-full flex-1 relative overflow-hidden bar-container">
+                                        <div class="absolute inset-y-0 left-0 bg-white/20 rounded-full animate-bar"
+                                            style="--target-width: 91%"></div>
+                                    </div>
+                                    <span
+                                        class="text-white/40 text-[9px] w-[18px] h-[18px] rounded-full flex items-center justify-center border border-white/10 shrink-0">✓</span>
+                                </div>
                             </div>
 
-                            <!-- Métrica na base da área visual -->
-                            <div class="mt-5 pt-4 flex flex-row items-baseline gap-2 border-t border-white/5">
-                                <span
-                                    class="font-['Bebas_Neue'] text-[52px] leading-none text-[#f0ede8] tracking-[0.02em] animate-number"
-                                    data-target="500">0</span>
-                                <span class="text-[11px] text-[#86868b] tracking-[0.1em] uppercase mb-1">arquivos /
-                                    dia</span>
+                            <!-- Process Flow -->
+                            <div class="mt-8 mb-4 flex flex-col gap-5 relative before:absolute before:left-[11px] before:top-3 before:bottom-3 before:w-[2px] before:bg-white/5">
+                                <div class="flex items-start gap-4 relative z-10">
+                                    <div class="w-6 h-6 mt-0.5 rounded-full bg-[#1c1c1e] border border-white/10 flex items-center justify-center shrink-0">
+                                        <div class="w-1.5 h-1.5 rounded-full bg-white/40"></div>
+                                    </div>
+                                    <div>
+                                        <span class="text-[13px] text-white/80 font-medium block">Documento recebido</span>
+                                        <span class="text-[11px] text-[#86868b] leading-snug">E-mail, portal ou pasta monitorada</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4 relative z-10">
+                                    <div class="w-6 h-6 mt-0.5 rounded-full bg-[#1c1c1e] border border-white/10 flex items-center justify-center shrink-0">
+                                        <div class="w-1.5 h-1.5 rounded-full bg-[#FFB800]"></div>
+                                    </div>
+                                    <div>
+                                        <span class="text-[13px] text-white font-medium block">IA lê e valida</span>
+                                        <span class="text-[11px] text-[#86868b] leading-snug">Extrai dados, confere CNPJ e valores</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4 relative z-10">
+                                    <div class="w-6 h-6 mt-0.5 rounded-full bg-[#1c1c1e] border border-white/10 flex items-center justify-center shrink-0">
+                                        <div class="w-1.5 h-1.5 rounded-full bg-[#4ade80]"></div>
+                                    </div>
+                                    <div>
+                                        <span class="text-[13px] text-[#86868b] font-medium block">Lançado no ERP</span>
+                                        <span class="text-[11px] text-[#86868b] leading-snug">Sem digitação, sem conferência manual</span>
+                                    </div>
+                                </div>
                             </div>
 
-                            <!-- Status Statistics -->
-                            <div class="flex items-center mt-5 py-4 border-y border-white/5">
-                                <div class="flex flex-1 flex-col gap-1">
-                                    <span
-                                        class="font-['Bebas_Neue'] text-[26px] leading-none text-[#f0ede8] tracking-[0.02em] animate-number"
-                                        data-target="-80" data-suffix="%">0%</span>
-                                    <span class="text-[11px] text-[#86868b] tracking-[0.06em] leading-[1.3]">tempo
-                                        manual</span>
-                                </div>
-                                <div class="w-[1px] h-8 bg-white/5 mx-3 md:mx-5 shrink-0"></div>
-                                <div class="flex flex-1 flex-col gap-1">
-                                    <span
-                                        class="font-['Bebas_Neue'] text-[26px] leading-none text-[#f0ede8] tracking-[0.02em] animate-number"
-                                        data-target="0">0</span>
-                                    <span class="text-[11px] text-[#86868b] tracking-[0.06em] leading-[1.3]">erros de
-                                        importação</span>
-                                </div>
-                                <div class="w-[1px] h-8 bg-white/5 mx-3 md:mx-5 shrink-0"></div>
-                                <div class="flex flex-1 flex-col gap-1">
-                                    <span
-                                        class="font-['Bebas_Neue'] text-[26px] leading-none text-[#f0ede8] tracking-[0.02em] animate-number"
-                                        data-target="24" data-suffix="h">0h</span>
-                                    <span class="text-[11px] text-[#86868b] tracking-[0.06em] leading-[1.3]">operação
-                                        contínua</span>
-                                </div>
-                            </div>
                         </div>
 
                         <!-- Conteúdo -->
                         <div class="px-6 md:px-10 pb-8 md:pb-10 pt-4 md:pt-0 relative z-20">
-                            <h3 class="text-xl md:text-3xl font-bold text-white mb-2 leading-tight">Automação de
-                                Backoffice Logístico
+                            <h3 class="text-xl md:text-3xl font-bold text-white mb-2 leading-tight">Importação Fiscal &amp; Logística sem Cliques
                             </h3>
-                            <p class="text-[#86868b] text-[14px] md:text-[15px] leading-relaxed">500 arquivos por dia.
-                                Zero cliques. O
-                                ERP sempre atualizado.</p>
+                            <p class="text-[#86868b] text-[14px] md:text-[15px] leading-relaxed">Notas, CT-e e XMLs entram direto no ERP. Ninguém precisa baixar, conferir ou digitar.</p>
                         </div>
 
                     </div>
 
                     <!-- Médio Superior Direito -->
                     <div
-                        class="md:col-span-2 rounded-[2rem] bg-[#151516] border border-white/5 overflow-hidden relative group p-8 md:p-10 flex flex-col justify-end hover:bg-[#1c1c1e] transition-colors duration-300">
+                        class="md:col-span-2 rounded-[2rem] bg-[#151516] border border-white/5 overflow-hidden relative group p-8 md:p-10 flex flex-col justify-between hover:bg-[#1c1c1e] transition-colors duration-300">
                         <div class="relative z-20">
-                            <h3 class="text-2xl md:text-3xl font-bold text-white mb-3">Agendamento Inteligente em
-                                WhatsApp</h3>
-                            <p class="text-[#f5f5f7] opacity-80 max-w-[280px]">
-                                Assistente de IA integrado à sua agenda: marcação, reagendamento e suporte técnico 24/7
-                                via WhatsApp, sem intervenção humana.
+                            <span class="text-[10px] font-bold tracking-[0.15em] text-white/50 border border-white/10 px-2.5 py-1 rounded-sm uppercase self-start mb-6 block w-max bg-white/5">Operação Interna</span>
+                        </div>
+                        <div class="relative z-20 mt-auto">
+                            <h3 class="text-2xl md:text-3xl font-bold text-white mb-3">Agenda & Processos Internos via WhatsApp</h3>
+                            <p class="text-[#f5f5f7] opacity-80 max-w-[280px] mb-3">
+                                Marcação, reagendamento e atualização do sistema rodam direto pelo WhatsApp — sem ninguém parar pra fazer no manual.
+                            </p>
+                            <p class="text-[13px] text-[#86868b] italic">
+                                Não é chatbot. É a sua operação interna usando o WhatsApp como ferramenta.
                             </p>
                         </div>
                     </div>
 
                     <!-- Pequeno Canto Inferior 1 -->
                     <div
-                        class="md:col-span-1 border border-white/5 rounded-[2rem] bg-[#151516] overflow-hidden relative group p-8 flex flex-col justify-end hover:bg-[#1c1c1e] transition-colors duration-300">
+                        class="md:col-span-1 border border-white/5 rounded-[2rem] bg-[#151516] overflow-hidden relative group p-8 flex flex-col justify-between hover:bg-[#1c1c1e] transition-colors duration-300">
                         <div class="relative z-20">
+                            <span class="text-[10px] font-bold tracking-[0.15em] text-white/50 border border-white/10 px-2.5 py-1 rounded-sm uppercase self-start mb-6 block w-max bg-white/5">Financeiro</span>
+                        </div>
+                        <div class="relative z-20 mt-auto">
                             <h3 class="text-[22px] font-bold text-white mb-2 leading-tight">Conciliação Bancária
                                 Autônoma</h3>
-                            <p class="text-[#a1a1a6] text-sm">Auditoria e cruzamento em tempo real de extratos e notas
-                                fiscais com precisão absoluta.
-                            </p>
+                            <p class="text-[#a1a1a6] text-sm">Extratos cruzados com notas fiscais sem ninguém conferir planilha.</p>
                         </div>
                     </div>
 
                     <!-- Pequeno Canto Inferior 2 -->
                     <div
-                        class="md:col-span-1 border border-white/5 rounded-[2rem] bg-[#151516] overflow-hidden relative group p-8 flex flex-col justify-end hover:bg-[#1c1c1e] transition-colors duration-300">
+                        class="md:col-span-1 border border-white/5 rounded-[2rem] bg-[#151516] overflow-hidden relative group p-8 flex flex-col justify-between hover:bg-[#1c1c1e] transition-colors duration-300">
                         <div class="relative z-20">
-                            <h3 class="text-[22px] font-bold text-white mb-2 leading-tight">Qualificação Inteligente de
-                                Leads</h3>
-                            <p class="text-[#a1a1a6] text-sm">Triagem automática e segmentação de contatos em tempo real
-                                para focar sua equipe no que realmente fecha negócio.</p>
+                            <span class="text-[10px] font-bold tracking-[0.15em] text-white/50 border border-white/10 px-2.5 py-1 rounded-sm uppercase self-start mb-6 block w-max bg-white/5">Fiscal</span>
+                        </div>
+                        <div class="relative z-20 mt-auto">
+                            <h3 class="text-[22px] font-bold text-white mb-2 leading-tight">Emissão Automática de NF-e</h3>
+                            <p class="text-[#a1a1a6] text-sm">Do faturamento do pedido à prefeitura e envio ao cliente, em segundos e sem erros de digitação.</p>
                         </div>
                     </div>
 
                 </div>
+
+                <!-- Footer da Seção -->
+                <div class="mt-16 flex flex-col items-center justify-center text-center">
+                    <p class="text-[#86868b] text-[15px] mb-6 font-medium">Esses são quatro exemplos. A sua operação tem outros.</p>
+                    <a href="#calculadora" class="inline-flex items-center justify-center px-6 py-3 border border-white/20 text-white font-semibold rounded-full hover:bg-white/10 transition-colors text-[14px]">
+                        Ver o que dá pra automatizar na minha empresa &rarr;
+                    </a>
+                </div>
+
             </div>
         </section>
 
@@ -864,14 +935,14 @@
                 <!-- Cabeçalho -->
                 <div class="flex flex-col md:flex-row justify-between items-start gap-8 mb-16 md:mb-20">
                     <div>
-                        <p class="text-white text-[11px] font-medium tracking-[0.2em] uppercase mb-5">Resultado</p>
+                        <p class="text-white text-[11px] font-medium tracking-[0.2em] uppercase mb-5">O que muda</p>
                         <h2
                             class="text-4xl md:text-[5rem] lg:text-[6rem] font-bold tracking-tighter text-white leading-[0.9]">
-                            Números<br><span class="text-white/60">reais.</span></h2>
+                            Quando o robô<br><span class="text-white/60">faz o trabalho de<br>robô.</span></h2>
                     </div>
                     <p
                         class="text-[#a1a1a6] text-[15px] md:text-[17px] text-left max-w-sm leading-relaxed pb-2 md:pb-4">
-                        Impacto medido 90 dias após a implantação. Menos trabalho manual, mais escala, zero falhas.
+                        Potencial de impacto quando tarefas manuais repetitivas são substituídas por IA.
                     </p>
                 </div>
 
@@ -879,25 +950,25 @@
                 <div class="grid grid-cols-2 lg:grid-cols-4 gap-[1px] bg-white/5 mb-[1px]">
                     <div class="bg-[#111] p-6 md:p-9 relative group hover:bg-[#151515] transition-colors">
                         <div class="text-5xl md:text-[5rem] font-bold text-white leading-none mb-2 tracking-tighter">
-                            73%</div>
+                            até 70%</div>
                         <div class="text-[12px] md:text-[13px] text-[#999] leading-relaxed mb-4 min-h-[40px]">Redução de
                             custos
                             operacionais</div>
                         <span
                             class="inline-flex items-center gap-1.5 text-[11px] font-medium tracking-wide text-white bg-white/5 border border-white/10 px-2.5 py-1 rounded-full"><span
-                                class="w-1.5 h-1.5 rounded-full bg-white"></span>vs. processo manual</span>
+                                class="w-1.5 h-1.5 rounded-full bg-white"></span>meta de automação</span>
                         <div
                             class="absolute bottom-0 left-0 right-0 h-[2px] bg-white scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100">
                         </div>
                     </div>
                     <div class="bg-[#111] p-6 md:p-9 relative group hover:bg-[#151515] transition-colors">
                         <div class="text-5xl md:text-[5rem] font-bold text-white leading-none mb-2 tracking-tighter">
-                            10×</div>
+                            até 10×</div>
                         <div class="text-[13px] text-[#999] leading-relaxed mb-4 min-h-[40px]">Velocidade de execução de
                             tarefas</div>
                         <span
                             class="inline-flex items-center gap-1.5 text-[11px] font-medium tracking-wide text-white bg-white/5 border border-white/10 px-2.5 py-1 rounded-full"><span
-                                class="w-1.5 h-1.5 rounded-full bg-white"></span>rendimento médio</span>
+                                class="w-1.5 h-1.5 rounded-full bg-white"></span>meta de automação</span>
                         <div
                             class="absolute bottom-0 left-0 right-0 h-[2px] bg-white scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100">
                         </div>
@@ -909,20 +980,20 @@
                             processos automatizados</div>
                         <span
                             class="inline-flex items-center gap-1.5 text-[11px] font-medium tracking-wide text-white bg-white/5 border border-white/10 px-2.5 py-1 rounded-full"><span
-                                class="w-1.5 h-1.5 rounded-full bg-white"></span>100% de precisão</span>
+                                class="w-1.5 h-1.5 rounded-full bg-white"></span>meta de automação</span>
                         <div
                             class="absolute bottom-0 left-0 right-0 h-[2px] bg-white scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100">
                         </div>
                     </div>
                     <div class="bg-[#111] p-6 md:p-9 relative group hover:bg-[#151515] transition-colors">
                         <div class="text-5xl md:text-[5rem] font-bold text-white leading-none mb-2 tracking-tighter">
-                            +40%</div>
+                            até 40%</div>
                         <div class="text-[12px] md:text-[13px] text-[#999] leading-relaxed mb-4 min-h-[40px]">
                             Crescimento de receita
                             sem novas contratações</div>
                         <span
                             class="inline-flex items-center gap-1.5 text-[11px] font-medium tracking-wide text-white bg-white/5 border border-white/10 px-2.5 py-1 rounded-full"><span
-                                class="w-1.5 h-1.5 rounded-full bg-white"></span>receita / headcount</span>
+                                class="w-1.5 h-1.5 rounded-full bg-white"></span>meta de automação</span>
                         <div
                             class="absolute bottom-0 left-0 right-0 h-[2px] bg-white scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100">
                         </div>
@@ -1072,9 +1143,9 @@
 
     </main>
 
-    <!-- 🧮 Secção 1: A Calculadora de Custo Invisível -->
+    <!-- Secção 1: Ferramentas Aivery -->
     <section id="calculadora"
-        class="relative min-h-[80vh] flex flex-col items-center justify-start overflow-hidden py-24 px-4 bg-black">
+        class="relative min-h-[80vh] flex flex-col items-center justify-start overflow-visible py-24 px-4 bg-black">
         <img src="assets/calculator_bg.png" alt=""
             class="absolute inset-0 w-full h-full object-cover opacity-[0.03] pointer-events-none"
             onerror="this.style.display='none'">
@@ -1083,96 +1154,113 @@
         <div class="relative z-20 w-full max-w-4xl mx-auto pt-10">
             <div class="text-center mb-12">
                 <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-white mb-6">
-                    Calcule o Custo Invisível da sua Operação
+                    Descubra o potencial da sua operação
                 </h2>
                 <p class="text-[17px] md:text-[19px] text-neutral-400 font-medium leading-relaxed max-w-3xl mx-auto">
-                    Descubra em 30 segundos quanto a sua operação perde por ano com trabalho manual.
+                    Faça um diagnóstico rápido ou monte sua própria automação estruturada.
                 </p>
             </div>
 
-            <!-- Painel da Calculadora -->
-            <div class="bg-[#111] border border-white/10 rounded-3xl p-8 md:p-12 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+            <!-- Tab Navigation -->
+            <div class="flex flex-wrap justify-center mb-8 gap-2 sm:gap-4">
+                <button id="tab-btn-diagnostic" onclick="switchToolTab('diagnostic')" class="px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-[14px] sm:text-[15px] font-semibold transition-all border border-white/10 bg-white/10 text-white shadow-[0_0_15px_rgba(255,255,255,0.05)]">
+                    Diagnóstico
+                </button>
+                <button id="tab-btn-builder" onclick="switchToolTab('builder')" class="px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-[14px] sm:text-[15px] font-semibold transition-all border border-transparent text-neutral-400 hover:text-white hover:bg-white/5">
+                    Criar Automação
+                </button>
+            </div>
 
-                <!-- Sliders -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-10">
-                    <!-- Número de Colaboradores -->
-                    <div class="flex flex-col gap-4">
-                        <div class="flex justify-between items-end">
-                            <label for="slider-n" class="text-[15px] font-medium text-white">Número de
-                                colaboradores:</label>
-                            <span id="val-n"
-                                class="text-2xl font-bold text-white bg-white/10 px-3 py-1 rounded-lg">3</span>
+            <!-- Painel de Ferramentas -->
+            <div class="bg-[#111] border border-white/10 rounded-3xl p-6 md:p-12 shadow-[0_0_50px_rgba(0,0,0,0.5)] transition-all relative min-h-[400px]">
+                
+                <!-- Diagnóstico View -->
+                <div id="view-diagnostic" class="tool-view block">
+                    <!-- Progress -->
+                    <div id="diag-progress-wrapper" class="mb-8">
+                        <div class="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
+                            <div id="diag-progress-bar" class="h-full bg-[#4ade80] transition-all duration-500 w-[14%]"></div>
                         </div>
-                        <input type="range" id="slider-n" min="1" max="50" value="3" step="1" oninput="updateValues()">
+                        <div class="flex justify-between mt-2">
+                            <span id="diag-progress-text" class="text-xs text-neutral-500 uppercase tracking-widest font-medium">Pergunta 1 de 7</span>
+                        </div>
                     </div>
 
-                    <!-- Horas Perdidas -->
-                    <div class="flex flex-col gap-4">
-                        <div class="flex justify-between items-end">
-                            <label for="slider-h"
-                                class="text-[15px] font-medium text-white max-w-[200px] leading-tight">Horas
-                                perdidas por dia por colaborador:</label>
-                            <span id="val-h"
-                                class="text-2xl font-bold text-white bg-white/10 px-3 py-1 rounded-lg">2</span>
-                        </div>
-                        <input type="range" id="slider-h" min="1" max="10" value="2" step="1" oninput="updateValues()">
+                    <!-- Question Container -->
+                    <div id="diag-question-container" class="transition-opacity duration-300"></div>
+                    
+                    <!-- Result Container -->
+                    <div id="diag-result-container" class="hidden transition-opacity duration-500"></div>
+                    
+                    <!-- Loading Container -->
+                    <div id="diag-loading" class="hidden flex-col items-center justify-center py-16 opacity-0 transition-opacity duration-300">
+                        <div class="w-12 h-12 border-[3px] border-white/10 border-t-[#ef4444] rounded-full animate-spin mb-5"></div>
+                        <p class="text-white font-semibold text-[17px] mb-1">Analisando suas respostas...</p>
+                        <p class="text-neutral-400 text-sm">Identificando frentes de trabalho manual</p>
+                    </div>
+
+                    <div id="diag-actions" class="mt-8 flex justify-between items-center">
+                        <button id="diag-btn-back" onclick="diagBack()" class="hidden px-5 py-2.5 text-white/60 hover:text-white hover:bg-white/5 rounded-lg font-medium transition-colors text-sm">← Voltar</button>
+                        <div></div>
                     </div>
                 </div>
 
-                <!-- Resultado -->
-                <div id="result-container" class="mt-8 pt-8 flex flex-col items-center">
-
-                    <div class="text-center mb-8">
-                        <p class="text-[18px] md:text-[22px] font-semibold text-white/90 mb-3">
-                            O trabalho manual está roubando
-                        </p>
-                        <div
-                            class="flex items-center justify-center text-red-500 font-['Bebas_Neue'] text-[4rem] md:text-[5.5rem] leading-none tracking-tight mb-2">
-                            <span>R$&nbsp;</span><span id="resultado-valor">0</span>
+                <!-- Automação View -->
+                <div id="view-builder" class="tool-view hidden">
+                    <!-- Progress -->
+                    <div id="build-progress-wrapper" class="mb-8">
+                        <div class="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
+                            <div id="build-progress-bar" class="h-full bg-white transition-all duration-500 w-[25%] shadow-[0_0_10px_rgba(255,255,255,0.3)]"></div>
                         </div>
-                        <p class="text-[18px] md:text-[22px] font-semibold text-white/90">
-                            da sua margem de lucro todos os anos.
-                        </p>
+                        <div class="flex justify-between mt-2">
+                            <span id="build-progress-text" class="text-xs text-neutral-500 uppercase tracking-widest font-medium">Passo 1 de 4</span>
+                        </div>
                     </div>
 
-                    <div class="text-center max-w-2xl mx-auto mb-10 space-y-6">
-                        <p class="text-neutral-400 text-[16px] md:text-[17px] leading-relaxed">
-                            Esse valor <strong class="text-white font-semibold">sai da sua margem todos os anos</strong>
-                            — sem aparecer em nenhum relatório, sem que ninguém perceba. É o <strong
-                                class="text-white font-semibold">custo invisível</strong> que nenhum gestor consegue ver
-                            sem parar para calcular.
-                        </p>
-                        <p class="text-neutral-400 text-[16px] md:text-[17px] leading-relaxed">
-                            <strong class="text-white font-semibold">A boa notícia:</strong> O setup da Aivery <strong
-                                class="text-white font-semibold">custa menos que 3 meses dessa perda</strong>.
-                            Construímos "Agentes Digitais" capazes de assumir esta tarefa em background por uma fração
-                            desse valor.
-                        </p>
-                        <p class="text-[12px] text-neutral-600 !mb-0">
-                            *Fórmula utilizada: Colaboradores × Horas/dia × R$ 15/hora × 240 dias úteis.
-                        </p>
+                    <!-- Builder Step Container -->
+                    <div id="build-step-container" class="transition-opacity duration-300"></div>
+                    
+                    <!-- Builder Result Container -->
+                    <div id="build-result-container" class="hidden transition-opacity duration-500"></div>
+                    
+                    <!-- Loading Container -->
+                    <div id="build-loading" class="hidden flex-col items-center justify-center py-16 opacity-0 transition-opacity duration-300">
+                        <div class="w-12 h-12 border-[3px] border-white/10 border-t-white rounded-full animate-spin mb-5"></div>
+                        <p class="text-white font-semibold text-[17px] mb-1">Gerando sua automação...</p>
+                        <p class="text-neutral-400 text-sm">A IA está montando o fluxo ideal para você</p>
                     </div>
 
-                    <!-- Botão Principal condicionado -->
-                    <p class="text-[15px] text-white/80 font-medium mb-4 text-center">O diagnóstico é gratuito e leva 30
-                        minutos.</p>
-                    <!-- Lembre-se de configurar no seu Calendly/Cal.com os campos: Nome, E-mail corporativo, e "Qual o principal processo manual que gera custo ou atrasa a sua operação hoje?" -->
-                    <button onclick="abrirCalendly(event)" id="final-cta-btn"
-                        class="inline-block w-full max-w-md px-8 py-4 bg-white text-black text-center font-bold rounded-full hover:scale-105 transition-all duration-300">
-                        Agendar o meu Diagnóstico Gratuito
-                    </button>
-                    <p class="text-[12px] text-neutral-500 mt-4 text-center font-medium">
-                        *Sem cartão de crédito. Sem compromisso de compra.
-                    </p>
+                    <div id="build-actions" class="mt-10 flex justify-between items-center">
+                        <button id="build-btn-back" onclick="buildBack()" class="hidden px-5 py-2.5 text-white/60 hover:text-white hover:bg-white/5 rounded-lg font-medium transition-colors text-sm">← Voltar</button>
+                        <button id="build-btn-next" onclick="buildNext()" disabled class="ml-auto px-7 py-3 bg-white/10 text-white/40 rounded-full font-semibold transition-all duration-300 cursor-not-allowed">Continuar →</button>
+                    </div>
                 </div>
+
             </div>
         </div>
     </section>
 
 
 
+    <!-- Integrações / Ferramentas -->
+    <section class="py-16 md:py-20 border-t border-white/5 bg-black" id="integracoes">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <h3 class="text-neutral-500 font-semibold tracking-[0.2em] uppercase text-[11px] mb-8">Nossos robôs operam pelos sistemas que você já usa</h3>
+            <div class="flex flex-wrap justify-center items-center gap-6 md:gap-14 opacity-50 grayscale hover:grayscale-0 transition-opacity transition-all duration-500">
+                <div class="flex items-center gap-2 font-bold text-lg text-white"><img src="https://cdn.simpleicons.org/whatsapp/white" class="w-7 h-7" alt="WhatsApp"> WhatsApp</div>
+                <div class="flex items-center gap-2 font-bold text-lg text-white"><img src="https://cdn.simpleicons.org/openai/white" class="w-7 h-7" alt="OpenAI"> OpenAI</div>
+                <div class="flex items-center gap-2 font-bold text-lg text-white"><img src="https://cdn.simpleicons.org/make/white" class="w-7 h-7" alt="Make"> Make</div>
+                <div class="flex items-center gap-2 font-bold text-lg text-white">RD Station</div>
+                <div class="flex items-center gap-2 font-bold text-[16px] text-white opacity-80">
+                    <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+                    ERPs Nacionais
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- FAQ Section -->
-    <section class="py-24 max-w-4xl mx-auto px-6 border-t border-white/5">
+    <section id="faq" class="py-24 max-w-4xl mx-auto px-6 border-t border-white/5">
         <h2 class="text-3xl md:text-[2.5rem] font-bold tracking-tight text-white mb-12 text-center">Perguntas Frequentes
         </h2>
         <div class="space-y-4">
@@ -1192,6 +1280,23 @@
                 <div class="px-6 pb-6 text-[#a1a1a6] text-[15px] leading-relaxed">
                     Nada obrigatório. Você recebe o mapa de automações e decide o que fazer. Não existe proposta
                     automática nem follow-up agressivo.
+                </div>
+            </details>
+
+            <details
+                class="group bg-[#111] border border-white/10 rounded-2xl overflow-hidden [&_summary::-webkit-details-marker]:hidden">
+                <summary class="flex items-center justify-between cursor-pointer p-6 bg-transparent">
+                    <span class="text-lg font-semibold text-white">Vocês fazem chatbot?</span>
+                    <span class="transition group-open:rotate-180">
+                        <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor"
+                            stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24"
+                            width="24" class="text-white">
+                            <path d="M6 9l6 6 6-6"></path>
+                        </svg>
+                    </span>
+                </summary>
+                <div class="px-6 pb-6 text-[#a1a1a6] text-[15px] leading-relaxed">
+                    Não é o nosso foco. A Aivery automatiza o backoffice da empresa — financeiro, ERP, emissão de nota fiscal, cobrança, conciliação, leitura de documentos e processos internos que hoje ocupam o tempo da sua equipe. Chatbot atende o cliente final; a gente atua um passo atrás disso, na operação que faz a empresa funcionar.
                 </div>
             </details>
 
@@ -1306,7 +1411,7 @@
                 </span>
             </div>
             <p class="text-[13px] text-[#FFB800] mt-4 font-medium tracking-wide">
-                Agenda de diagnóstico: 3 vagas disponíveis esta semana.
+                Agenda de diagnóstico: vagas de análise de arquitetura limitadas semanalmente.
             </p>
 
             <!-- Separador -->
@@ -1379,7 +1484,7 @@
                         <li><a href="#processo">O Processo</a></li>
                         <li><a href="#projetos">Projetos</a></li>
                         <li><a href="#resultado">Resultados</a></li>
-                        <li><a href="calculadora.html">Quero automatizar</a></li>
+                        <li><a href="#calculadora">Quero automatizar</a></li>
                     </ul>
                 </div>
 
@@ -1396,92 +1501,759 @@
 
     <!-- Lógica da Calculadora -->
     <script>
-        let countUpAnim;
+        // ======= AIVERY TOOLS LOGIC =======
+        const AUTOMATION_CATEGORIES = [
+            {
+                id: "whatsapp", icon: "", label: "WhatsApp",
+                desc: "Respostas automáticas, agendamento, notificações",
+                templates: [
+                    { id: "wa1", name: "Resposta automática para clientes", complexity: 1, desc: "Responda automaticamente a mensagens recebidas com IA" },
+                    { id: "wa2", name: "Lembrete de agendamento", complexity: 1, desc: "Envie lembretes automáticos antes de compromissos" },
+                    { id: "wa3", name: "Atendimento com IA conversacional", complexity: 3, desc: "Chatbot inteligente que entende contexto e resolve dúvidas" },
+                ],
+            },
+            {
+                id: "financeiro", icon: "", label: "Financeiro",
+                desc: "NF-e, cobranças, conciliação, relatórios",
+                templates: [
+                    { id: "fi1", name: "Envio automático de cobranças", complexity: 1, desc: "Dispare cobranças por WhatsApp ou e-mail quando vencer" },
+                    { id: "fi2", name: "Emissão automática de NF-e", complexity: 2, desc: "Gere notas fiscais a partir de vendas ou contratos" },
+                    { id: "fi3", name: "Conciliação bancária automatizada", complexity: 3, desc: "Cruze extratos com lançamentos automaticamente" },
+                ],
+            },
+            {
+                id: "vendas", icon: "", label: "Vendas & CRM",
+                desc: "Follow-up, pipeline, propostas, leads",
+                templates: [
+                    { id: "ve1", name: "Follow-up automático de leads", complexity: 1, desc: "Envie follow-ups em sequência após primeiro contato" },
+                    { id: "ve2", name: "Qualificação de leads com IA", complexity: 2, desc: "Classifique leads automaticamente por potencial" },
+                    { id: "ve3", name: "Pipeline inteligente com alertas", complexity: 3, desc: "Mova deals automaticamente e alerte sobre oportunidades travadas" },
+                ],
+            },
+            {
+                id: "rh", icon: "", label: "RH & Operações",
+                desc: "Onboarding, ponto, documentos, tarefas",
+                templates: [
+                    { id: "rh1", name: "Onboarding automatizado", complexity: 2, desc: "Fluxo completo de integração de novo funcionário" },
+                    { id: "rh2", name: "Controle de ponto inteligente", complexity: 2, desc: "Registro e validação automática de horas" },
+                    { id: "rh3", name: "Gestão de documentos com OCR", complexity: 3, desc: "Leia, classifique e armazene documentos automaticamente" },
+                ],
+            },
+        ];
 
-        // Formater for currency
-        const formatBRL = (value) => {
-            return value.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        const COMPLEXITY_LABELS = {
+            1: { label: "Simples", colorClass: "text-[#4ade80] bg-[#4ade80]/10 border-[#4ade80]/30", dotClass: "bg-[#4ade80]", desc: "Você consegue configurar" },
+            2: { label: "Intermediário", colorClass: "text-[#facc15] bg-[#facc15]/10 border-[#facc15]/30", dotClass: "bg-[#facc15]", desc: "Pode precisar de ajustes" },
+            3: { label: "Avançado", colorClass: "text-[#f87171] bg-[#f87171]/10 border-[#f87171]/30", dotClass: "bg-[#f87171]", desc: "Recomendamos assistência" },
         };
 
-        function initCountUp(initialValue) {
-            const options = {
-                decimalPlaces: 2,
-                duration: 2.5,
-                useEasing: true,
-                useGrouping: true,
-                separator: '.',
-                decimal: ',',
-            };
-            if (typeof countUp !== 'undefined' && countUp.CountUp) {
-                countUpAnim = new countUp.CountUp('resultado-valor', initialValue, options);
-                if (!countUpAnim.error) {
-                    countUpAnim.start();
-                } else {
-                    console.error(countUpAnim.error);
-                }
+        const AI_OPTIONS = [
+            { id: "openai", name: "OpenAI (GPT)", icon: `<img src="https://cdn.simpleicons.org/openai/white" class="w-8 h-8 mx-auto" alt="OpenAI Logo" />` },
+            { id: "claude", name: "Claude (Anthropic)", icon: `<img src="https://cdn.simpleicons.org/anthropic/e1cdb3" class="w-8 h-8 mx-auto" alt="Anthropic Logo" />` },
+            { id: "gemini", name: "Gemini (Google)", icon: `<img src="https://cdn.simpleicons.org/googlegemini/8e85ee" class="w-8 h-8 mx-auto" alt="Gemini Logo" />` },
+            { id: "naosabe", name: "Não sei qual escolher", icon: `<svg class="w-8 h-8 mx-auto text-neutral-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>` },
+        ];
+
+        const DIAGNOSTIC_QUESTIONS = [
+            {
+                id: "setor", question: "Qual é o setor da sua empresa?",
+                options: [
+                    { id: "servicos", label: "Serviços", icon: "" },
+                    { id: "comercio", label: "Comércio", icon: "" },
+                    { id: "alimentacao", label: "Alimentação", icon: "" },
+                    { id: "saude", label: "Saúde / Estética", icon: "" },
+                    { id: "outro", label: "Outro", icon: "" },
+                ],
+            },
+            {
+                id: "funcionarios", question: "Quantos funcionários você tem?",
+                options: [
+                    { id: "1-3", label: "1 a 3", icon: "" },
+                    { id: "4-10", label: "4 a 10", icon: "" },
+                    { id: "11-30", label: "11 a 30", icon: "" },
+                    { id: "30+", label: "Mais de 30", icon: "" },
+                ],
+            },
+            {
+                id: "whatsapp", question: "Quantas mensagens de WhatsApp de clientes você recebe por dia?",
+                options: [
+                    { id: "10", label: "Menos de 10", icon: "" },
+                    { id: "30", label: "10 a 30", icon: "" },
+                    { id: "80", label: "30 a 80", icon: "" },
+                    { id: "150", label: "Mais de 80", icon: "" },
+                ],
+            },
+            {
+                id: "nfe", question: "Como você emite suas notas fiscais?",
+                options: [
+                    { id: "manual", label: "Manualmente, uma a uma", icon: "" },
+                    { id: "semi", label: "Tenho sistema mas preencho dados", icon: "" },
+                    { id: "auto", label: "Já é automático", icon: "" },
+                    { id: "nao", label: "Não emito NF-e", icon: "" },
+                ],
+            },
+            {
+                id: "cobranca", question: "Como você faz cobrança de clientes inadimplentes?",
+                options: [
+                    { id: "manual", label: "Ligo ou mando WhatsApp um por um", icon: "" },
+                    { id: "planilha", label: "Controlo por planilha", icon: "" },
+                    { id: "sistema", label: "Tenho sistema de cobrança", icon: "" },
+                    { id: "nao", label: "Não faço cobrança ativa", icon: "" },
+                ],
+            },
+            {
+                id: "tempo_admin", question: "Quanto tempo por dia você gasta com tarefas administrativas?",
+                options: [
+                    { id: "1h", label: "Menos de 1 hora", icon: "" },
+                    { id: "2h", label: "1 a 3 horas", icon: "" },
+                    { id: "4h", label: "3 a 5 horas", icon: "" },
+                    { id: "6h", label: "Mais de 5 horas", icon: "" },
+                ],
+            },
+            {
+                id: "dor", question: "Qual a sua maior dor hoje?",
+                options: [
+                    { id: "tempo", label: "Falta de tempo", icon: "" },
+                    { id: "dinheiro", label: "Perda de dinheiro", icon: "" },
+                    { id: "desorganizacao", label: "Desorganização", icon: "" },
+                    { id: "crescer", label: "Não consigo crescer", icon: "" },
+                ],
+            },
+        ];
+
+        // --- TABS LOGIC ---
+        function switchToolTab(tab) {
+            const btnDiag = document.getElementById('tab-btn-diagnostic');
+            const btnBuild = document.getElementById('tab-btn-builder');
+            const viewDiag = document.getElementById('view-diagnostic');
+            const viewBuild = document.getElementById('view-builder');
+
+            if (tab === 'diagnostic') {
+                btnDiag.className = "px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-[14px] sm:text-[15px] font-semibold transition-all border border-white/10 bg-white/10 text-white shadow-[0_0_15px_rgba(255,255,255,0.05)]";
+                btnBuild.className = "px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-[14px] sm:text-[15px] font-semibold transition-all border border-transparent text-neutral-400 hover:text-white hover:bg-white/5";
+                viewDiag.classList.remove('hidden');
+                viewBuild.classList.add('hidden');
+            } else {
+                btnBuild.className = "px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-[14px] sm:text-[15px] font-semibold transition-all border border-white/10 bg-white/10 text-white shadow-[0_0_15px_rgba(255,255,255,0.05)]";
+                btnDiag.className = "px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-[14px] sm:text-[15px] font-semibold transition-all border border-transparent text-neutral-400 hover:text-white hover:bg-white/5";
+                viewBuild.classList.remove('hidden');
+                viewDiag.classList.add('hidden');
             }
         }
 
-        function updateValues() {
-            const sliderN = document.getElementById('slider-n');
-            const sliderH = document.getElementById('slider-h');
+        // --- DIAGNOSTIC LOGIC ---
+        let diagCurrentQ = 0;
+        let diagAnswers = {};
 
-            const n = parseInt(sliderN.value) || 3;
-            const h = parseInt(sliderH.value) || 2;
+        function renderDiagQuestion() {
+            const container = document.getElementById('diag-question-container');
+            const q = DIAGNOSTIC_QUESTIONS[diagCurrentQ];
+            
+            // Progress Update
+            const progress = ((diagCurrentQ) / DIAGNOSTIC_QUESTIONS.length) * 100;
+            document.getElementById('diag-progress-bar').style.width = `${progress}%`;
+            document.getElementById('diag-progress-text').innerText = `Pergunta ${diagCurrentQ + 1} de ${DIAGNOSTIC_QUESTIONS.length}`;
 
-            // Progresso Visual dos Sliders
-            const percentN = ((n - sliderN.min) / (sliderN.max - sliderN.min)) * 100;
-            sliderN.style.background = `linear-gradient(to right, #ffffff ${percentN}%, rgba(255, 255, 255, 0.1) ${percentN}%)`;
+            // Actions Update
+            const btnBack = document.getElementById('diag-btn-back');
+            if (diagCurrentQ > 0) btnBack.classList.remove('hidden');
+            else btnBack.classList.add('hidden');
 
-            const percentH = ((h - sliderH.min) / (sliderH.max - sliderH.min)) * 100;
-            sliderH.style.background = `linear-gradient(to right, #ffffff ${percentH}%, rgba(255, 255, 255, 0.1) ${percentH}%)`;
+            let html = `
+                <h3 class="text-white text-[19px] md:text-xl font-bold mb-6">${q.question}</h3>
+                <div class="flex flex-col gap-3">
+            `;
 
-            document.getElementById('val-n').innerText = n;
-            document.getElementById('val-h').innerText = h;
+            q.options.forEach(opt => {
+                const isSelected = diagAnswers[q.id] === opt.id;
+                const activeClass = isSelected ? 'bg-white/10 border-white/30 shadow-[0_0_15px_rgba(255,255,255,0.05)]' : 'bg-[#151516] border-white/5 hover:bg-[#1c1c1e]';
+                html += `
+                    <div onclick="selectDiagOption('${q.id}', '${opt.id}')" class="p-4 rounded-2xl cursor-pointer transition-all border flex items-center gap-4 ${activeClass}">
+                        <span class="text-2xl">${opt.icon}</span>
+                        <span class="text-white font-medium text-[15px]">${opt.label}</span>
+                    </div>
+                `;
+            });
 
-            const annualCost = n * h * 15 * 240;
+            html += `</div>`;
+            container.style.opacity = 0;
+            setTimeout(() => {
+                container.innerHTML = html;
+                container.style.opacity = 1;
+            }, 150);
+        }
 
-            if (countUpAnim && !countUpAnim.error) {
-                countUpAnim.update(annualCost);
-            } else {
-                document.getElementById('resultado-valor').innerText = formatBRL(annualCost);
+        function selectDiagOption(qId, optId) {
+            diagAnswers[qId] = optId;
+            renderDiagQuestion(); // re-render to show selection briefly
+            setTimeout(() => {
+                if (diagCurrentQ < DIAGNOSTIC_QUESTIONS.length - 1) {
+                    diagCurrentQ++;
+                    renderDiagQuestion();
+                } else {
+                    finishDiagnostic();
+                }
+            }, 300);
+        }
+
+        function diagBack() {
+            if (diagCurrentQ > 0) {
+                diagCurrentQ--;
+                renderDiagQuestion();
             }
+        }
+
+        function finishDiagnostic() {
+            document.getElementById('diag-question-container').classList.add('hidden');
+            document.getElementById('diag-progress-wrapper').classList.add('hidden');
+            document.getElementById('diag-actions').classList.add('hidden');
+            
+            const loading = document.getElementById('diag-loading');
+            loading.classList.remove('hidden');
+            loading.classList.add('flex');
+            setTimeout(() => loading.style.opacity = 1, 50);
+
+            setTimeout(() => {
+                loading.style.opacity = 0;
+                setTimeout(() => {
+                    loading.classList.add('hidden');
+                    loading.classList.remove('flex');
+                    showDiagResult();
+                }, 300);
+            }, 2500);
+        }
+
+        function showDiagResult() {
+            const data = calculateDiagnostic(diagAnswers);
+            const container = document.getElementById('diag-result-container');
+            container.classList.remove('hidden');
+
+            const tierColors = { alta: '#ef4444', media: '#facc15', baixa: '#4ade80' };
+            const tierColor = tierColors[data.tier] || '#facc15';
+            const tierBarWidth = data.tier === 'alta' ? '90%' : data.tier === 'media' ? '55%' : '25%';
+
+            // Build manual processes list
+            let processosHtml = '';
+            data.processosManuais.forEach(p => {
+                const catColor = p.categoria === 'crítico' ? '#ef4444' : p.categoria === 'atenção' ? '#facc15' : '#a1a1a6';
+                const catLabelClass = p.categoria === 'crítico' ? 'text-[#ef4444] bg-[#ef4444]/10 border-[#ef4444]/30' : p.categoria === 'atenção' ? 'text-[#facc15] bg-[#facc15]/10 border-[#facc15]/30' : 'text-neutral-400 bg-white/5 border-white/10';
+                processosHtml += `
+                    <div class="bg-[#151516] border border-white/5 rounded-xl p-4 md:p-5 mb-3" style="border-left: 3px solid ${catColor}">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-white font-semibold text-[14px]">${p.titulo}</span>
+                            <span class="${catLabelClass} text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded">${p.categoria}</span>
+                        </div>
+                        <p class="text-neutral-400 text-xs leading-relaxed">${p.desc}</p>
+                    </div>
+                `;
+            });
+
+            // Build automation fronts
+            let frentesHtml = '';
+            data.frentesAutomacao.forEach(f => {
+                const tierCls = f.tier === 'N1' ? 'text-[#4ade80] border-[#4ade80]/20 bg-[#4ade80]/10' : f.tier === 'N2' ? 'text-[#facc15] border-[#facc15]/20 bg-[#facc15]/10' : 'text-[#ef4444] border-[#ef4444]/20 bg-[#ef4444]/10';
+                frentesHtml += `
+                    <div class="bg-white/[0.03] border border-white/10 rounded-xl p-4 mb-3 flex justify-between items-center gap-4">
+                        <div>
+                            <div class="text-white font-semibold text-[13px] mb-1">${f.titulo}</div>
+                            <div class="text-neutral-500 text-[12px]">${f.desc}</div>
+                        </div>
+                        <span class="${tierCls} text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider text-center shrink-0 min-w-[35px]">${f.tier}</span>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = `
+                <div class="text-center mb-10 transition-all duration-700 opacity-0 transform translate-y-4" id="res-step-1">
+                    <div class="text-neutral-500 text-[11px] tracking-[0.2em] uppercase mb-3">Dependência de trabalho manual</div>
+                    <div class="text-4xl md:text-5xl font-bold tracking-tight" style="color: ${tierColor}">${data.tierLabel}</div>
+                    <div class="w-full max-w-[220px] h-1.5 bg-white/10 mx-auto mt-5 rounded-full overflow-hidden">
+                        <div class="h-full rounded-full transition-all duration-1000" style="width: ${tierBarWidth}; background: ${tierColor}"></div>
+                    </div>
+                    <p class="text-neutral-400 text-[13px] mt-5 font-medium max-w-md mx-auto leading-relaxed">${data.dorInsight}</p>
+                    <div class="mt-4 text-neutral-600 text-[11px] tracking-wide">${data.pontos} de ${data.pontosMax} pontos no índice qualitativo</div>
+                </div>
+
+                <div class="mb-10 transition-all duration-700 opacity-0 transform translate-y-4" id="res-step-2">
+                    <h4 class="text-white text-[15px] font-bold mb-4 flex items-center gap-2">
+                        <span style="color:${tierColor}">●</span> Processos manuais identificados
+                    </h4>
+                    <p class="text-neutral-500 text-[12px] mb-4">Com base no que você respondeu, estes são os pontos de trabalho repetitivo na sua operação.</p>
+                    ${processosHtml}
+                </div>
+
+                <div class="mb-10 transition-all duration-700 opacity-0 transform translate-y-4" id="res-step-3">
+                    <h4 class="text-white text-[15px] font-bold mb-4 flex items-center gap-2">
+                        <span class="text-[#4ade80]">●</span> Frentes de automação relevantes
+                    </h4>
+                    <p class="text-neutral-500 text-[12px] mb-4">Áreas onde a Aivery pode substituir trabalho manual por robôs com IA.</p>
+                    ${frentesHtml}
+                </div>
+
+                <div class="bg-gradient-to-br from-white/10 to-white/5 border border-white/20 rounded-2xl p-8 py-10 text-center transition-all duration-700 opacity-0 transform translate-y-4" id="res-step-4">
+                    <div class="text-white text-xl md:text-2xl font-bold mb-3">Quer números reais?</div>
+                    <p class="text-neutral-400 text-[14px] max-w-lg mx-auto mb-8 leading-relaxed">
+                        Este diagnóstico é qualitativo — mostra onde estão os gargalos, não quanto custam. Para ter números de verdade, a gente vai na sua empresa e mede. Diagnóstico presencial gratuito de 30 minutos.
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                        <button onclick="abrirCalendly(event)" class="w-full sm:w-auto px-8 py-4 bg-white text-black font-bold rounded-full hover:scale-105 shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all text-[15px]">
+                            Agendar diagnóstico presencial
+                        </button>
+                        <button onclick="resetDiag()" class="w-full sm:w-auto px-8 py-4 border border-white/20 text-white hover:text-white hover:bg-white/10 font-bold rounded-full transition-all text-[15px]">
+                            Refazer diagnóstico
+                        </button>
+                    </div>
+                </div>
+
+                <details class="mt-8 group transition-all duration-700 opacity-0 transform translate-y-4" id="res-step-5">
+                    <summary class="flex items-center gap-2 cursor-pointer text-neutral-600 hover:text-neutral-400 transition-colors text-[13px] font-medium">
+                        <svg class="w-4 h-4 transition-transform group-open:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                        Como funciona este diagnóstico?
+                    </summary>
+                    <div class="mt-3 pl-6 text-neutral-500 text-[12px] leading-relaxed border-l border-white/5 space-y-2">
+                        <p>Este diagnóstico é <strong class="text-neutral-400">qualitativo</strong>. Ele classifica o nível de dependência de trabalho manual da sua empresa com base nas suas respostas, sem inventar valores financeiros ou horas que não foram medidos.</p>
+                        <p>Cada resposta gera pontos em um sistema transparente (máximo ${data.pontosMax}). O tier é definido pela soma: <strong class="text-neutral-400">Alta</strong> (≥${data.limiteAlta}), <strong class="text-neutral-400">Média</strong> (≥${data.limiteMedia}), <strong class="text-neutral-400">Baixa</strong> (abaixo).</p>
+                        <p>Para obter números reais de horas e custo, a Aivery faz um diagnóstico presencial cronometrando os processos na sua operação.</p>
+                    </div>
+                </details>
+            `;
+            
+            setTimeout(() => container.style.opacity = 1, 50);
+
+            // Stagger animations
+            [1, 2, 3, 4, 5].forEach((step, i) => {
+                setTimeout(() => {
+                    const el = document.getElementById(`res-step-${step}`);
+                    if (el) {
+                        el.classList.remove('opacity-0', 'translate-y-4');
+                    }
+                }, 350 * (i + 1));
+            });
+        }
+
+        function calculateDiagnostic(ans) {
+            let pontos = 0;
+            const pontosMax = 14;
+            let processosManuais = [];
+            let frentesAutomacao = [];
+
+            // --- Scoring ---
+
+            // Tempo administrativo
+            const tempo = ans.tempo_admin || "1h";
+            if (tempo === "4h" || tempo === "6h") {
+                pontos += tempo === "6h" ? 3 : 2;
+                processosManuais.push({
+                    titulo: "Alto volume de tarefas administrativas",
+                    desc: `Você declarou gastar ${tempo === "6h" ? "mais de 5" : "3 a 5"} horas por dia em tarefas administrativas. Esse tempo está sendo consumido por atividades que não geram receita direta.`,
+                    categoria: "crítico",
+                });
+                frentesAutomacao.push({ titulo: "Rotinas administrativas", desc: "Lançamentos, relatórios e tarefas repetitivas de backoffice", tier: "N1" });
+            } else if (tempo === "2h") {
+                pontos += 1;
+                processosManuais.push({
+                    titulo: "Tempo administrativo moderado",
+                    desc: "Você gasta entre 1 e 3 horas por dia em tarefas admin — ainda há espaço para reduzir.",
+                    categoria: "atenção",
+                });
+            }
+
+            // WhatsApp
+            const wpp = ans.whatsapp || "10";
+            if (wpp === "80" || wpp === "150") {
+                pontos += wpp === "150" ? 3 : 2;
+                processosManuais.push({
+                    titulo: "Volume alto de mensagens respondidas manualmente",
+                    desc: `Você recebe ${wpp === "150" ? "mais de 80" : "30 a 80"} mensagens por dia. Cada resposta manual consome tempo da equipe e atrasa outras tarefas.`,
+                    categoria: wpp === "150" ? "crítico" : "atenção",
+                });
+                frentesAutomacao.push({ titulo: "Triagem e resposta de WhatsApp", desc: "IA lê, classifica e responde mensagens operacionais", tier: "N2" });
+            } else if (wpp === "30") {
+                pontos += 1;
+                processosManuais.push({
+                    titulo: "Mensagens de WhatsApp ocupam parte do dia",
+                    desc: "Entre 10 e 30 mensagens por dia — volume que já justifica automação parcial.",
+                    categoria: "atenção",
+                });
+            }
+
+            // NF-e
+            if (ans.nfe === "manual") {
+                pontos += 3;
+                processosManuais.push({
+                    titulo: "Emissão de nota fiscal totalmente manual",
+                    desc: "Notas são emitidas uma a uma, com preenchimento manual. Isso gera risco de erro fiscal e consome tempo operacional.",
+                    categoria: "crítico",
+                });
+                frentesAutomacao.push({ titulo: "Emissão automática de NF-e", desc: "Do pedido à prefeitura, sem digitação", tier: "N3" });
+            } else if (ans.nfe === "semi") {
+                pontos += 1;
+                processosManuais.push({
+                    titulo: "NF-e com preenchimento manual parcial",
+                    desc: "Você tem sistema, mas ainda preenche dados manualmente — o risco de erro humano permanece.",
+                    categoria: "atenção",
+                });
+                frentesAutomacao.push({ titulo: "Integração de NF-e com ERP", desc: "Eliminar preenchimento manual de campos", tier: "N2" });
+            }
+
+            // Cobrança
+            if (ans.cobranca === "manual") {
+                pontos += 2;
+                processosManuais.push({
+                    titulo: "Cobrança feita uma a uma",
+                    desc: "Cobrar manualmente (ligação ou WhatsApp individual) limita o alcance e atrasa a recuperação de receita.",
+                    categoria: "atenção",
+                });
+                frentesAutomacao.push({ titulo: "Cobrança automatizada", desc: "Disparo automático por WhatsApp ou e-mail quando o boleto vence", tier: "N1" });
+            } else if (ans.cobranca === "nao") {
+                pontos += 3;
+                processosManuais.push({
+                    titulo: "Sem processo de cobrança ativa",
+                    desc: "Clientes inadimplentes não são cobrados ativamente — receita fica na mesa sem ninguém buscar.",
+                    categoria: "crítico",
+                });
+                frentesAutomacao.push({ titulo: "Implantação de cobrança automatizada", desc: "Criar o processo do zero com régua de cobrança por IA", tier: "N2" });
+            } else if (ans.cobranca === "planilha") {
+                pontos += 1;
+                processosManuais.push({
+                    titulo: "Cobrança controlada por planilha",
+                    desc: "Planilha ajuda a organizar, mas não cobra sozinha — depende de alguém lembrar e executar.",
+                    categoria: "atenção",
+                });
+            }
+
+            // Porte (modula o tier levemente)
+            const func = ans.funcionarios || "1-3";
+            if (func === "11-30" || func === "30+") pontos += 1;
+
+            // --- Tier ---
+            const limiteAlta = 8;
+            const limiteMedia = 4;
+            let tier, tierLabel;
+            if (pontos >= limiteAlta) {
+                tier = 'alta';
+                tierLabel = 'Alta Dependência';
+            } else if (pontos >= limiteMedia) {
+                tier = 'media';
+                tierLabel = 'Média Dependência';
+            } else {
+                tier = 'baixa';
+                tierLabel = 'Baixa Dependência';
+            }
+
+            // --- Dor Insight ---
+            const dorMap = {
+                tempo: "Você sente que o dia é curto — e as respostas mostram onde o tempo está indo.",
+                dinheiro: "A sensação de perda de dinheiro geralmente vem de processos que ninguém parou pra medir.",
+                desorganizacao: "Desorganização é sintoma. A causa costuma ser processo manual acumulado.",
+                crescer: "Crescer fica difícil quando a operação depende de gente pra tudo. Automação libera esse teto.",
+            };
+
+            // Ensure at least one frente if there are processos
+            if (frentesAutomacao.length === 0 && processosManuais.length > 0) {
+                frentesAutomacao.push({ titulo: "Diagnóstico presencial recomendado", desc: "Seus processos precisam de uma análise mais profunda", tier: "N2" });
+            }
+
+            return {
+                tier,
+                tierLabel,
+                pontos,
+                pontosMax,
+                limiteAlta,
+                limiteMedia,
+                processosManuais,
+                frentesAutomacao,
+                dorInsight: dorMap[ans.dor] || "",
+            };
+        }
+
+        function resetDiag() {
+            diagCurrentQ = 0;
+            diagAnswers = {};
+            document.getElementById('diag-result-container').classList.add('hidden');
+            document.getElementById('diag-question-container').classList.remove('hidden');
+            document.getElementById('diag-progress-wrapper').classList.remove('hidden');
+            document.getElementById('diag-actions').classList.remove('hidden');
+            renderDiagQuestion();
+        }
+
+        // --- BUILDER LOGIC ---
+        let buildStep = 0;
+        let buildData = { cat: null, tpl: null, ai: null, details: '' };
+
+        function updateBuildUI() {
+            const container = document.getElementById('build-step-container');
+            const btnBack = document.getElementById('build-btn-back');
+            const btnNext = document.getElementById('build-btn-next');
+            
+            // Progress
+            document.getElementById('build-progress-bar').style.width = `${((buildStep + 1) / 3) * 100}%`;
+            document.getElementById('build-progress-text').innerText = `Passo ${buildStep + 1} de 3`;
+
+            container.style.opacity = 0;
+            
+            setTimeout(() => {
+                btnBack.classList.toggle('hidden', buildStep === 0);
+                
+                // Can advance?
+                let canAdvance = false;
+                if (buildStep === 0) canAdvance = !!buildData.cat;
+                if (buildStep === 1) canAdvance = !!buildData.tpl;
+                if (buildStep === 2) canAdvance = !!buildData.ai;
+                
+                if (canAdvance) {
+                    btnNext.disabled = false;
+                    btnNext.className = buildStep === 2 ? "ml-auto px-7 py-3 bg-white text-black rounded-full font-bold transition-all duration-300 shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:scale-105" : "hidden";
+                } else {
+                    btnNext.disabled = true;
+                    btnNext.className = buildStep === 2 ? "ml-auto px-7 py-3 bg-white/10 text-white/40 rounded-full font-semibold transition-all duration-300 cursor-not-allowed" : "hidden";
+                }
+
+                if (buildStep === 2) btnNext.innerText = "Gerar Automação →";
+
+                let html = '';
+                if (buildStep === 0) {
+                    html += `
+                        <h3 class="text-white text-[19px] md:text-xl font-bold mb-2">O que você quer automatizar?</h3>
+                        <p class="text-neutral-400 text-sm mb-6">Escolha a área principal do seu negócio</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    `;
+                    AUTOMATION_CATEGORIES.forEach(c => {
+                        const sel = buildData.cat?.id === c.id;
+                        const activeClass = sel ? 'bg-white/10 border-white/30 shadow-[0_0_15px_rgba(255,255,255,0.05)]' : 'bg-[#151516] border-white/5 hover:bg-[#1c1c1e]';
+                        html += `
+                            <div onclick="selectBuildCat('${c.id}')" class="p-6 rounded-2xl cursor-pointer transition-all border ${activeClass}">
+                                <div class="text-3xl mb-3">${c.icon}</div>
+                                <div class="text-white font-semibold text-[16px] mb-1.5">${c.label}</div>
+                                <div class="text-neutral-500 text-[13px] leading-relaxed">${c.desc}</div>
+                            </div>
+                        `;
+                    });
+                    html += `</div>`;
+                } else if (buildStep === 1) {
+                    html += `
+                        <h3 class="text-white text-[19px] md:text-xl font-bold mb-2">Escolha o tipo de automação</h3>
+                        <p class="text-neutral-400 text-sm mb-6">${buildData.cat.icon} ${buildData.cat.label}</p>
+                        <div class="flex flex-col gap-3">
+                    `;
+                    buildData.cat.templates.forEach(t => {
+                        const sel = buildData.tpl?.id === t.id;
+                        const cx = COMPLEXITY_LABELS[t.complexity];
+                        const activeClass = sel ? 'bg-white/10 border-white/30 shadow-[0_0_15px_rgba(255,255,255,0.05)]' : 'bg-[#151516] border-white/5 hover:bg-[#1c1c1e]';
+                        html += `
+                            <div onclick="selectBuildTpl('${t.id}')" class="p-5 rounded-2xl cursor-pointer transition-all border flex flex-col md:flex-row justify-between md:items-center gap-4 ${activeClass}">
+                                <div>
+                                    <div class="text-white font-semibold text-[15px] mb-1.5">${t.name}</div>
+                                    <div class="text-neutral-500 text-[13px]">${t.desc}</div>
+                                </div>
+                                <div class="text-left md:text-right shrink-0 mt-1 md:mt-0">
+                                    <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded inline-block mb-1 border ${cx.colorClass}">${cx.label}</span>
+                                    <div class="text-neutral-500 text-[11px]">${cx.desc}</div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    html += `</div>`;
+                } else if (buildStep === 2) {
+                    html += `
+                        <h3 class="text-white text-[19px] md:text-xl font-bold mb-2">Qual IA você prefere usar?</h3>
+                        <p class="text-neutral-400 text-sm mb-6">Escolha o cérebro virtual por trás do processamento</p>
+                        <div class="grid grid-cols-2 gap-3 mb-6">
+                    `;
+                    AI_OPTIONS.forEach(ai => {
+                        const sel = buildData.ai?.id === ai.id;
+                        const activeClass = sel ? 'bg-white/10 border-white/30 shadow-[0_0_15px_rgba(255,255,255,0.05)]' : 'bg-[#151516] border-white/5 hover:bg-[#1c1c1e]';
+                        html += `
+                            <div onclick="selectBuildAI('${ai.id}')" class="p-5 rounded-2xl cursor-pointer transition-all border text-center ${activeClass}">
+                                <div class="text-3xl mb-2">${ai.icon}</div>
+                                <div class="text-white font-medium text-[14px]">${ai.name}</div>
+                            </div>
+                        `;
+                    });
+                    html += `</div>
+                        <div>
+                            <label class="text-neutral-400 text-[11px] block mb-2 font-medium uppercase tracking-wider">Detalhes contextuais (opcional)</label>
+                            <textarea id="buildTextarea" placeholder="Ex: Uso o Tiny ERP, meu CRM é Rd Station..." class="w-full bg-[#151516] border border-white/5 rounded-2xl p-4 text-white text-[14px] outline-none hover:border-white/20 focus:border-white/30 transition-colors h-28 resize-none">${buildData.details}</textarea>
+                        </div>
+                    `;
+                }
+
+                container.innerHTML = html;
+                container.style.opacity = 1;
+            }, 150);
+        }
+
+        function selectBuildCat(id) {
+            buildData.cat = AUTOMATION_CATEGORIES.find(c => c.id === id);
+            buildData.tpl = null; // reset next steps
+            updateBuildUI();
+            setTimeout(() => { if (buildStep === 0) buildNext(); }, 350);
+        }
+        function selectBuildTpl(id) {
+            buildData.tpl = buildData.cat.templates.find(t => t.id === id);
+            updateBuildUI();
+            setTimeout(() => { if (buildStep === 1) buildNext(); }, 350);
+        }
+        function selectBuildAI(id) {
+            buildData.ai = AI_OPTIONS.find(a => a.id === id);
+            updateBuildUI();
+        }
+        function buildBack() {
+            if (buildStep > 0) {
+                if (buildStep === 2 && document.getElementById('buildTextarea')) {
+                    buildData.details = document.getElementById('buildTextarea').value;
+                }
+                buildStep--;
+                updateBuildUI();
+            }
+        }
+        function buildNext() {
+            if (buildStep === 2) {
+                if(document.getElementById('buildTextarea')) buildData.details = document.getElementById('buildTextarea').value;
+                finishBuild();
+            } else {
+                buildStep++;
+                updateBuildUI();
+            }
+        }
+
+        function finishBuild() {
+            document.getElementById('build-step-container').classList.add('hidden');
+            document.getElementById('build-progress-wrapper').classList.add('hidden');
+            document.getElementById('build-actions').classList.add('hidden');
+            
+            const loading = document.getElementById('build-loading');
+            loading.classList.remove('hidden');
+            loading.classList.add('flex');
+            setTimeout(() => loading.style.opacity = 1, 50);
+
+            setTimeout(() => {
+                loading.style.opacity = 0;
+                setTimeout(() => {
+                    loading.classList.add('hidden');
+                    loading.classList.remove('flex');
+                    renderBuildResult();
+                }, 300);
+            }, 2500);
+        }
+
+        function renderBuildResult() {
+            const container = document.getElementById('build-result-container');
+            container.classList.remove('hidden');
+
+            const t = buildData.tpl;
+            const complexity = t.complexity;
+            const isComplex = complexity >= 2;
+            const cx = COMPLEXITY_LABELS[complexity];
+            const aiName = buildData.ai?.id !== "naosabe" ? (buildData.ai?.name || "IA") : "IA Recomendada";
+
+            const steps = complexity === 1 ? [
+                { title: "Trigger Inicial", desc: "Quando um evento simples acontece.", status: "auto", dot: "bg-[#4ade80]" },
+                { title: "Processamento e IA", desc: `A engine aciona o modelo ${aiName} para definir a resposta.`, status: "auto", dot: "bg-[#4ade80]" },
+                { title: "Ação de Retorno", desc: "Disparo automático para o usuário.", status: "auto", dot: "bg-[#4ade80]" },
+            ] : complexity === 2 ? [
+                { title: "Trigger Avançado", desc: "Monitoramento constante de base ou webhook.", status: "auto", dot: "bg-[#4ade80]" },
+                { title: "Validação de Regras", desc: "Checagem de consistência (se cliente pagou, se existe no CRM, etc).", status: "warning", dot: "bg-[#facc15]" },
+                { title: "Processamento Semântico", desc: `Utilização de ${aiName} para transformar dados em formato legível.`, status: "warning", dot: "bg-[#facc15]" },
+                { title: "Sincronização", desc: "Registro no seu sistema.", status: "auto", dot: "bg-[#4ade80]" },
+            ] : [
+                { title: "Webhooks e Listeners", desc: "Escuta multicamada em e-mail, portal de dados e ERP.", status: "auto", dot: "bg-[#4ade80]" },
+                { title: "OCR / Parsing", desc: "Extração inteligente dos parâmetros-chave de documentos e áudios.", status: "danger", dot: "bg-[#ef4444]" },
+                { title: "Validação Cruzada", desc: "Asseguramento de integridade usando base de dados e APIs legadas.", status: "danger", dot: "bg-[#ef4444]" },
+                { title: "Decisão Cognitiva", desc: `Motor ${aiName} analisa anomalias e aprova/recusa fluxo.`, status: "warning", dot: "bg-[#facc15]" },
+                { title: "Múltiplas Ações", desc: "Comandos paralelos executados no sistema financeiro, logístico e no WhatsApp do cliente.", status: "warning", dot: "bg-[#facc15]" },
+            ];
+
+            const estimatedTime = complexity === 1 ? "1 a 2 dias" : complexity === 2 ? "3 a 7 dias" : "2 a 4 semanas";
+            const savings = complexity === 1 ? "4 a 8h/semana" : complexity === 2 ? "10 a 20h/semana" : "No mínimo 1 headcount inteiro";
+
+            let stepsHtml = '';
+            steps.forEach((s, idx) => {
+                const isLast = idx === steps.length - 1;
+                const textColor = s.dot.replace('bg-', 'text-');
+                stepsHtml += `
+                    <div class="relative pl-8 md:pl-10 ${isLast ? '' : 'pb-6'}">
+                        <!-- Line segment -->
+                        ${!isLast ? '<div class="absolute left-[5.5px] top-[24px] bottom-[-8px] w-px bg-white/10"></div>' : ''}
+                        
+                        <!-- Dot -->
+                        <div class="${textColor} absolute left-0 top-[10px] w-3 h-3 rounded-full ${s.dot} shadow-[0_0_15px_currentColor] z-10 ring-[4px] ring-[#151516]"></div>
+                        
+                        <!-- Content Card -->
+                        <div class="bg-[#1c1c1e]/50 border border-white/5 rounded-2xl p-4 md:p-5 hover:bg-white/5 transition-colors">
+                            <h4 class="text-white font-semibold tracking-tight text-[15px] mb-1.5 flex items-center gap-2">
+                                ${s.title}
+                            </h4>
+                            <p class="text-[#a1a1a6] text-[13.5px] leading-relaxed">${s.desc}</p>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = `
+                <div class="mb-10 transition-opacity duration-700 opacity-0" id="b-res-step-1">
+                    <h3 class="text-white text-2xl md:text-3xl font-bold mb-4 leading-tight">${t.name}</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="text-[11px] font-bold uppercase tracking-wider px-3 py-1.5 rounded inline-block border ${cx.colorClass}">${cx.label}</span>
+                        <span class="text-neutral-400 text-[11px] uppercase tracking-wider font-semibold flex items-center bg-white/5 border border-white/10 px-3 py-1.5 rounded">SETUP: ${estimatedTime}</span>
+                        <span class="text-[#4ade80] text-[11px] uppercase tracking-wider font-semibold flex items-center bg-[#4ade80]/5 border border-[#4ade80]/20 px-3 py-1.5 rounded">ECONOMIA: ${savings}</span>
+                    </div>
+                </div>
+
+                <div class="bg-[#151516] border border-white/5 rounded-3xl p-6 md:p-8 mb-8 relative transition-opacity duration-700 opacity-0 transform translate-y-4" id="b-res-step-2">
+                    <h4 class="text-white font-bold text-[17px] mb-8 tracking-tight flex items-center gap-2">
+                        Arquitetura da Automação
+                    </h4>
+                    <div class="ml-2 relative z-20">
+                        ${stepsHtml}
+                    </div>
+                </div>
+
+                <div class="${complexity === 1 ? 'bg-gradient-to-br from-[#111] to-[#4ade80]/10 border-[#4ade80]/30' : 'bg-gradient-to-br from-[#111] to-[#ef4444]/10 border-[#ef4444]/30'} border rounded-3xl p-6 md:p-8 flex flex-col md:flex-row justify-between items-center gap-6 transition-opacity duration-700 opacity-0 transform translate-y-4" id="b-res-step-3">
+                    <div>
+                        <div class="${complexity === 1 ? 'text-[#4ade80]' : 'text-[#ef4444]'} font-bold text-[18px] mb-2 flex items-center gap-2">
+                            ${complexity === 1 ? 'Automação de Nível Simples' : 'Arquitetura Especializada Necessária'}
+                        </div>
+                        <p class="text-neutral-400 text-[14px] max-w-lg leading-relaxed">
+                            ${complexity === 1 ? 'Uma vez estruturada, esta automação rodará continuamente sem travamentos. Pronta para colocar em produção.' : 'O grau de complexidade exige tratamento de erros e integração direta via APIs/Webhooks. Recomendamos a arquitetura validada e monitoramento contínuo da Aivery.'}
+                        </p>
+                    </div>
+                    <div class="shrink-0 w-full md:w-auto mt-6 md:mt-0">
+                        <button onclick="abrirCalendly(event)" class="w-full px-6 py-3.5 bg-white text-black font-bold text-[15px] rounded-full hover:scale-105 transition-all shadow-[0_4px_20px_rgba(255,255,255,0.1)]">
+                            Discutir Projeto com a Aivery
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mt-10 text-center transition-opacity duration-700 opacity-0" id="b-res-step-4">
+                    <button onclick="resetBuild()" class="px-5 py-2.5 text-neutral-500 hover:text-white transition-colors text-[14px] font-medium">← Começar outra automação</button>
+                </div>
+            `;
+            
+            setTimeout(() => container.style.opacity = 1, 50);
+
+            // Stagger animations
+            [1, 2, 3, 4].forEach((step, i) => {
+                setTimeout(() => {
+                    const el = document.getElementById(`b-res-step-${step}`);
+                    if (el) el.classList.remove('opacity-0', 'translate-y-4');
+                }, 300 * (i + 1));
+            });
+        }
+
+        function resetBuild() {
+            buildStep = 0;
+            buildData = { cat: null, tpl: null, ai: null, details: '' };
+            document.getElementById('build-result-container').classList.add('hidden');
+            document.getElementById('build-step-container').classList.remove('hidden');
+            document.getElementById('build-progress-wrapper').classList.remove('hidden');
+            document.getElementById('build-actions').classList.remove('hidden');
+            updateBuildUI();
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Start calculation based on DOM elements setup
-            const sliderN = document.getElementById('slider-n');
-            const sliderH = document.getElementById('slider-h');
-
-            if (!sliderN || !sliderH) return; // safety check
-
-            const n = parseInt(sliderN.value) || 3;
-            const h = parseInt(sliderH.value) || 2;
-            const initialCost = n * h * 15 * 240;
-
-            // Initialize background fills right away
-            updateValues();
-
-            // Wait brief moment for CountUp library to inject via CDN if not fully loaded
-            setTimeout(() => {
-                const resultContainer = document.getElementById('result-container');
-                if (resultContainer) {
-                    resultContainer.style.display = 'flex';
-                    // Trigger reflow to apply transition classes safely if needed
-                    void resultContainer.offsetWidth;
-                    resultContainer.classList.add('visible');
-                }
-
-                initCountUp(initialCost);
-
-                const btn = document.getElementById('final-cta-btn');
-                if (btn) {
-                    // Small delay to let user see numbers before button appears
-                    setTimeout(() => {
-                        btn.classList.add('visible');
-                    }, 1000);
-                }
-            }, 100);
+            renderDiagQuestion();
+            updateBuildUI();
         });
     </script>
 
