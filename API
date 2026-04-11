@@ -1,0 +1,59 @@
+export default async function handler(req, res) {
+  // Só aceita POST
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Método não permitido' });
+  }
+
+  // CORS — só aceita do seu domínio
+  const allowedOrigins = [
+    'https://www.aiverycompany.com',
+    'https://aiverycompany.com',
+    'https://antigravity-seven-theta.vercel.app'
+  ];
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  // Preflight CORS
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
+  // Honeypot — se esse campo vier preenchido, é bot
+  if (req.body && req.body._hp) {
+    return res.status(200).json({ success: true }); // finge que deu certo
+  }
+
+  // Validação básica
+  const { name, email, whatsapp, desafio } = req.body || {};
+  if (!name || !email) {
+    return res.status(400).json({ error: 'Nome e email são obrigatórios' });
+  }
+
+  // Repassa pro n8n — URL fica escondida na variável de ambiente
+  const webhookUrl = process.env.N8N_WEBHOOK_URL;
+  if (!webhookUrl) {
+    console.error('N8N_WEBHOOK_URL não configurada');
+    return res.status(500).json({ error: 'Erro interno' });
+  }
+
+  try {
+    const response = await fetch(webhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, whatsapp, desafio }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`n8n respondeu com status ${response.status}`);
+    }
+
+    return res.status(200).json({ success: true });
+  } catch (error) {
+    console.error('Erro ao enviar para n8n:', error);
+    return res.status(500).json({ error: 'Erro ao processar' });
+  }
+}
