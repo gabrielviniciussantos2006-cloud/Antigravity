@@ -642,6 +642,145 @@
                 display: none;
             }
         }
+
+        /* ========== Footer Legal Links (LGPD) ========== */
+        .footer-legal {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 16px 0 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-legal a {
+            color: #71717a;
+            text-decoration: none;
+            font-size: 12px;
+            transition: color 0.2s;
+        }
+
+        .footer-legal a:hover {
+            color: #a1a1a6;
+        }
+
+        @media (max-width: 640px) {
+            .footer-legal {
+                gap: 14px;
+                font-size: 11px;
+            }
+        }
+
+        /* ========== Cookie Banner (LGPD) ========== */
+        #cookie-banner {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            max-width: 520px;
+            margin: 0 auto;
+            z-index: 9999;
+            background: #151516;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.03);
+            font-family: 'Inter', system-ui, sans-serif;
+            color: #f5f5f7;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+        }
+
+        #cookie-banner.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        #cookie-banner h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #fff;
+            margin: 0 0 8px 0;
+            letter-spacing: -0.01em;
+        }
+
+        #cookie-banner p {
+            font-size: 13.5px;
+            line-height: 1.55;
+            color: #a1a1a6;
+            margin: 0 0 18px 0;
+        }
+
+        #cookie-banner a {
+            color: #97C459;
+            text-decoration: underline;
+            text-decoration-color: rgba(151, 196, 89, 0.4);
+            text-underline-offset: 2px;
+            transition: text-decoration-color 0.2s;
+        }
+
+        #cookie-banner a:hover {
+            text-decoration-color: #97C459;
+        }
+
+        .cookie-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .cookie-btn {
+            flex: 1;
+            padding: 11px 16px;
+            border-radius: 999px;
+            font-size: 13.5px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+            transition: all 0.2s ease;
+            letter-spacing: -0.005em;
+        }
+
+        .cookie-btn-accept {
+            background: #fff;
+            color: #000;
+        }
+
+        .cookie-btn-accept:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .cookie-btn-reject {
+            background: rgba(255, 255, 255, 0.06);
+            color: #f5f5f7;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .cookie-btn-reject:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 640px) {
+            #cookie-banner {
+                bottom: 12px;
+                left: 12px;
+                right: 12px;
+                padding: 20px;
+            }
+
+            #cookie-banner p {
+                font-size: 13px;
+            }
+
+            .cookie-buttons {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 
@@ -1451,6 +1590,13 @@
             <div class="footer-bottom">
                 <span class="footer-copyright">São José dos Campos · CNPJ 65.744.729/0001-18 · © 2026 Aivery. Todos os direitos reservados.</span>
                 <span class="footer-slogan"><strong>Otimizando o presente,</strong> Automatizando o futuro.</span>
+            </div>
+
+            <div class="footer-legal">
+                <a href="/privacidade">Política de Privacidade</a>
+                <a href="/termos">Termos de Uso</a>
+                <a href="mailto:privacidade@aiverycompany.com">Encarregado de Dados (DPO)</a>
+                <a href="javascript:void(0)" onclick="revogarCookies()">Gerenciar Cookies</a>
             </div>
 
         </div>
@@ -2469,6 +2615,91 @@
                 revealObserver.observe(el);
             });
         });
+    </script>
+
+    <!-- ============================================ -->
+    <!-- Cookie Banner (LGPD)                         -->
+    <!-- ============================================ -->
+    <div id="cookie-banner" role="dialog" aria-live="polite" aria-label="Aviso de cookies">
+        <h3>🍪 A gente usa cookies</h3>
+        <p>
+            Utilizamos cookies essenciais para o funcionamento do site e, com seu consentimento,
+            cookies de análise para entender como você navega e melhorar sua experiência.
+            Saiba mais na nossa <a href="/privacidade">Política de Privacidade</a>.
+        </p>
+        <div class="cookie-buttons">
+            <button type="button" class="cookie-btn cookie-btn-reject" onclick="rejeitarCookies()">
+                Recusar
+            </button>
+            <button type="button" class="cookie-btn cookie-btn-accept" onclick="aceitarCookies()">
+                Aceitar
+            </button>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            const STORAGE_KEY = 'aivery_cookie_consent';
+            const banner = document.getElementById('cookie-banner');
+            const consent = localStorage.getItem(STORAGE_KEY);
+
+            if (!consent) {
+                // Primeira visita — mostra o banner após 800ms
+                setTimeout(() => banner.classList.add('visible'), 800);
+            } else if (consent === 'accepted') {
+                // Consentimento prévio — carrega o GA automaticamente
+                carregarGoogleAnalytics();
+            }
+        })();
+
+        function aceitarCookies() {
+            localStorage.setItem('aivery_cookie_consent', 'accepted');
+            localStorage.setItem('aivery_cookie_consent_date', new Date().toISOString());
+            esconderBanner();
+            carregarGoogleAnalytics();
+        }
+
+        function rejeitarCookies() {
+            localStorage.setItem('aivery_cookie_consent', 'rejected');
+            localStorage.setItem('aivery_cookie_consent_date', new Date().toISOString());
+            esconderBanner();
+        }
+
+        function esconderBanner() {
+            const banner = document.getElementById('cookie-banner');
+            if (banner) banner.classList.remove('visible');
+        }
+
+        // Função pública: permite revogar a escolha (usada pelo link "Gerenciar Cookies" no rodapé)
+        function revogarCookies() {
+            localStorage.removeItem('aivery_cookie_consent');
+            localStorage.removeItem('aivery_cookie_consent_date');
+            location.reload();
+        }
+
+        function carregarGoogleAnalytics() {
+            // ⚠️ QUANDO FOR ATIVAR O GA: troque "G-XXXXXXXXXX" pelo seu ID real
+            const GA_ID = 'G-XXXXXXXXXX';
+
+            // Se ainda não tiver ID real, não carrega nada
+            if (GA_ID === 'G-XXXXXXXXXX') return;
+
+            // Evita carregar duas vezes
+            if (window.dataLayer) return;
+
+            const script = document.createElement('script');
+            script.async = true;
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+            document.head.appendChild(script);
+
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            window.gtag = gtag;
+            gtag('js', new Date());
+            gtag('config', GA_ID, {
+                anonymize_ip: true
+            });
+        }
     </script>
 </body>
 
