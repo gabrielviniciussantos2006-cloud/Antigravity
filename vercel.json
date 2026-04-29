@@ -1,10 +1,26 @@
 {
-  "cleanUrls": true,
-  "trailingSlash": false,
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        }
+      ]
+    },
     {
       "source": "/(.*)",
       "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://assets.calendly.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://assets.calendly.com; font-src 'self' https://fonts.gstatic.com https://assets.calendly.com; img-src 'self' data: blob: https://cdn.simpleicons.org https://*.calendly.com https://aiverycompany.com https://www.aiverycompany.com https://aivery.com.br; media-src 'self'; connect-src 'self' https://calendly.com https://*.calendly.com https://www.google-analytics.com https://region1.google-analytics.com; frame-src https://calendly.com https://*.calendly.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests"
+        },
         {
           "key": "Strict-Transport-Security",
           "value": "max-age=63072000; includeSubDomains; preload"
@@ -15,7 +31,7 @@
         },
         {
           "key": "X-Frame-Options",
-          "value": "SAMEORIGIN"
+          "value": "DENY"
         },
         {
           "key": "Referrer-Policy",
@@ -26,21 +42,16 @@
           "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()"
         },
         {
-          "key": "X-DNS-Prefetch-Control",
-          "value": "on"
+          "key": "Cross-Origin-Opener-Policy",
+          "value": "same-origin"
         },
         {
-          "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://assets.calendly.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://assets.calendly.com; font-src 'self' https://fonts.gstatic.com https://assets.calendly.com; img-src 'self' data: blob: https://cdn.simpleicons.org https://*.calendly.com https://aiverycompany.com; media-src 'self'; connect-src 'self' https://calendly.com https://*.calendly.com https://www.google-analytics.com https://region1.google-analytics.com; frame-src https://calendly.com https://*.calendly.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests"
-        }
-      ]
-    },
-    {
-      "source": "/assets/(.*)",
-      "headers": [
+          "key": "X-Permitted-Cross-Domain-Policies",
+          "value": "none"
+        },
         {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
+          "key": "X-XSS-Protection",
+          "value": "0"
         }
       ]
     }
